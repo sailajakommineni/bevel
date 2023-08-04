@@ -64,10 +64,10 @@ service:
   type: NodePort
   #Provide the node port for node service to be accessible outside
   #Eg. nodePort: 30050
-  nodePort:
+  nodePort: 
   #Provide the targetPort for node service to be accessible 
   #Eg. targetPort: 8080
-  targetPort:
+  targetPort: 
   #Provide the port for node service to be accessible 
   #Eg. port: 8080
   port:

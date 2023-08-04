@@ -34,7 +34,7 @@ image:
   certsContainerName: ghcr.io/hyperledger/bevel-build:jdk8-latest
   # Provide the docker-registry secret created and stored in kubernetes cluster as a secret.
   # Eg. imagePullSecret: regcred
-  imagePullSecret: 
+  imagePullSecret: ""
   # Pull policy to be used for the Docker image
   # Eg. pullPolicy: Always
   pullPolicy: IfNotPresent
