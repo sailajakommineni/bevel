@@ -27,7 +27,7 @@ spec:
       initContainerName: {{ network.docker.url }}/alpine-utils:1.0
     storage:
       memory: 512Mi
-      name: {{ sc_name }}
+      name: {{ org.cloud_provider }}storageclass
       mountPath: /data/db
       volname: hostvol
     vault:

@@ -31,6 +31,7 @@
 #   vars:
 #     component_type: "{{ cloud_provider }}storageclass"
 #     component_name: "{{ cloud_provider }}storageclass"
+#     org_name: "{{ org.name | lower }}"
 #     helm_lint: "false"
 #     release_dir: "{{ playbook_dir }}/../../../{{ org.gitops.release_dir }}"
 #   when: storageclass_state.resources|length == 0
@@ -39,7 +40,7 @@
 - name: Create value file for storage class
   template:
     src: "{{ playbook_dir }}/../../../platforms/r3-corda/configuration/roles/create/k8_component/templates/storage_class.j2"
-    dest: "{{ playbook_dir }}/../../../platforms/r3-corda/configuration/build/{{name}}-storageclass.yaml"  
+    dest: "{{ playbook_dir }}/../../../platforms/r3-corda/configuration/build/{{name}}-storageclass.yaml"  #build dir
   vars: 
     release_dir: "{{ playbook_dir }}/../../../{{ org.gitops.release_dir }}"
   when: storageclass_state.resources|length == 0
@@ -74,7 +75,7 @@
     - notest
   vars:
     component_type: "StorageClass"
-    component_name: "{{ cloud_provider }}storageclass"
+    component_name: "{{ sc_name }}"
     kubernetes: "{{ org.k8s }}"
     type: "retry"
   when: storageclass_state.resources|length == 0

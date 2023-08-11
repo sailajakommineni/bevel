@@ -50,7 +50,7 @@ spec:
         basePath: /opt/doorman
     storage:
       memory: 512Mi
-      name: {{ sc_name }}
+      name: {{ org.cloud_provider }}storageclass
     mountPath:
       basePath: /opt/doorman
     vault:
