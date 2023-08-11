@@ -18,24 +18,43 @@
       path: "./build"
       state: absent
 
-  # ----------------------------------------------------------------------
-  # Create Storageclass
-  - name: Create Storage Class
-    include_role:
-      name: create/storageclass
-    loop: "{{ network['organizations'] }}"
-    loop_control:
-      loop_var: org
-    when: network['type'] == 'corda'
-
-  # create namespace, service account and clusterrolebinding
+ # create namespace, service account and clusterrolebinding
   - name: "Create namespace, service accounts and clusterrolebinding"
     include_role: 
       name: create/namespace
     loop: "{{ network['organizations'] }}"
     loop_control:
       loop_var: org
-    when: network['type'] == 'corda'  
+    when: network['type'] == 'corda' 
+
+  # ----------------------------------------------------------------------
+  # # Create Storageclass
+  - name: Create Storage Class
+    include_role:
+      name: create/storageclass
+    vars:
+      org_name: "{{ org.name | lower }}"
+      cloudProvider: "{{ org.cloud_provider | lower }}"
+      sc_name: "{{ org_name }}-{{ cloudProvider }}-storageclass"
+      region: "{{ org.k8s.region | default('eu-west-1') }}"
+      git_dir: "{{ org.gitops.release_dir }}"
+      kubernetes: "{{ org.k8s }}"
+      gitops: "{{ org.gitops }}"
+      charts_dir: "platforms/shared/charts"
+      platform_suffix: "ns"  
+    loop: "{{ network['organizations'] }}"
+    loop_control:
+      loop_var: org
+    when: network['type'] == 'corda'
+
+  # Create Storageclass
+  # - name: Create Storage Class
+  #   include_role:
+  #     name: create/storageclass
+  #   loop: "{{ network['organizations'] }}"
+  #   loop_control:
+  #     loop_var: org
+  #   when: network['type'] == 'corda'
 
   # ----------------------------------------------------------------------  
   # Deploy Doorman node
@@ -45,6 +64,8 @@
     vars:
      services: "{{ item.services }}"
      organisation: "{{ item.name | lower }}"
+     cloudProvider: "{{ item.cloud_provider | lower }}"
+     sc_name: "{{ organisation}}-{{ cloudProvider }}-storageclass"
      component_ns: "{{ item.name | lower }}-ns"
      kubernetes: "{{ item.k8s }}"
      vault: "{{ item.vault }}"
@@ -60,6 +81,8 @@
     vars:
      services: "{{ item.services }}"
      organisation: "{{ item.name | lower }}"
+     cloudProvider: "{{ item.cloud_provider | lower }}"
+     sc_name: "{{ organisation}}-{{ cloudProvider }}-storageclass"
      component_ns: "{{ item.name | lower }}-ns"
      kubernetes: "{{ item.k8s }}"
      vault: "{{ item.vault }}"
@@ -90,6 +113,8 @@
       services: "{{ item.services }}"
       node: "{{ item.services.notary }}"
       organisation: "{{ item.name | lower }}"
+      cloudProvider: "{{ item.cloud_provider | lower }}"
+      sc_name: "{{ organisation}}-{{ cloudProvider }}-storageclass"
       component_ns: "{{ item.name | lower }}-ns"
       kubernetes: "{{ item.k8s }}"
       vault: "{{ item.vault }}"
@@ -106,6 +131,8 @@
     vars:
       organisation: "{{ item.name | lower }}"
       component_ns: "{{ item.name | lower }}-ns"
+      cloudProvider: "{{ item.cloud_provider | lower }}"
+      sc_name: "{{ organisation}}-{{ cloudProvider }}-storageclass"
       services: "{{ item.services }}"
       kubernetes: "{{ item.k8s }}"
       vault: "{{ item.vault }}"

@@ -34,6 +34,8 @@
       services: "{{ item.services }}"
       node: "{{ item.services.notary }}"
       organisation: "{{ item.name | lower }}"
+      cloudProvider: "{{ item.cloud_provider | lower }}"
+      sc_name: "{{ organisation}}-{{ cloudProvider }}-storageclass"
       component_ns: "{{ item.name | lower }}-ns"
       kubernetes: "{{ item.k8s }}"
       vault: "{{ item.vault }}"
@@ -50,6 +52,8 @@
     vars:
       organisation: "{{ item.name | lower }}"
       component_ns: "{{ item.name | lower }}-ns"
+      cloudProvider: "{{ item.cloud_provider | lower }}"
+      sc_name: "{{ organisation}}-{{ cloudProvider }}-storageclass"
       services: "{{ item.services }}"
       kubernetes: "{{ item.k8s }}"
       vault: "{{ item.vault }}"
