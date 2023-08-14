@@ -52,7 +52,7 @@ spec:
       configpath: conf/fabric-ca-server-config-{{ component }}.yaml
 {% endif %}  
     storage:
-      storageclassname: {{ component | lower }}sc
+      storageclassname: {{ sc_name }}
       storagesize: 512Mi
     vault:
       role: vault-role
@@ -62,7 +62,11 @@ spec:
       secretkey: {{ vault.secret_path | default('secretsv2') }}/data/crypto/peerOrganizations/{{ component_name | e }}/ca?{{ component_name | e }}-CA.key
       secretadminpass: {{ vault.secret_path | default('secretsv2') }}/data/credentials/{{ component_name | e }}/ca/{{ component }}?user
       serviceaccountname: vault-auth
+{% if network.docker.username is defined and network.docker.password is defined %}
       imagesecretname: regcred
+{% else %}
+      imagesecretname: ""
+{% endif %}
     service:
       servicetype: ClusterIP
       ports:

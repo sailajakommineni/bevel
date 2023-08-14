@@ -23,7 +23,7 @@ spec:
         fabrictools: {{ fabrictools_image }}
         alpineutils: {{ alpine_image }}
     storage:
-      class: {{ storage_class }}
+      class: {{ sc_name }}
       size: 256Mi
     vault:
       role: vault-role
@@ -32,7 +32,11 @@ spec:
       adminsecretprefix: {{ vault.secret_path | default('secretsv2') }}/data/crypto/peerOrganizations/{{ component_ns }}/users/admin
       orderersecretprefix: {{ vault.secret_path | default('secretsv2') }}/data/crypto/peerOrganizations/{{ component_ns }}/orderer
       serviceaccountname: vault-auth
+{% if network.docker.username is defined and network.docker.password is defined %}
       imagesecretname: regcred
+{% else %}
+      imagesecretname: ""
+{% endif %}
       tls: false
     peer:
       name: {{ peer.name }}

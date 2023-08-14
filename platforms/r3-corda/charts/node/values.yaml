@@ -36,7 +36,7 @@ image:
   gitContainerName: hyperledgerlabs/corda-git:0.0.2-corda-git-jar    
   #Provide the image pull secret of image
   #Eg. pullSecret: regcred
-  imagePullSecret: regcred
+  imagePullSecret: ""
   #Provide true or false if private certificate to be added
   #Eg. privateCertificate: true
   privateCertificate: true
@@ -119,9 +119,14 @@ credentials:
   #Eg. dataSourceUser: 
   dataSourceUser: 
   #Provide the rpcUser for corda node
+  #Eg. rpcUser: bank1operations
   rpcUser: 
-    - name: bank1operations
-      permissions: [ALL]
+    - name: 
+      permissions: 
+    - name: 
+      permissions: 
+    - name: 
+      permissions: 
 
 volume:
   #Provide the base path
@@ -170,7 +175,7 @@ service:
     port: 10007
     #Provide the p2p node port for node
     #Eg. port: 30007
-    nodePort: 30007
+    nodePort: 
     #Provide the p2p targetPort for node
     #Eg. targetPort: 30007
     targetPort: 30007
@@ -183,7 +188,7 @@ service:
     targetPort: 10003
     #Provide the rpc node port for node 
     #Eg. nodePort: 30007
-    nodePort: 30007
+    nodePort: 
   rpcadmin:
     #Provide the rpcadmin port for node
     #Eg. port: 10108
@@ -193,7 +198,7 @@ service:
     targetPort: 10005
     #Provide the rpcadmin node port for node 
     #Eg. nodePort: 30007
-    nodePort: 30007
+    nodePort: 
   #   annotations:
   #     key: "value"
   annotations: 
@@ -266,4 +271,4 @@ ambassador:
   external_url_suffix: org1.blockchaincloudpoc.com
   #Provide the p2p port for ambassador
   #Eg. p2p_ambassador: 10007
-  p2p_ambassador: 10007
+  p2p_ambassador: 
