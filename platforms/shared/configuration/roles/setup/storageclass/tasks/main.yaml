@@ -1,0 +1,110 @@
+##############################################################################################
+#  Copyright Accenture. All Rights Reserved.
+#
+#  SPDX-License-Identifier: Apache-2.0
+##############################################################################################
+
+#############################################################################################
+# This role creates value files for storage class
+#############################################################################################
+#############################################################################################
+# Check storageclass exists already
+- name: Check if storageclass exists
+  include_role:
+    name: "{{ playbook_dir }}/../../shared/configuration/roles/check/k8_component"  
+  vars:
+    component_type: "StorageClass"
+    component_name: "{{ sc_name }}"
+    kubernetes: "{{ org.k8s }}"
+    type: "no_retry"
+
+- name: Set the storageclass check result to a local variable
+  set_fact:
+    storageclass_state: "{{ result }}"
+    get_sc: "{{ result }}"
+
+#############################################################################################
+# create the build directory for storageclass
+- name: Create build directory
+  file:
+    path: "{{ playbook_dir }}/../../../platforms/shared/configuration/build"
+    state: directory
+
+#############################################################################################
+# Creation of the value file for storage class
+- name: Create value file for storage class
+  template:
+    src: "{{ playbook_dir }}/../../../platforms/shared/configuration/roles/create/shared_helm_component/templates/storage_class.j2"
+    dest: "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{sc_name}}-storageclass.yaml"  
+  when: storageclass_state.resources|length == 0
+
+#############################################################################################
+# This task creates the value file for creating the storage class for Orderer
+- name: Create Storage Class value file for orderers
+  template:
+    src: "{{ playbook_dir }}/../../../platforms/shared/configuration/roles/create/shared_helm_component/templates/storage_class.j2"
+    dest: "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{sc_name}}-storageclass.yaml"
+  vars:
+    component_type: orderer
+    type: "{{ cloudProvider }}-orderer"
+    values_file: 
+      - "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{ sc_name }}-storageclass.yaml"
+  when: 
+  - component_type == 'orderer' and get_sc.resources|length == 0
+  - network.type == 'fabric' 
+
+#############################################################################################
+# This task creates the value file for creating the storage class for Peer
+- name: Create Storage Class value file for Peer
+  template:
+    src: "{{ playbook_dir }}/../../../platforms/shared/configuration/roles/create/shared_helm_component/templates/storage_class.j2"
+    dest: "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{sc_name}}-storageclass.yaml"
+  vars:
+    component_type: peer
+    type: "{{ cloudProvider }}-peer"
+    values_file:
+      - "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{ sc_name }}-storageclass.yaml"
+  when: 
+  - component_type == 'peer' and get_sc.resources|length == 0
+  - network.type == 'fabric'
+
+#############################################################################################
+# This task creates the storage class for when using operator 
+- name: Create the storagelass when using operator
+  kubernetes.core.k8s:
+    state: present
+    src: "{{ playbook_dir }}/../../../platforms/shared/configuration/roles/create/shared_helm_component/templates/storage_class.j2"
+    dest: "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{sc_name}}-storageclass.yaml"
+    kubeconfig: "{{ kubernetes.config_file }}"
+    context: "{{ kubernetes.context }}"
+  when: 
+  - get_sc.resources|length == 0
+  - network.env.type == 'operator'
+  tags:
+    - notest
+
+#############################################################################################
+ # Install the helm chart to create storageclass
+- name: Install Helm Chart for Create storageclass
+  community.kubernetes.helm:
+    name: storageclass
+    chart_ref: "{{ playbook_dir }}/../../../platforms/shared/charts/storage_class"
+    release_namespace: "{{ component_ns }}"
+    create_namespace: true
+    values_files:
+      - "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{ sc_name }}-storageclass.yaml"
+  when: storageclass_state.resources|length == 0
+  
+#############################################################################################
+# Wait for Storageclass creation for componentname
+- name: "Wait for Storageclass creation for {{ component_name }}"
+  include_role:
+    name: "{{ playbook_dir }}/../../shared/configuration/roles/check/k8_component"
+  tags:
+    - notest
+  vars:
+    component_type: "StorageClass"
+    component_name: "{{ sc_name }}"
+    kubernetes: "{{ org.k8s }}"
+    type: "retry"
+  when: storageclass_state.resources|length == 0

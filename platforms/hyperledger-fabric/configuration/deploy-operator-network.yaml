@@ -35,15 +35,20 @@
         release_dir: "./build"
       loop: "{{ network['organizations'] }}"
 
+    # Create Storageclass for new organization for when operator using
     - name: Create storageclass for each organization
       include_role:
-        name: "create/storageclass"
+        name: "{{ playbook_dir }}/../../../platforms/shared/configuration/roles/setup/storageclass"  
       vars:
-        sc_name: "{{ item.name | lower}}sc"
-        component_type: "{{ item.type | lower}}"
-        kubernetes: "{{ item.k8s }}"
-        release_dir: "./build"
+        org_name: "{{ org.name | lower }}"
+        cloudProvider: "{{ org.cloud_provider | lower }}"
+        sc_name: "{{ org_name }}-{{ cloudProvider }}-storageclass"
+        component_ns: "{{ org.name | lower }}-net"
+        component_type: "{{ org.type | lower}}"
+        kubernetes: "{{ org.k8s }}"
       loop: "{{ network['organizations'] }}"
+      loop_control:
+        loop_var: org
         
     - name: Create CA server for each organization
       include_role:

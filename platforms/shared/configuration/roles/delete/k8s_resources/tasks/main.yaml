@@ -18,14 +18,14 @@
 # Remove an existing Storage Class
 - name: Remove an existing Storage Class of {{ organization }}
   vars:
-    provider: "{{ organizationItem.cloud_provider | lower }}"
-    storageclass_name: "{{ organization }}-{{ provider }}-storageclass"
+    cloudProvider: "{{ organizationItem.cloud_provider | lower }}"
+    sc_name: "{{ organization }}-{{ cloudProvider }}-storageclass"
   k8s:
     state: absent
     kind: StorageClass
     kubeconfig: "{{ kubernetes.config_file }}"
     namespace: "{{ organization_ns }}"
-    name: "{{ storageclass_name }}"
+    name: "{{ sc_name }}"
 
 # Remove an existing Namespace
 - name: Remove an existing Namespace {{ organization_ns }}
@@ -35,3 +35,9 @@
     kubeconfig: "{{ kubernetes.config_file }}"
     namespace: "{{ organization_ns }}"
     name: "{{ organization_ns }}"
+    
+# Delete the existing build directory for StorageClass
+- name: Delete build directory for storageclass
+  file:
+    path: "{{ playbook_dir }}/../../../platforms/shared/configuration/build"
+    state: absent
