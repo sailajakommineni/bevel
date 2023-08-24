@@ -78,10 +78,18 @@ spec:
     vault:
       role: vault-role
       address: {{ vault.url }}
+{% if item.k8s.cluster_id is defined %}
+      authpath: {{ item.k8s.cluster_id }}{{ namespace }}-auth
+{% else %}
       authpath: {{ network.env.type }}{{ namespace }}-auth
+{% endif %}
       secretprefix: {{ vault.secret_path | default('secretsv2') }}/data/crypto/peerOrganizations/{{ namespace }}/peers/{{ peer_name }}.{{ namespace }}
       secretambassador: {{ vault.secret_path | default('secretsv2') }}/data/crypto/peerOrganizations/{{ namespace }}/ambassador
       serviceaccountname: vault-auth
+<<<<<<< HEAD
+=======
+      type: {{ vault.type | default("hashicorp") }}
+>>>>>>> upstream/develop
 {% if network.docker.username is defined and network.docker.password is defined %}
       imagesecretname: regcred
 {% else %}

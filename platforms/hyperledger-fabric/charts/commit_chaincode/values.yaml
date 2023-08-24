@@ -74,6 +74,9 @@ orderer:
   #Provide the address for orderer including port
   #Eg. address: orderer-ext.example-com:443
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> upstream/develop
   address:
 =======
   address: ""

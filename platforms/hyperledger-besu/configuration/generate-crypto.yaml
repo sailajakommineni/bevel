@@ -54,7 +54,10 @@
       kubernetes: "{{ org.k8s }}"
       vault: "{{ org.vault }}"
       gitops: "{{ org.gitops }}"
+<<<<<<< HEAD
       reset_path: "platforms/hyperledger-besu/configuration"
+=======
+>>>>>>> upstream/develop
     loop: "{{ network['organizations'] }}"
     loop_control:
       loop_var: org

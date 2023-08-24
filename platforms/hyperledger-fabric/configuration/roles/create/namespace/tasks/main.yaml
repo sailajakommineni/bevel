@@ -41,7 +41,10 @@
   vars:
     GIT_DIR: "{{ playbook_dir }}/../../../"
     gitops: "{{ item.gitops }}"
+<<<<<<< HEAD
     GIT_RESET_PATH: "platforms/hyperledger-fabric/configuration"
+=======
+>>>>>>> upstream/develop
     msg: "[ci skip] Pushing deployment files for namespace, service accounts and clusterrolebinding"
   tags:
     - notest

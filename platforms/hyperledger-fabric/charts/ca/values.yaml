@@ -96,11 +96,14 @@ annotations:
 <<<<<<< HEAD
   #Extra annotations wanted
   service: []
+<<<<<<< HEAD
 =======
   # Extra annotations for the service
   service: []
   # Extra annotations for the PVC
 >>>>>>> upstream/main
+=======
+>>>>>>> upstream/develop
   pvc: []
   
 proxy:

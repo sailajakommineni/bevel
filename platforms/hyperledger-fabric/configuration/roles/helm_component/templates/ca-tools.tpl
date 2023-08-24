@@ -59,7 +59,11 @@ spec:
     vault:
       role: vault-role
       address: {{ vault.url }}
+{% if item.k8s.cluster_id is defined %}
+      authpath: {{ item.k8s.cluster_id }}{{ component_name }}-auth
+{% else %}
       authpath: {{ network.env.type }}{{ component_name }}-auth
+{% endif %}
       secretusers: {{ vault.secret_path | default('secretsv2') }}/data/crypto/{{ component_type }}Organizations/{{ component_name }}/users
       secretorderer: {{ vault.secret_path | default('secretsv2') }}/data/crypto/{{ component_type }}Organizations/{{ component_name }}/orderers
       secretpeer: {{ vault.secret_path | default('secretsv2') }}/data/crypto/{{ component_type }}Organizations/{{ component_name }}/peers
@@ -70,6 +74,10 @@ spec:
       secretcouchdb: {{ vault.secret_path | default('secretsv2') }}/data/credentials/{{ component_name }}/couchdb/{{ org_name }}
       secretconfigfile: {{ vault.secret_path | default('secretsv2') }}/data/crypto/{{ component_type }}Organizations/{{ component_name | e }}/msp/config
       serviceaccountname: vault-auth
+<<<<<<< HEAD
+=======
+      type: {{ vault.type | default("hashicorp") }}
+>>>>>>> upstream/develop
 {% if network.docker.username is defined and network.docker.password is defined %}
       imagesecretname: regcred
 {% else %}

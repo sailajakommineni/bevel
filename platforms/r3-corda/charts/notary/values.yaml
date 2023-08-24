@@ -113,6 +113,7 @@ credentials:
   #Eg. dataSourceUser: 
   dataSourceUser: 
   #Provide the rpcUser for corda node
+<<<<<<< HEAD
   #Eg. rpcUser: bank1operations
   rpcUser: 
     - name: 
@@ -121,6 +122,11 @@ credentials:
       permissions: 
     - name: 
       permissions: 
+=======
+  rpcUser:
+    - name: bank1operations
+      permissions: [ALL]
+>>>>>>> upstream/develop
 cordapps: 
   #Provide if you want to provide jars in cordapps
   #Eg. getcordapps: true or false

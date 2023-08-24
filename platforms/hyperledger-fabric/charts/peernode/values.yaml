@@ -39,6 +39,9 @@ peer:
   #Provide the url of gossip external endpoint and  port to be mentioned is ambassador https service port
   #Eg. gossipexternalendpoint: peer1-ext.org1-example-com:443
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> upstream/develop
   gossipexternalendpoint:  
 =======
   gossipexternalendpoint: peer1-ext.org1-example-com:443
