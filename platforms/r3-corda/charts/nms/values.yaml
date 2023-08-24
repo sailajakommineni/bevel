@@ -25,7 +25,7 @@ image:
   containerName: hyperledgerlabs/nms:0.3.6-nms
   #Provide the image pull secret of image
   #Eg. pullSecret: regcred
-  imagePullSecret: regcred
+  imagePullSecret: 
   #Provide enviroment variable for container image
   env:
     #Provide rootcaname for the doorman
@@ -52,13 +52,13 @@ image:
 service:
   #Provide the NMS service port 
   #Eg. port: 30007
-  port: 30007
+  port: 
   #Provide the type of service
   #Eg. type: NodePort
   type: NodePort
   #Provide the node port for node service to be accessible outside
   #Eg. nodePort: 30050
-  nodePort: 30050
+  nodePort: 
 
 storage:
   #Provide the memory for node

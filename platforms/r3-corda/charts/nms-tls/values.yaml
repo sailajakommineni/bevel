@@ -52,13 +52,13 @@ image:
 service:
   #Provide the NMS service port 
   #Eg. port: 30007
-  port: 30007
+  port: 
   #Provide the type of service
   #Eg. type: NodePort
   type: NodePort
   #Provide the node port for node service to be accessible outside
   #Eg. nodePort: 30050
-  nodePort: 30050
+  nodePort: 
 
 storage:
   #Provide the memory for node

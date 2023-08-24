@@ -170,30 +170,30 @@ service:
     port: 10007
     #Provide the p2p node port for node
     #Eg. port: 30007
-    nodePort: 30007
+    nodePort: 
     #Provide the p2p targetPort for node
     #Eg. targetPort: 30007
-    targetPort: 30007
+    targetPort: 
   rpc:
     #Provide the rpc port for node
     #Eg. port: 10008
-    port: 10008
+    port: 
     #Provide the rpc targetPort for node
     #Eg. targetPort: 10003
     targetPort: 10003
     #Provide the rpc node port for node 
     #Eg. nodePort: 30007
-    nodePort: 30007
+    nodePort: 
   rpcadmin:
     #Provide the rpcadmin port for node
     #Eg. port: 10108
     port: 10108
     #Provide the rpcadmin targetPort for node
     #Eg. targetPort: 10005
-    targetPort: 10005
+    targetPort: 
     #Provide the rpcadmin node port for node 
     #Eg. nodePort: 30007
-    nodePort: 30007
+    nodePort: 
       
 deployment:
   annotations: 
