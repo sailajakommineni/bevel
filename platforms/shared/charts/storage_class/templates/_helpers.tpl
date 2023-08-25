@@ -5,5 +5,7 @@ provisioner: kubernetes.io/aws-ebs
 provisioner: gce.csi.google.com
 {{- else if eq .Values.cloud_provider "minikube" }}
 provisioner: k8s.io/minikube-hostpath
+{{- else if eq .Values.cloud_provider "azure" }}
+provisioner: disk.csi.azure.com
 {{- end -}}
 {{- end -}}
