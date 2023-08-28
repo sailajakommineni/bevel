@@ -12,19 +12,19 @@
 - set_fact:
     cloud_provider: "{{ org.cloud_provider }}"
     
-# # Check storageclass exists already
-# - name: Check if storageclass exists
-#   include_role:
-#     name: "{{ playbook_dir }}/../../shared/configuration/roles/check/k8_component"  
-#   vars:
-#     component_type: "StorageClass"
-#     component_name: "{{ sc_name }}"
-#     kubernetes: "{{ org.k8s }}"
-#     type: "no_retry"
+# Check storageclass exists already
+- name: Check if storageclass exists
+  include_role:
+    name: "{{ playbook_dir }}/../../shared/configuration/roles/check/k8_component"  
+  vars:
+    component_type: "StorageClass"
+    component_name: "{{ sc_name }}"
+    kubernetes: "{{ org.k8s }}"
+    type: "no_retry"
 
-# - name: Set the storageclass check result to a local variable
-#   set_fact:
-#     storageclass_state: "{{ result }}"
+- name: Set the storageclass check result to a local variable
+  set_fact:
+    storageclass_state: "{{ result }}"
 
 #############################################################################################
 # create the build directory for storageclass
@@ -39,7 +39,7 @@
   template:
     src: "{{ playbook_dir }}/../../../platforms/shared/configuration/roles/create/shared_helm_component/templates/storage_class.tpl"
     dest: "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{sc_name}}-storageclass.yaml"  
-  # when: storageclass_state.resources|length == 0
+  when: storageclass_state.resources|length == 0
 
 #############################################################################################
 # Install the helm chart to create storageclass
@@ -51,18 +51,18 @@
     values_files:
       - "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{ sc_name }}-storageclass.yaml"
     force: true
-  # when: storageclass_state.resources|length == 0
+  when: storageclass_state.resources|length == 0
   
-# #############################################################################################
-# # Wait for Storageclass creation for componentname
-# - name: "Wait for Storageclass creation for {{ component_name }}"
-#   include_role:
-#     name: "{{ playbook_dir }}/../../shared/configuration/roles/check/k8_component"
-#   tags:
-#     - notest
-#   vars:
-#     component_type: "StorageClass"
-#     component_name: "{{ sc_name }}"
-#     kubernetes: "{{ org.k8s }}"
-#     type: "retry"
-  # when: storageclass_state.resources|length == 0
+#############################################################################################
+# Wait for Storageclass creation for componentname
+- name: "Wait for Storageclass creation for {{ component_name }}"
+  include_role:
+    name: "{{ playbook_dir }}/../../shared/configuration/roles/check/k8_component"
+  tags:
+    - notest
+  vars:
+    component_type: "StorageClass"
+    component_name: "{{ sc_name }}"
+    kubernetes: "{{ org.k8s }}"
+    type: "retry"
+  when: storageclass_state.resources|length == 0
