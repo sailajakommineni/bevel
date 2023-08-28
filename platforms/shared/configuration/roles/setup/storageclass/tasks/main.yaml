@@ -45,7 +45,7 @@
 # Install the helm chart to create storageclass
 - name: Install Helm Chart for Create storageclass
   community.kubernetes.helm:
-    name: storageclass
+    name: "{{ sc_name }}storageclass"
     chart_ref: "{{ playbook_dir }}/../../../platforms/shared/charts/storage_class"
     release_namespace: default
     values_files:
