@@ -42,7 +42,7 @@
   when: storageclass_state.resources|length == 0
 
 #############################################################################################
- # Install the helm chart to create storageclass
+# Install the helm chart to create storageclass
 - name: Install Helm Chart for Create storageclass
   community.kubernetes.helm:
     name: storageclass
