@@ -42,21 +42,6 @@
     dest: "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{sc_name}}-storageclass.yaml"  
   when: storageclass_state.resources|length == 0
 
-# #############################################################################################
-# # This task creates the storage class for when using operator 
-# - name: Create the storagelass when using operator
-#   kubernetes.core.k8s:
-#     state: present
-#     src: "{{ playbook_dir }}/../../../platforms/shared/configuration/roles/create/shared_helm_component/templates/storage_class.tpl"
-#     dest: "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{sc_name}}-storageclass.yaml"
-#     kubeconfig: "{{ kubernetes.config_file }}"
-#     context: "{{ kubernetes.context }}"
-#   when: 
-#   - get_sc.resources|length == 0
-#   - network.env.type == 'operator'
-#   tags:
-#     - notest
-
 #############################################################################################
  # Install the helm chart to create storageclass
 - name: Install Helm Chart for Create storageclass
