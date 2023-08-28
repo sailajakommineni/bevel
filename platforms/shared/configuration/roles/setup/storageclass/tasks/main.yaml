@@ -46,7 +46,7 @@
 # This task creates the value file for creating the storage class for Orderer
 - name: Create Storage Class value file for orderers
   template:
-    src: "{{ playbook_dir }}/../../../platforms/shared/configuration/roles/create/shared_helm_component/templates/storage_class.j2"
+    src: "{{ playbook_dir }}/../../../platforms/shared/configuration/roles/create/shared_helm_component/templates/storage_class.tpl"
     dest: "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{sc_name}}-storageclass.yaml"
   vars:
     component_type: orderer
@@ -61,7 +61,7 @@
 # This task creates the value file for creating the storage class for Peer
 - name: Create Storage Class value file for Peer
   template:
-    src: "{{ playbook_dir }}/../../../platforms/shared/configuration/roles/create/shared_helm_component/templates/storage_class.j2"
+    src: "{{ playbook_dir }}/../../../platforms/shared/configuration/roles/create/shared_helm_component/templates/storage_class.tpl"
     dest: "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{sc_name}}-storageclass.yaml"
   vars:
     component_type: peer
@@ -77,7 +77,7 @@
 - name: Create the storagelass when using operator
   kubernetes.core.k8s:
     state: present
-    src: "{{ playbook_dir }}/../../../platforms/shared/configuration/roles/create/shared_helm_component/templates/storage_class.j2"
+    src: "{{ playbook_dir }}/../../../platforms/shared/configuration/roles/create/shared_helm_component/templates/storage_class.tpl"
     dest: "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{sc_name}}-storageclass.yaml"
     kubeconfig: "{{ kubernetes.config_file }}"
     context: "{{ kubernetes.context }}"
