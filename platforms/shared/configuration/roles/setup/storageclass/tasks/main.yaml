@@ -93,7 +93,7 @@
   community.kubernetes.helm:
     name: storageclass
     chart_ref: "{{ playbook_dir }}/../../../platforms/shared/charts/storage_class"
-    release_namespace: default
+    release_namespace: "default"
     create_namespace: false
     values_files:
       - "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{ sc_name }}-storageclass.yaml"
