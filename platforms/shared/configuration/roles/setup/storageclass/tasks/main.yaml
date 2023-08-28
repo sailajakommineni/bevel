@@ -34,7 +34,7 @@
 # Creation of the value file for storage class
 - name: Create value file for storage class
   template:
-    src: "{{ playbook_dir }}/../../../platforms/shared/configuration/roles/create/shared_helm_component/templates/storage_class.j2"
+    src: "{{ playbook_dir }}/../../../platforms/shared/configuration/roles/create/shared_helm_component/templates/storage_class.tpl"
     dest: "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{sc_name}}-storageclass.yaml"  
   when: storageclass_state.resources|length == 0
 

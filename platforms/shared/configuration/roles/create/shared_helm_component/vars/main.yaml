@@ -6,3 +6,4 @@
 
 helm_templates:
   vault_k8s_mgmt: vault_kubernetes_job.tpl
+  storageclass: storage_class.tpl
