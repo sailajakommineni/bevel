@@ -94,7 +94,7 @@
         org_name: "{{ org.name | lower }}"
         cloudProvider: "{{ org.cloud_provider | lower }}"
         sc_name: "{{ org_name }}-{{ cloudProvider }}-storageclass"
-        component_ns: "{{ org.name | lower }}-net"
+        # component_ns: "{{ org.name | lower }}-net"
         component_type: "{{ org.type | lower }}"
         region: "{{ org.k8s.region | default('eu-west-1') }}"
         kubernetes: "{{ org.k8s }}"
