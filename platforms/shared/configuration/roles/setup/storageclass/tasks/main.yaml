@@ -39,7 +39,7 @@
   template:
     src: "{{ playbook_dir }}/../../../platforms/shared/configuration/roles/create/shared_helm_component/templates/storage_class.tpl"
     dest: "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{sc_name}}-storageclass.yaml"  
-  # when: storageclass_state.resources|length == 0
+  when: storageclass_state.resources|length == 0
 
 #############################################################################################
 # Install the helm chart to create storageclass
@@ -51,7 +51,8 @@
     create_namespace: false
     values_files:
       - "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{ sc_name }}-storageclass.yaml"
-  # when: storageclass_state.resources|length == 0
+    force: true
+  when: storageclass_state.resources|length == 0
   
 #############################################################################################
 # Wait for Storageclass creation for componentname
@@ -65,4 +66,4 @@
     component_name: "{{ sc_name }}"
     kubernetes: "{{ org.k8s }}"
     type: "retry"
-  # when: storageclass_state.resources|length == 0
+  when: storageclass_state.resources|length == 0
