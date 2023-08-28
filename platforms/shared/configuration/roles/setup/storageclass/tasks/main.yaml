@@ -42,50 +42,20 @@
     dest: "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{sc_name}}-storageclass.yaml"  
   when: storageclass_state.resources|length == 0
 
-#############################################################################################
-# This task creates the value file for creating the storage class for Orderer
-- name: Create Storage Class value file for orderers
-  template:
-    src: "{{ playbook_dir }}/../../../platforms/shared/configuration/roles/create/shared_helm_component/templates/storage_class.tpl"
-    dest: "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{sc_name}}-storageclass.yaml"
-  vars:
-    component_type: orderer
-    type: "{{ cloudProvider }}-orderer"
-    values_file: 
-      - "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{ sc_name }}-storageclass.yaml"
-  when: 
-  - component_type == 'orderer' and get_sc.resources|length == 0
-  - network.type == 'fabric' 
-
-#############################################################################################
-# This task creates the value file for creating the storage class for Peer
-- name: Create Storage Class value file for Peer
-  template:
-    src: "{{ playbook_dir }}/../../../platforms/shared/configuration/roles/create/shared_helm_component/templates/storage_class.tpl"
-    dest: "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{sc_name}}-storageclass.yaml"
-  vars:
-    component_type: peer
-    type: "{{ cloudProvider }}-peer"
-    values_file:
-      - "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{ sc_name }}-storageclass.yaml"
-  when: 
-  - component_type == 'peer' and get_sc.resources|length == 0
-  - network.type == 'fabric'
-
-#############################################################################################
-# This task creates the storage class for when using operator 
-- name: Create the storagelass when using operator
-  kubernetes.core.k8s:
-    state: present
-    src: "{{ playbook_dir }}/../../../platforms/shared/configuration/roles/create/shared_helm_component/templates/storage_class.tpl"
-    dest: "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{sc_name}}-storageclass.yaml"
-    kubeconfig: "{{ kubernetes.config_file }}"
-    context: "{{ kubernetes.context }}"
-  when: 
-  - get_sc.resources|length == 0
-  - network.env.type == 'operator'
-  tags:
-    - notest
+# #############################################################################################
+# # This task creates the storage class for when using operator 
+# - name: Create the storagelass when using operator
+#   kubernetes.core.k8s:
+#     state: present
+#     src: "{{ playbook_dir }}/../../../platforms/shared/configuration/roles/create/shared_helm_component/templates/storage_class.tpl"
+#     dest: "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{sc_name}}-storageclass.yaml"
+#     kubeconfig: "{{ kubernetes.config_file }}"
+#     context: "{{ kubernetes.context }}"
+#   when: 
+#   - get_sc.resources|length == 0
+#   - network.env.type == 'operator'
+#   tags:
+#     - notest
 
 #############################################################################################
  # Install the helm chart to create storageclass

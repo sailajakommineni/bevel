@@ -49,8 +49,9 @@
       loop: "{{ network['organizations'] }}"
       loop_control:
         loop_var: org
-      # when: 
-      # - network.env.type == 'operator'  
+      when: 
+      - network.env.type == 'operator'  
+      
   #   - name: Create CA server for each organization
   #     include_role:
   #       name: "operator/create/ca/server"
