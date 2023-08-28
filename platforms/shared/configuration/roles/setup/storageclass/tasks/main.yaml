@@ -22,9 +22,9 @@
     kubernetes: "{{ org.k8s }}"
     type: "no_retry"
 
-- name: Set the storageclass check result to a local variable
-  set_fact:
-    storageclass_state: "{{ result }}"
+# - name: Set the storageclass check result to a local variable
+#   set_fact:
+#     storageclass_state: "{{ result }}"
     # get_sc: "{{ result }}"
 
 #############################################################################################
