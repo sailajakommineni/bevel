@@ -6,4 +6,5 @@
 
 helm_templates:
   vault_k8s_mgmt: vault_kubernetes_job.tpl
-  storageclass: storage_class.tpl
+  awsstorageclass: storage_class.tpl
+  minikube-storageclass: storage_class.tpl
