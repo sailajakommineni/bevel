@@ -11,7 +11,7 @@
 
 - set_fact:
     cloud_provider: "{{ org.cloud_provider }}"
-    
+
 # Check storageclass exists already
 - name: Check if storageclass exists
   include_role:
@@ -93,7 +93,7 @@
   community.kubernetes.helm:
     name: storageclass
     chart_ref: "{{ playbook_dir }}/../../../platforms/shared/charts/storage_class"
-    release_namespace: "{{ component_ns }}"
+    release_namespace: "default"
     create_namespace: true
     values_files:
       - "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{ sc_name }}-storageclass.yaml"
