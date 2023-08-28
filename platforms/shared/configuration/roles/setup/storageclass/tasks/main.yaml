@@ -8,6 +8,10 @@
 # This role creates value files for storage class
 #############################################################################################
 #############################################################################################
+
+- set_fact:
+    cloud_provider: "{{ org.cloud_provider }}"
+    
 # Check storageclass exists already
 - name: Check if storageclass exists
   include_role:
