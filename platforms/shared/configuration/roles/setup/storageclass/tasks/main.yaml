@@ -26,6 +26,10 @@
   set_fact:
     storageclass_state: "{{ result }}"
 
+- name: Debug storageclass_state
+  debug:
+    var: storageclass_state
+
 #############################################################################################
 # create the build directory for storageclass
 - name: Create build directory
