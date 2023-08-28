@@ -9,8 +9,8 @@
 #############################################################################################
 #############################################################################################
 
-- set_fact:
-    cloud_provider: "{{ org.cloud_provider }}"
+# - set_fact:
+#     cloud_provider: "{{ org.cloud_provider }}"
     
 # Check storageclass exists already
 - name: Check if storageclass exists
@@ -22,10 +22,10 @@
     kubernetes: "{{ org.k8s }}"
     type: "no_retry"
 
-# - name: Set the storageclass check result to a local variable
-#   set_fact:
-#     storageclass_state: "{{ result }}"
-    # get_sc: "{{ result }}"
+- name: Set the storageclass check result to a local variable
+  set_fact:
+    storageclass_state: "{{ result }}"
+    get_sc: "{{ result }}"
 
 #############################################################################################
 # create the build directory for storageclass
@@ -40,7 +40,7 @@
   template:
     src: "{{ playbook_dir }}/../../../platforms/shared/configuration/roles/create/shared_helm_component/templates/storage_class.tpl"
     dest: "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{sc_name}}-storageclass.yaml"  
-  # when: storageclass_state.resources|length == 0
+  when: storageclass_state.resources|length == 0
 
 # #############################################################################################
 # # This task creates the value file for creating the storage class for Orderer
@@ -97,7 +97,7 @@
     create_namespace: false
     values_files:
       - "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{ sc_name }}-storageclass.yaml"
-  # when: storageclass_state.resources|length == 0
+  when: storageclass_state.resources|length == 0
   
 #############################################################################################
 # Wait for Storageclass creation for componentname
@@ -111,4 +111,4 @@
     component_name: "{{ sc_name }}"
     kubernetes: "{{ org.k8s }}"
     type: "retry"
-  # when: storageclass_state.resources|length == 0
+  when: storageclass_state.resources|length == 0
