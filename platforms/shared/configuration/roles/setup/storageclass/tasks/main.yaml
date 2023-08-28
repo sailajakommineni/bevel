@@ -25,7 +25,6 @@
 - name: Set the storageclass check result to a local variable
   set_fact:
     storageclass_state: "{{ result }}"
-    get_sc: "{{ result }}"
 
 #############################################################################################
 # create the build directory for storageclass
