@@ -100,15 +100,15 @@
   # when: storageclass_state.resources|length == 0
   
 #############################################################################################
-# Wait for Storageclass creation for componentname
-- name: "Wait for Storageclass creation for {{ component_name }}"
-  include_role:
-    name: "{{ playbook_dir }}/../../shared/configuration/roles/check/k8_component"
-  tags:
-    - notest
-  vars:
-    component_type: "StorageClass"
-    component_name: "{{ sc_name }}"
-    kubernetes: "{{ org.k8s }}"
-    type: "retry"
-  when: storageclass_state.resources|length == 0
+# # Wait for Storageclass creation for componentname
+# - name: "Wait for Storageclass creation for {{ component_name }}"
+#   include_role:
+#     name: "{{ playbook_dir }}/../../shared/configuration/roles/check/k8_component"
+#   tags:
+#     - notest
+#   vars:
+#     component_type: "StorageClass"
+#     component_name: "{{ sc_name }}"
+#     kubernetes: "{{ org.k8s }}"
+#     type: "retry"
+#   # when: storageclass_state.resources|length == 0
