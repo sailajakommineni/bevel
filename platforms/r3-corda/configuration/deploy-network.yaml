@@ -47,83 +47,83 @@
       loop_var: org
     when: network['type'] == 'corda'
 
-  # # ----------------------------------------------------------------------  
-  # # Deploy Doorman node
-  # - name: Deploy Doorman service node
-  #   include_role:
-  #     name: setup/doorman
-  #   vars:
-  #    services: "{{ item.services }}"
-  #    organisation: "{{ item.name | lower }}"
-  #    sc_name: "{{ organisation }}-{{ item.cloud_provider | lower }}-storageclass"
-  #    component_ns: "{{ item.name | lower }}-ns"
-  #    kubernetes: "{{ item.k8s }}"
-  #    vault: "{{ item.vault }}"
-  #    gitops: "{{ item.gitops }}"     
-  #   loop: "{{ network['organizations'] }}"
-  #   when: network['type'] == 'corda' and item.type.find('doorman') != -1
+  # ----------------------------------------------------------------------  
+  # Deploy Doorman node
+  - name: Deploy Doorman service node
+    include_role:
+      name: setup/doorman
+    vars:
+     services: "{{ item.services }}"
+     organisation: "{{ item.name | lower }}"
+     sc_name: "{{ organisation }}-{{ item.cloud_provider | lower }}-storageclass"
+     component_ns: "{{ item.name | lower }}-ns"
+     kubernetes: "{{ item.k8s }}"
+     vault: "{{ item.vault }}"
+     gitops: "{{ item.gitops }}"     
+    loop: "{{ network['organizations'] }}"
+    when: network['type'] == 'corda' and item.type.find('doorman') != -1
 
-  # # ----------------------------------------------------------------------  
-  # # Deploy NMS node
-  # - name: Deploy Networkmap service node
-  #   include_role:
-  #     name: setup/nms      
-  #   vars:
-  #    services: "{{ item.services }}"
-  #    organisation: "{{ item.name | lower }}"
-  #    sc_name: "{{ organisation }}-{{ item.cloud_provider | lower }}-storageclass"
-  #    component_ns: "{{ item.name | lower }}-ns"
-  #    kubernetes: "{{ item.k8s }}"
-  #    vault: "{{ item.vault }}"
-  #    gitops: "{{ item.gitops }}"
-  #   loop: "{{ network['organizations'] }}"
-  #   when: network['type'] == 'corda' and item.type.find('nms') != -1
+  # ----------------------------------------------------------------------  
+  # Deploy NMS node
+  - name: Deploy Networkmap service node
+    include_role:
+      name: setup/nms      
+    vars:
+     services: "{{ item.services }}"
+     organisation: "{{ item.name | lower }}"
+     sc_name: "{{ organisation }}-{{ item.cloud_provider | lower }}-storageclass"
+     component_ns: "{{ item.name | lower }}-ns"
+     kubernetes: "{{ item.k8s }}"
+     vault: "{{ item.vault }}"
+     gitops: "{{ item.gitops }}"
+    loop: "{{ network['organizations'] }}"
+    when: network['type'] == 'corda' and item.type.find('nms') != -1
   
-  # # ----------------------------------------------------------------------  
-  # # Wait for network services to respond  
-  # - name: Check that network services uri are reachable
-  #   uri:
-  #     url: "{{ item.uri }}"
-  #     validate_certs: no
-  #   register: this
-  #   until: this.status == 200 or this.status == 401
-  #   loop: "{{ network['network_services'] }}"
-  #   retries: "{{ network.env.retry_count}}"
-  #   delay: 50
-  #   ignore_errors: yes
-  #   when: network.env.proxy != 'none'
+  # ----------------------------------------------------------------------  
+  # Wait for network services to respond  
+  - name: Check that network services uri are reachable
+    uri:
+      url: "{{ item.uri }}"
+      validate_certs: no
+    register: this
+    until: this.status == 200 or this.status == 401
+    loop: "{{ network['network_services'] }}"
+    retries: "{{ network.env.retry_count}}"
+    delay: 50
+    ignore_errors: yes
+    when: network.env.proxy != 'none'
 
-  # # ----------------------------------------------------------------------  
-  # # Deploy notaries
-  # - name: 'Deploy notary'
-  #   include_role:
-  #     name: setup/notary
-  #   vars:
-  #     services: "{{ item.services }}"
-  #     node: "{{ item.services.notary }}"
-  #     organisation: "{{ item.name | lower }}"
-  #     sc_name: "{{ organisation }}-{{ item.cloud_provider | lower }}-storageclass"
-  #     component_ns: "{{ item.name | lower }}-ns"
-  #     kubernetes: "{{ item.k8s }}"
-  #     vault: "{{ item.vault }}"
-  #     gitops: "{{ item.gitops }}" 
-  #     cordapps: "{{ item.cordapps | default() }}"
-  #   loop: "{{ network['organizations'] }}"
-  #   when: network['type'] == 'corda' and item.type.find('notary') != -1
+  # ----------------------------------------------------------------------  
+  # Deploy notaries
+  - name: 'Deploy notary'
+    include_role:
+      name: setup/notary
+    vars:
+      services: "{{ item.services }}"
+      node: "{{ item.services.notary }}"
+      organisation: "{{ item.name | lower }}"
+      sc_name: "{{ organisation }}-{{ item.cloud_provider | lower }}-storageclass"
+      component_ns: "{{ item.name | lower }}-ns"
+      kubernetes: "{{ item.k8s }}"
+      vault: "{{ item.vault }}"
+      gitops: "{{ item.gitops }}" 
+      cordapps: "{{ item.cordapps | default() }}"
+    loop: "{{ network['organizations'] }}"
+    when: network['type'] == 'corda' and item.type.find('notary') != -1
 
-  # # ----------------------------------------------------------------------  
-  # # Deploy all other nodes
-  # - name: 'Deploy nodes'
-  #   include_role:
-  #     name: setup/node
-  #   vars:
-  #     organisation: "{{ item.name | lower }}"
-  #     sc_name: "{{ organisation }}-{{ item.cloud_provider | lower }}-storageclass"
-  #     component_ns: "{{ item.name | lower }}-ns"
-  #     services: "{{ item.services }}"
-  #     kubernetes: "{{ item.k8s }}"
-  #     vault: "{{ item.vault }}"
-  #     cordapps: "{{ item.cordapps | default() }}"
-  #     gitops: "{{ item.gitops }}" 
-  #   loop: "{{ network['organizations'] }}"  
-  #   when: network['type'] == 'corda' and item.type == 'node'
+  # ----------------------------------------------------------------------  
+  # Deploy all other nodes
+  - name: 'Deploy nodes'
+    include_role:
+      name: setup/node
+    vars:
+      organisation: "{{ item.name | lower }}"
+      sc_name: "{{ organisation }}-{{ item.cloud_provider | lower }}-storageclass"
+      component_ns: "{{ item.name | lower }}-ns"
+      services: "{{ item.services }}"
+      kubernetes: "{{ item.k8s }}"
+      vault: "{{ item.vault }}"
+      cordapps: "{{ item.cordapps | default() }}"
+      gitops: "{{ item.gitops }}" 
+    loop: "{{ network['organizations'] }}"  
+    when: network['type'] == 'corda' and item.type == 'node'
