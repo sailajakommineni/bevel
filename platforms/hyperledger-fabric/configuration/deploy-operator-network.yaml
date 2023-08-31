@@ -52,75 +52,75 @@
       when: 
       - network.env.type == 'operator'  
       
-    - name: Create CA server for each organization
-      include_role:
-        name: "operator/create/ca/server"
-      vars:
-        ca: "{{ item.services.ca }}"
-        namespace: "{{ item.name | lower }}-net"
-        component_name: "{{ item.name | lower }}"
-      loop: "{{ network['organizations'] }}"
-      when: item.services.ca is defined
+  #   - name: Create CA server for each organization
+  #     include_role:
+  #       name: "operator/create/ca/server"
+  #     vars:
+  #       ca: "{{ item.services.ca }}"
+  #       namespace: "{{ item.name | lower }}-net"
+  #       component_name: "{{ item.name | lower }}"
+  #     loop: "{{ network['organizations'] }}"
+  #     when: item.services.ca is defined
 
-    - name: Register default users for each organization
-      include_role:
-        name: "operator/create/ca/user"
-      vars:
-        user_type: "default"
-        namespace: "{{ item.name | lower }}-net"
-        component_name: "{{ item.name | lower }}"
-        component_type: "{{ item.type | lower }}"
-      loop: "{{ network['organizations'] }}"
+  #   - name: Register default users for each organization
+  #     include_role:
+  #       name: "operator/create/ca/user"
+  #     vars:
+  #       user_type: "default"
+  #       namespace: "{{ item.name | lower }}-net"
+  #       component_name: "{{ item.name | lower }}"
+  #       component_type: "{{ item.type | lower }}"
+  #     loop: "{{ network['organizations'] }}"
     
-    - name: Create orderer nodes
-      include_role:
-        name: "operator/create/orderer"
-      vars:
-        namespace: "{{ item.name | lower }}-net"
-        component_name: "{{ item.name | lower }}"
-        component_type: "{{ item.type | lower }}"
-        kubeconfig_path: "{{ item.k8s.config_file }}"
-      loop: "{{ network['organizations'] }}"
-      when: item.type == 'orderer'
+  #   - name: Create orderer nodes
+  #     include_role:
+  #       name: "operator/create/orderer"
+  #     vars:
+  #       namespace: "{{ item.name | lower }}-net"
+  #       component_name: "{{ item.name | lower }}"
+  #       component_type: "{{ item.type | lower }}"
+  #       kubeconfig_path: "{{ item.k8s.config_file }}"
+  #     loop: "{{ network['organizations'] }}"
+  #     when: item.type == 'orderer'
 
-    - name: Create all peers
-      include_role:
-        name: "operator/create/peer"
-      vars:
-        namespace: "{{ item.name | lower }}-net"
-        component_name: "{{ item.name | lower }}"
-        component_type: "{{ item.type | lower }}"
-      loop: "{{ network['organizations'] }}"
-      when: item.type == 'peer'
+  #   - name: Create all peers
+  #     include_role:
+  #       name: "operator/create/peer"
+  #     vars:
+  #       namespace: "{{ item.name | lower }}-net"
+  #       component_name: "{{ item.name | lower }}"
+  #       component_type: "{{ item.type | lower }}"
+  #     loop: "{{ network['organizations'] }}"
+  #     when: item.type == 'peer'
 
-    - name: Register admin users for each organization
-      include_role:
-        name: "operator/create/ca/user"
-      vars:
-        user_type: "admin"
-        namespace: "{{ item.name | lower }}-net"
-        component_name: "{{ item.name | lower }}"
-        component_type: "{{ item.type | lower }}"
-      loop: "{{ network['organizations'] }}"
+  #   - name: Register admin users for each organization
+  #     include_role:
+  #       name: "operator/create/ca/user"
+  #     vars:
+  #       user_type: "admin"
+  #       namespace: "{{ item.name | lower }}-net"
+  #       component_name: "{{ item.name | lower }}"
+  #       component_type: "{{ item.type | lower }}"
+  #     loop: "{{ network['organizations'] }}"
     
-    - name: Create the main channels
-      include_role:
-        name: "operator/create/mainchannel"
-      vars:
-        participants: "{{ item.participants }}"
-      loop: "{{ network['channels'] }}"
+  #   - name: Create the main channels
+  #     include_role:
+  #       name: "operator/create/mainchannel"
+  #     vars:
+  #       participants: "{{ item.participants }}"
+  #     loop: "{{ network['channels'] }}"
 
-    - name: Join the main channels
-      include_role:
-        name: "operator/create/followerchannel"
-      vars:
-        build_path: "./build"
-        participants: "{{ item.participants }}"
-      loop: "{{ network['channels'] }}"
+  #   - name: Join the main channels
+  #     include_role:
+  #       name: "operator/create/followerchannel"
+  #     vars:
+  #       build_path: "./build"
+  #       participants: "{{ item.participants }}"
+  #     loop: "{{ network['channels'] }}"
 
-  vars: #These variables can be overriden from the command line
-    privilege_escalate: false           #Default to NOT escalate to root privledges
-    install_os: "linux"                 #Default to linux OS
-    install_arch:  "amd64"              #Default to amd64 architecture
-    bin_install_dir:  "~/bin"            #Default to /bin install directory for binaries
-    add_new_org: 'false'                # Default to false as this is for main network creation
+  # vars: #These variables can be overriden from the command line
+  #   privilege_escalate: false           #Default to NOT escalate to root privledges
+  #   install_os: "linux"                 #Default to linux OS
+  #   install_arch:  "amd64"              #Default to amd64 architecture
+  #   bin_install_dir:  "~/bin"            #Default to /bin install directory for binaries
+  #   add_new_org: 'false'                # Default to false as this is for main network creation
