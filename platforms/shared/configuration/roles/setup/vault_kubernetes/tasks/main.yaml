@@ -71,6 +71,11 @@
     values_dir_path: "{{ playbook_dir }}/../../../{{gitops.release_dir}}/{{org_name}}/{{ name }}"
   when: network.type == "corda" and item.type != "node"
 
+- name: Unset variables
+  set_fact:
+    check_clusterRoleBinding:
+    check_serviceAccount:
+
 # Check if ClusterRoleBinding created
 - name: "Checking for the {{ component_ns }}-role-tokenreview-binding"
   include_role:
@@ -135,6 +140,7 @@
   vars:
     GIT_DIR: "{{ playbook_dir }}/../../../"
     # gitops: "{{ org.gitops }}"
+    GIT_RESET_PATH: "{{ reset_path }}"
     msg: "[ci skip] Pushing vault_kubernetes files"
    
 # Check if vault_kubernetes is completed
