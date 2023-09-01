@@ -20,22 +20,34 @@
       path: "./build"
       state: absent
 
-  # Create Storageclass that will be used for this deployment
+ # Create Storageclass that will be used for this deployment
   - name: Create Storage Class
     include_role:
       name: "{{ playbook_dir }}/../../../platforms/shared/configuration/roles/setup/storageclass"
     vars:
-      org_name: "{{ org.name | lower }}"
-      cloudProvider: "{{ org.cloud_provider | lower }}"
-      sc_name: "{{ org_name }}-{{ cloudProvider }}-storageclass"
+      storageclass_name: "cordaentsc"
       git_dir: "{{ org.gitops.release_dir }}"
-      region: "{{ org.k8s.region | default('eu-west-1') }}"
       kubernetes: "{{ org.k8s }}"
-      gitops: "{{ org.gitops }}"
-      charts_dir: "platforms/shared/charts"
     loop: "{{ network['organizations'] }}"
     loop_control:
       loop_var: org
+     
+  # # Create Storageclass that will be used for this deployment
+  # - name: Create Storage Class
+  #   include_role:
+  #     name: "{{ playbook_dir }}/../../../platforms/shared/configuration/roles/setup/storageclass"
+  #   vars:
+  #     org_name: "{{ org.name | lower }}"
+  #     cloudProvider: "{{ org.cloud_provider | lower }}"
+  #     sc_name: "{{ org_name }}-{{ cloudProvider }}-storageclass"
+  #     git_dir: "{{ org.gitops.release_dir }}"
+  #     region: "{{ org.k8s.region | default('eu-west-1') }}"
+  #     kubernetes: "{{ org.k8s }}"
+  #     gitops: "{{ org.gitops }}"
+  #     charts_dir: "platforms/shared/charts"
+  #   loop: "{{ network['organizations'] }}"
+  #   loop_control:
+  #     loop_var: org
 
   # create namespace, service account and clusterrolebinding
   - name: "Create namespace, service accounts and clusterrolebinding"
