@@ -54,8 +54,8 @@
   
 #############################################################################################
 # Wait for storageclass creation
-# - name: Wait for {{ component_name }} storageclass creation
-- name: "Waiting for the creation of {{ storageclass_name }} storage class for {{ component_name }}"  
+- name: Wait for {{ component_name }} storageclass creation
+# - name: "Waiting for the creation of {{ sc_name }} storage class for {{ component_name }}"  
   include_role:
     name: "{{ playbook_dir }}/../../shared/configuration/roles/check/k8_component"
   tags:
