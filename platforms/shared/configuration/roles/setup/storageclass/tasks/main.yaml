@@ -50,7 +50,6 @@
     release_namespace: default
     values_files:
       - "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{ sc_name }}-storageclass.yaml"
-    force: true
   when: storageclass_state.resources|length == 0
   
 #############################################################################################
