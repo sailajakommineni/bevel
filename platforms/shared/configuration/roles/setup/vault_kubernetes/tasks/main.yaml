@@ -61,21 +61,6 @@
     KUBECONFIG={{ kubernetes.config_file }} kubectl config view --minify | grep server | cut -f 2- -d ":" | tr -d " "
   register: kubernetes_server_url
 
-# # This sets a fact values_dir_path
-# - set_fact:
-#     values_dir_path: "{{ playbook_dir }}/../../../{{gitops.release_dir}}/{{ name }}"
-#   when: network.type != "corda" or (network.type == "corda" and item.type == "node")
-  
-# # This sets a fact values_dir_path
-# - set_fact:
-#     values_dir_path: "{{ playbook_dir }}/../../../{{gitops.release_dir}}/{{org_name}}/{{ name }}"
-#   when: network.type == "corda" and item.type != "node"
-
-# - name: Unset variables
-#   set_fact:
-#     check_clusterRoleBinding:
-#     check_serviceAccount:
-
 # Check if ClusterRoleBinding created
 - name: "Checking for the {{ component_ns }}-role-tokenreview-binding"
   include_role:
