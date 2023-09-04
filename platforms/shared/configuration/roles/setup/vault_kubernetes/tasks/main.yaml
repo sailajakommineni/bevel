@@ -118,9 +118,6 @@
   # when:
   # - check_serviceAccount or check_clusterRoleBinding
 
-  debug: 
-    var: 
-
 # Git Push : Pushes the above generated files to git directory 
 - name: Git Push
   include_role: 
