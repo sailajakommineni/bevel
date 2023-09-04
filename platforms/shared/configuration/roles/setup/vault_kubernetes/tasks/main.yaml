@@ -115,8 +115,8 @@
     create_serviceAccount: "{{ check_serviceAccount }}"
     create_clusterRoleBinding: "{{ check_clusterRoleBinding }}"
     values_dir: "{{ playbook_dir }}/../../../{{gitops.release_dir}}/{{ name }}"
-    when:
-      - expression: (check_serviceAccount or check_clusterRoleBinding) and network.type != "corda-enterprise"
+  when:
+  - (network.type != "corda-enterprise") and (check_serviceAccount or check_clusterRoleBinding)
   # when:
   # - (check_serviceAccount or check_clusterRoleBinding) and network.type != "corda-enterprise"
 
