@@ -20,7 +20,7 @@ spec:
       name: supplysri-ent
       namespace: supplysri-ent
       images:
-        alpineutils: ghcr.io/hyperledger/alpine-utils:1.0
+        alpineutils: adopblockchaincloud0502.azurecr.io/alpine-utils:1.0
         pullPolicy: IfNotPresent
 
     vault:
