@@ -115,10 +115,10 @@
     create_serviceAccount: "{{ check_serviceAccount }}"
     create_clusterRoleBinding: "{{ check_clusterRoleBinding }}"
     values_dir: "{{ playbook_dir }}/../../../{{gitops.release_dir}}/{{ name }}"
+  when:
+  - network.type != 'corda-enterprise' and (check_serviceAccount or check_clusterRoleBinding)
   # when:
-  # - (network.type != "corda-enterprise") and (check_serviceAccount or check_clusterRoleBinding)
-  # when:
-  # - (check_serviceAccount or check_clusterRoleBinding) and network.type != "corda-enterprise"
+  # - (check_serviceAccount or check_clusterRoleBinding)
 
 # Git Push : Pushes the above generated files to git directory 
 - name: Git Push
