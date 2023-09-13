@@ -1,23 +1,22 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: notary-2-initial-registration
+  name: notary-1
   namespace: supplysri-ent
   annotations:
     fluxcd.io/automated: "false"
 spec:
-  releaseName: notary-2-initial-registration
+  releaseName: notary-1
   interval: 1m
   chart:
    spec:
-    chart: platforms/r3-corda-ent/charts/notary-initial-registration
+    chart: platforms/r3-corda-ent/charts/notary
     sourceRef:
       kind: GitRepository
       name: flux-sri
       namespace: flux-sri
   values:
-    nodeName: notary-2-initial-registration
-    nodePath: notary-2
+    nodeName: notary-1
     metadata:
       namespace: supplysri-ent
     image:
@@ -36,6 +35,7 @@ spec:
       retryInterval: 10
     service:
       p2pPort: 10002
+      sshdPort: 2222
       rpc:
         address: "0.0.0.0"
         addressPort: 10003
@@ -56,38 +56,48 @@ spec:
       networkmapName: "networkmap"
     dataSourceProperties:
       dataSource:
-        password: "notary-2-db-password"
-        url: "jdbc:h2:tcp://notary-2db:9101/persistence;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=10000;WRITE_DELAY=100;AUTO_RECONNECT=TRUE;"
-        user: "notary-2-db-user"
+        password: "notary-1-db-password"
+        url: "jdbc:h2:tcp://notary-1db:9101/persistence;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=10000;WRITE_DELAY=100;AUTO_RECONNECT=TRUE;"
+        user: "notary-1-db-user"
       dataSourceClassName: "org.h2.jdbcx.JdbcDataSource"
-      dbUrl: "notary-2db"
+      dbUrl: "notary-1db"
       dbPort: 9101
+    cordapps:
+      getcordapps: true
+      jars:
+        - url: https://maven.pkg.github.com/hyperledger/bevel/com.supplychain.bcc.cordapp-supply-chain/4.7/cordapp-supply-chain-4.7.jar
+        - url: https://maven.pkg.github.com/hyperledger/bevel/com.supplychain.bcc.cordapp-contracts-states/4.7/cordapp-contracts-states-4.7.jar
+        
     nodeConf:
-      legalName: O=Notary,OU=Notary2,L=London,C=GB
+      legalName: O=Notary,OU=Notary1,L=London,C=GB
       emailAddress: dev@bevel.com
-      notaryPublicIP: notary-2.sai29.dev.aws.blockchaincloudpoc-develop.com
+      notaryPublicIP: notary-1.sai29.dev.aws.blockchaincloudpoc-develop.com
       devMode: false
       notary:
-        serviceLegalName: O=Notary Service,OU=Notary2,L=London,C=GB
+        serviceLegalName: O=Notary Service,OU=Notary1,L=London,C=GB
         validating: True
         type: cenm
       p2p:
-        url: notary-2.supplysri-ent
+        url: notary-1.supplysri-ent
       ambassador:
-        p2pPort: 15041
+        p2pPort: 15040
         external_url_suffix: sai29.dev.aws.blockchaincloudpoc-develop.com
-        p2pAddress: notary-2-initial-registration.sai29.dev.aws.blockchaincloudpoc-develop.com:15041
+        p2pAddress: notary-1.sai29.dev.aws.blockchaincloudpoc-develop.com:15040
       jarPath: bin
       configPath: etc
       cordaJar:
         memorySize: 1524
         unit: M
       volume:
-        baseDir: /opt/corda
+        baseDir: /opt/corda/base
       pod:
         resources:
           limits: 2056M
           requests: 2056M
+      storage:
+        name: cordaentsc
+        memory: 512Mi
+      replicas: 1
     healthCheckNodePort: 0
     sleepTimeAfterError: 60
     sleepTime: 10
