@@ -15,23 +15,23 @@
 metadata:
   # Provide the namespace for the Corda Enterprise Zone.
   # Eg. namespace: cenm
-  namespace: cenm
+  namespace: 
   # Provide the name of the deployment
   # Eg. nodeName: zone
   nodeName: zone
   # Provide prefix for deployment
   # Eg. prefix: cenm
-  prefix: cenm
+  prefix: 
 
 # Provide information regarding the Docker images used.
 image:
   # Provide the alpine utils image, which is used for all init-containers of deployments/jobs.
   # NOTE: The alpine image used is the base alpine image with CURL installed.
   # Eg. initContainer: ghcr.io/hyperledger/bevel-alpine:latest
-  initContainer: ghcr.io/hyperledger/bevel-alpine:latest
+  initContainer: 
   # Provide the image for the main Zone container.
   # Eg. zoneContainer: corda/enterprise-zone:1.5.1-zulu-openjdk8u242
-  zoneContainer: corda/enterprise-zone:1.5.1-zulu-openjdk8u242
+  zoneContainer: 
   # Provide the docker-registry secret created and stored in kubernetes cluster as a secret.
   # Eg. imagePullSecrets: regcred, can add multiple creds
   imagePullSecrets: ""
