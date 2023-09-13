@@ -15,6 +15,7 @@
       KUBECONFIG={{ kubernetes.config_file }} helm uninstall ${helm_component} -n {{ organization_ns }}
     done
 
+<<<<<<< HEAD
 # Remove an existing Storage Class
 - name: Remove an existing Storage Class of {{ organization }}
   vars:
@@ -27,6 +28,8 @@
     namespace: "{{ organization_ns }}"
     name: "{{ sc_name }}"
 
+=======
+>>>>>>> 97c6f266f29fd8bc605bb4efcf31ea8fa2b76d8b
 # Remove an existing Namespace
 - name: Remove an existing Namespace {{ organization_ns }}
   k8s:

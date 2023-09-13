@@ -16,8 +16,8 @@ metadata:
     #Eg. hyperledger/fabric-peer::2.2.2
     peer: hyperledger/fabric-peer::2.2.2
     #Provide the valid image name and version to read certificates from vault server 
-    #Eg. alpineutils: hyperledgerlabs/alpine-utils:1.0
-    alpineutils: index.docker.io/hyperledgerlabs/alpine-utils:1.0
+    #Eg. alpineutils: ghcr.io/hyperledger/bevel-alpine:latest
+    alpineutils: ghcr.io/hyperledger/bevel-alpine:latest
   #Provide the custom labels  
   #NOTE: Provide labels other than name, release name , release service, chart version , chart name, run
   #These lables will not be applied to VolumeClaimTemplate of StatefulSet as labels are automatically picked up by Kubernetes
@@ -39,10 +39,14 @@ peer:
   #Provide the url of gossip external endpoint and  port to be mentioned is ambassador https service port
   #Eg. gossipexternalendpoint: peer1-ext.org1-example-com:443
 <<<<<<< HEAD
+<<<<<<< HEAD
   gossipexternalendpoint:  
 =======
   gossipexternalendpoint: peer1-ext.org1-example-com:443
 >>>>>>> c7f59cea19fb0eca9ab959f79bbb88760d93d928
+=======
+  gossipexternalendpoint: peer1-ext.org1-example-com:443
+>>>>>>> 97c6f266f29fd8bc605bb4efcf31ea8fa2b76d8b
   #Provide the localmspid for organization
   #Eg. localmspid: Org1MSP
   localmspid: Org1MSP

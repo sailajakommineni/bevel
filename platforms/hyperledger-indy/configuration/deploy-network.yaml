@@ -59,7 +59,10 @@
       name: "{{ playbook_dir }}/../../../platforms/shared/configuration/roles/setup/storageclass"
     vars:
       org_name: "{{ org.name | lower }}"
+<<<<<<< HEAD
       component_ns: "{{ org.name | lower }}-ns"
+=======
+>>>>>>> 97c6f266f29fd8bc605bb4efcf31ea8fa2b76d8b
       cloudProvider: "{{ org.cloud_provider | lower }}"
       sc_name: "{{ org_name }}-{{ cloudProvider }}-storageclass"
       region: "{{ org.k8s.region | default('eu-west-1') }}"

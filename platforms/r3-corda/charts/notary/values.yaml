@@ -24,13 +24,11 @@ metadata:
   
 image:
   #Provide the containerName of image
-  #Eg. containerName: hyperledgerlabs/h2:2018
-  #Note: For public certificate use: hyperledgerlabs/corda:3.3.0-corda-corda-20190502
-  #      For private certificate use: hyperledgerlabs/corda:3.3.0-corda-root-20190502
-  containerName: hyperledgerlabs/h2:2018
+  #Eg. containerName: ghcr.io/hyperledger/bevel-corda:4.9
+  containerName: ghcr.io/hyperledger/bevel-corda:4.9
   #Provide the name of image for init container
-  #Eg. name: hyperledgerlabs/alpine-utils:1.0
-  initContainerName: hyperledgerlabs/alpine-utils:1.0  
+  #Eg. name: ghcr.io/hyperledger/bevel-alpine:latest
+  initContainerName: ghcr.io/hyperledger/bevel-alpine:latest  
   #Provide the image pull secret of image
   #Eg. pullSecret: regcred
   imagePullSecret: ""
@@ -116,10 +114,14 @@ credentials:
   rpcUser:
     - name: bank1operations
 <<<<<<< HEAD
+<<<<<<< HEAD
       permissions: [ALL]
 =======
       permissions: [ALL] 
 >>>>>>> c7f59cea19fb0eca9ab959f79bbb88760d93d928
+=======
+      permissions: [ALL] 
+>>>>>>> 97c6f266f29fd8bc605bb4efcf31ea8fa2b76d8b
 cordapps: 
   #Provide if you want to provide jars in cordapps
   #Eg. getcordapps: true or false

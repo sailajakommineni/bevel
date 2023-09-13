@@ -41,7 +41,10 @@
       org_name: "{{ org.name | lower }}"
       cloudProvider: "{{ org.cloud_provider | lower }}"
       sc_name: "{{ org_name }}-{{ cloudProvider }}-storageclass"
+<<<<<<< HEAD
       component_ns: "{{ org.name | lower }}-ent"
+=======
+>>>>>>> 97c6f266f29fd8bc605bb4efcf31ea8fa2b76d8b
       region: "{{ org.k8s.region | default('eu-west-1') }}"
       git_dir: "{{ org.gitops.release_dir }}"
       kubernetes: "{{ org.k8s }}"

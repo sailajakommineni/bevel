@@ -17,7 +17,7 @@ metadata:
     fabrictools: hyperledger/fabric-tools:2.2.2
     #Provide the valid image name and version to read certificates from vault server
     #Eg. alpineutils: gcr.io/acn-stp-on-blockchain/alpine-utils
-    alpineutils: index.docker.io/hyperledgerlabs/alpine-utils:1.0
+    alpineutils: ghcr.io/hyperledger/bevel-alpine:latest
   #Flag for ivoking the chaincode for addition of an org or for the first network
   add_organization: false
   #Provide the custom labels
@@ -79,10 +79,14 @@ orderer:
   #Provide the address for orderer
   #Eg. address: orderer-ext.example-com:443
 <<<<<<< HEAD
+<<<<<<< HEAD
   address:
 =======
   address: orderer-ext.example-com:443
 >>>>>>> c7f59cea19fb0eca9ab959f79bbb88760d93d928
+=======
+  address: orderer-ext.example-com:443
+>>>>>>> 97c6f266f29fd8bc605bb4efcf31ea8fa2b76d8b
 
 chaincode:
   #Provide a valid chaincode builder image for Fabric
