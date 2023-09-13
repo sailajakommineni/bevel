@@ -34,8 +34,8 @@ image:
   signerContainer: 
   # Provide the docker-registry secret created and stored in kubernetes cluster as a secret.
   # Eg. imagePullSecrets: regcred, can add multiple creds
-  imagePullSecrets: "" 
-    - name:  
+  imagePullSecrets: 
+    - name: ""  
   # Pull policy to be used for the Docker image
   # Eg. pullPolicy: Always
   pullPolicy:
