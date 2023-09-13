@@ -35,10 +35,6 @@
       org_name: "{{ org.name | lower }}"
       cloudProvider: "{{ org.cloud_provider | lower }}"
       sc_name: "{{ org_name }}-{{ cloudProvider }}-storageclass"
-<<<<<<< HEAD
-      component_ns: "{{ org.name | lower }}-ns"
-=======
->>>>>>> upstream/develop
       git_dir: "{{ org.gitops.release_dir }}"
       charts_dir: "platforms/shared/charts"
       org: "{{ org }}"
