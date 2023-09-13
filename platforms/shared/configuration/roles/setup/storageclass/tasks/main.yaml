@@ -50,19 +50,12 @@
     release_namespace: default
     values_files:
       - "{{ playbook_dir }}/../../../platforms/shared/configuration/build/{{ sc_name }}-storageclass.yaml"
-<<<<<<< HEAD
     force: true
-=======
->>>>>>> d610ddace0b2e8a67057429d2bcedacd03ca7dd5
   when: storageclass_state.resources|length == 0
   
 #############################################################################################
 # Wait for storageclass creation
-<<<<<<< HEAD
 - name: Wait for {{ component_name }} storageclass creation 
-=======
-- name: Wait for {{ component_name }} storageclass creation  
->>>>>>> d610ddace0b2e8a67057429d2bcedacd03ca7dd5
   include_role:
     name: "{{ playbook_dir }}/../../shared/configuration/roles/check/k8_component"
   tags:
