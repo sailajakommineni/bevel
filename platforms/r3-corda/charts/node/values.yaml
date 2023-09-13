@@ -119,7 +119,11 @@ credentials:
   #Eg. dataSourceUser: 
   dataSourceUser: 
   #Provide the rpcUser for corda node
+<<<<<<< HEAD
   rpcUser:
+=======
+  rpcUser: 
+>>>>>>> c7f59cea19fb0eca9ab959f79bbb88760d93d928
     - name: bank1operations
       permissions: [ALL]
 
@@ -266,4 +270,4 @@ ambassador:
   external_url_suffix: org1.blockchaincloudpoc.com
   #Provide the p2p port for ambassador
   #Eg. p2p_ambassador: 10007
-  p2p_ambassador: 10007
+  p2p_ambassador: 

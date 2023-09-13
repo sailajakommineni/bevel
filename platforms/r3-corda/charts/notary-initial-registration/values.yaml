@@ -34,7 +34,7 @@ image:
    
   #Provide the image pull secret of image
   #Eg. pullSecret: regcred
-  imagePullSecret: regcred
+  imagePullSecret: ""
   #Provide true or false if private certificate to be added
   #Eg. privateCertificate: true
   privateCertificate: true

@@ -26,7 +26,11 @@ image:
   containerName: hyperledgerlabs/nms:0.3.6-nms
   #Provide the image pull secret of image
   #Eg. pullSecret: regcred
+<<<<<<< HEAD
   imagePullSecret: 
+=======
+  imagePullSecret: ""
+>>>>>>> c7f59cea19fb0eca9ab959f79bbb88760d93d928
   #Provide enviroment variable for container image
   mountPath:
     #Provide the path for base dir
