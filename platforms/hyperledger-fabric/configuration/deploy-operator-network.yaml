@@ -43,11 +43,17 @@
         org_name: "{{ org.name | lower }}"
         cloudProvider: "{{ org.cloud_provider | lower }}"
         sc_name: "{{ org_name }}-{{ cloudProvider }}-storageclass"
+<<<<<<< HEAD
         component_type: "{{ org.type | lower}}"
         kubernetes: "{{ org.k8s }}"
         region: "{{ org.k8s.region | default('eu-west-1') }}"
         charts_dir: "platforms/shared/charts"
         platform_suffix: "net"
+=======
+        component_ns: "{{ org.name | lower }}-net"
+        component_type: "{{ org.type | lower}}"
+        kubernetes: "{{ org.k8s }}"
+>>>>>>> d610ddace0b2e8a67057429d2bcedacd03ca7dd5
       loop: "{{ network['organizations'] }}"
       loop_control:
         loop_var: org

@@ -31,6 +31,10 @@
       git_dir: "{{ org.gitops.release_dir }}"
       region: "{{ org.k8s.region | default('eu-west-1') }}"
       kubernetes: "{{ org.k8s }}"
+<<<<<<< HEAD
+=======
+      gitops: "{{ org.gitops }}"
+>>>>>>> d610ddace0b2e8a67057429d2bcedacd03ca7dd5
       charts_dir: "platforms/shared/charts"
     loop: "{{ network['organizations'] }}"
     loop_control:
