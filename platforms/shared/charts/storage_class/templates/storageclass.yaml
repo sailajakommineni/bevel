@@ -21,16 +21,16 @@ parameters:
   {{ $key }}: "{{ $value }}"
   {{- end }}
 {{- end }}
-# {{- if .Values.allowedTopologies }}
-# allowedTopologies:
-# {{- range .Values.allowedTopologies }}
-#   - matchLabelExpressions:
-# {{- range .matchLabelExpressions }}
-#       - key: {{ .key }}
-#         values:
-# {{- range .values }}
-#           - {{ . | quote }}
-# {{- end }}
-# {{- end }}
-# {{- end }}
-# {{- end }}
+{{- if .Values.allowedTopologies }}
+allowedTopologies:
+{{- range .Values.allowedTopologies }}
+  - matchLabelExpressions:
+{{- range .matchLabelExpressions }}
+      - key: {{ .key }}
+        values:
+{{- range .values }}
+          - {{ . | quote }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
