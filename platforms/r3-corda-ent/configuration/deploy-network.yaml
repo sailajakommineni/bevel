@@ -38,7 +38,6 @@
     include_role:
       name: create/storageclass
     vars:
-      vars:
       storageclass_name: "cordaentsc"
       git_dir: "{{ org.gitops.release_dir }}"
       kubernetes: "{{ org.k8s }}"
