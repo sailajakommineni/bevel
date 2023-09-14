@@ -22,7 +22,7 @@ prefix:
 metadata:
   # Provide the namespace for the Corda Enterprise Idman.
   # Eg. namespace: cenm
-  namespace: cenm
+  namespace: 
   # Provide any additional labels for the Corda Enterprise Idman.
   labels:
 
@@ -52,7 +52,7 @@ storage:
   # NOTE: Make sure that the storageclass exist prior to this deployment as
   # this chart doesn't create the storageclass.
   # Eg. name: cenm
-  name: cenm
+  name: 
   # Provide the memory size for the storage class.
   # Eg. memory: 64Mi
   memory: 64Mi
