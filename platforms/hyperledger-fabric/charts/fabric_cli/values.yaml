@@ -64,28 +64,10 @@ peer:
   #Eg. tlsstatus: true
   tlsstatus: true
   #Provide the address for the peer
-<<<<<<< HEAD
-<<<<<<< HEAD
-  #Eg: address: peer0-ext.org1-fratest-com:443
-  address: 
-=======
   #Eg: address: peer0.org1-example-com:7051
   address: peer0.peer0-net:7051
->>>>>>> c7f59cea19fb0eca9ab959f79bbb88760d93d928
-=======
-  #Eg: address: peer0.org1-example-com:7051
-  address: peer0.peer0-net:7051
->>>>>>> 97c6f266f29fd8bc605bb4efcf31ea8fa2b76d8b
 
 orderer:
   #Provide the address for orderer
   #Eg. address: orderer-ext.example-com:443
-<<<<<<< HEAD
-<<<<<<< HEAD
-  address:
-=======
   address: orderer-ext.example-com:443
->>>>>>> c7f59cea19fb0eca9ab959f79bbb88760d93d928
-=======
-  address: orderer-ext.example-com:443
->>>>>>> 97c6f266f29fd8bc605bb4efcf31ea8fa2b76d8b

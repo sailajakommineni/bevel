@@ -35,12 +35,7 @@
     vars:
       org_name: "{{ org.name | lower }}"
       cloudProvider: "{{ org.cloud_provider | lower }}"
-<<<<<<< HEAD
-      sc_name: "{{ org_name }}-{{ cloudProvider }}-storageclass"
-      component_ns: "{{ org.name | lower }}-ns"
-=======
       sc_name: "{{ org_name }}-{{ cloudProvider }}-storageclass" 
->>>>>>> 97c6f266f29fd8bc605bb4efcf31ea8fa2b76d8b
       region: "{{ org.k8s.region | default('eu-west-1') }}"
       git_dir: "{{ org.gitops.release_dir }}"
       kubernetes: "{{ org.k8s }}"
@@ -60,12 +55,7 @@
     vars:
      services: "{{ item.services }}"
      organisation: "{{ item.name | lower }}"
-<<<<<<< HEAD
-     cloudProvider: "{{ item.cloud_provider | lower }}"
-     sc_name: "{{ organisation}}-{{ cloudProvider }}-storageclass"
-=======
      sc_name: "{{ organisation }}-{{ item.cloud_provider | lower }}-storageclass"
->>>>>>> 97c6f266f29fd8bc605bb4efcf31ea8fa2b76d8b
      component_ns: "{{ item.name | lower }}-ns"
      kubernetes: "{{ item.k8s }}"
      vault: "{{ item.vault }}"
@@ -81,12 +71,7 @@
     vars:
      services: "{{ item.services }}"
      organisation: "{{ item.name | lower }}"
-<<<<<<< HEAD
-     cloudProvider: "{{ item.cloud_provider | lower }}"
-     sc_name: "{{ organisation}}-{{ cloudProvider }}-storageclass"
-=======
      sc_name: "{{ organisation }}-{{ item.cloud_provider | lower }}-storageclass"
->>>>>>> 97c6f266f29fd8bc605bb4efcf31ea8fa2b76d8b
      component_ns: "{{ item.name | lower }}-ns"
      kubernetes: "{{ item.k8s }}"
      vault: "{{ item.vault }}"
@@ -117,12 +102,7 @@
       services: "{{ item.services }}"
       node: "{{ item.services.notary }}"
       organisation: "{{ item.name | lower }}"
-<<<<<<< HEAD
-      cloudProvider: "{{ item.cloud_provider | lower }}"
-      sc_name: "{{ organisation}}-{{ cloudProvider }}-storageclass"
-=======
       sc_name: "{{ organisation }}-{{ item.cloud_provider | lower }}-storageclass"
->>>>>>> 97c6f266f29fd8bc605bb4efcf31ea8fa2b76d8b
       component_ns: "{{ item.name | lower }}-ns"
       kubernetes: "{{ item.k8s }}"
       vault: "{{ item.vault }}"
@@ -140,8 +120,6 @@
       organisation: "{{ item.name | lower }}"
       sc_name: "{{ organisation }}-{{ item.cloud_provider | lower }}-storageclass"
       component_ns: "{{ item.name | lower }}-ns"
-      cloudProvider: "{{ item.cloud_provider | lower }}"
-      sc_name: "{{ organisation}}-{{ cloudProvider }}-storageclass"
       services: "{{ item.services }}"
       kubernetes: "{{ item.k8s }}"
       vault: "{{ item.vault }}"

@@ -43,15 +43,6 @@
         org_name: "{{ org.name | lower }}"
         cloudProvider: "{{ org.cloud_provider | lower }}"
         sc_name: "{{ org_name }}-{{ cloudProvider }}-storageclass"
-<<<<<<< HEAD
-        component_ns: "{{ org.name | lower }}-net"
-        component_type: "{{ org.type | lower}}"
-        kubernetes: "{{ org.k8s }}"
-      loop: "{{ network['organizations'] }}"
-      loop_control:
-        loop_var: org
-        
-=======
         component_type: "{{ org.type | lower}}"
         kubernetes: "{{ org.k8s }}"
         region: "{{ org.k8s.region | default('eu-west-1') }}"
@@ -63,7 +54,6 @@
       when: 
       - network.env.type == 'operator'  
       
->>>>>>> 97c6f266f29fd8bc605bb4efcf31ea8fa2b76d8b
     - name: Create CA server for each organization
       include_role:
         name: "operator/create/ca/server"
