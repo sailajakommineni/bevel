@@ -52,7 +52,7 @@ volumeBindingMode: Immediate
 allowedTopologies:
   # A label expression that specifies the allowed zones.
   - matchLabelExpressions:
-      - key: topology.ebs.csi.aws.com/zone #failure-domain.beta.kubernetes.io/zone
+      - key: topology.ebs.csi.aws.com/zone  #failure-domain.beta.kubernetes.io/zone
         values:
           # The allowed zones.
           - "eu-west-1a"
