@@ -16,5 +16,4 @@ allowedTopologies:
       - key: topology.ebs.csi.aws.com/zone
         values:
           - "{{ region }}a"
-          - "{{ region }}b"
 {% endif %}
