@@ -10,12 +10,12 @@
 # 60 seconds between each try
 - name: 'Wait for {{ component_type }} {{ component_name }} in {{ namespace }}'
   k8s_info:
-    kind: "Pod"
+    kind: "Job"
     namespace: "{{ namespace }}"
     kubeconfig: "{{ kubernetes.config_file }}"
     context: "{{ kubernetes.context }}"
     label_selectors:
-      - "app = {{ component_name }}"
+      - "app={{ component_name }}"
   register: component_data
   retries: "{{ network.env.retry_count}}"
   delay: 30
