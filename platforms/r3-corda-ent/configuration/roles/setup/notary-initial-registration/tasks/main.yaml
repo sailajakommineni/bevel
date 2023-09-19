@@ -28,6 +28,6 @@
   vars:
     component_type: "Job"
     namespace: "{{ component_ns }}"
-    component_name: "{{ notary.name | lower }}-initial-registration-gl274"
+    component_name: "{{ notary.name | lower }}-initial-registration"
     kubernetes: "{{ org.k8s }}"
   when: notary_certs.failed
