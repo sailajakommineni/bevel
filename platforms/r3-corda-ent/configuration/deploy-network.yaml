@@ -14,43 +14,46 @@
   gather_facts: no
   no_log: "{{ no_ansible_log | default(false) }}"
   tasks:
-  # Delete build directory before start of play, can be commented if you do not want to delete it.
-  - name: Remove build directory
-    file:
-      path: "./build"
-      state: absent
+  # # Delete build directory before start of play, can be commented if you do not want to delete it.
+  # - name: Remove build directory
+  #   file:
+  #     path: "./build"
+  #     state: absent
 
-  # create namespace, service account and clusterrolebinding
-  - name: "Create namespace, service accounts and clusterrolebinding"
-    include_role: 
-      name: create/namespace_serviceaccount
-    vars:
-      component_ns: "{{ org.name | lower }}-ent"
-      organisation: "{{ org.name | lower }}"
-      kubernetes: "{{ org.k8s }}"
-      gitops: "{{ org.gitops }}"
-    loop: "{{ network['organizations'] }}"
-    loop_control:
-      loop_var: org
+  # # create namespace, service account and clusterrolebinding
+  # - name: "Create namespace, service accounts and clusterrolebinding"
+  #   include_role: 
+  #     name: create/namespace_serviceaccount
+  #   vars:
+  #     component_ns: "{{ org.name | lower }}-ent"
+  #     organisation: "{{ org.name | lower }}"
+  #     kubernetes: "{{ org.k8s }}"
+  #     gitops: "{{ org.gitops }}"
+  #   loop: "{{ network['organizations'] }}"
+  #   loop_control:
+  #     loop_var: org
 
-  # Create Storageclass that will be used for this deployment
-  - name: Create Storage Class
-    include_role:
-      name: "{{ playbook_dir }}/../../../platforms/shared/configuration/roles/setup/storageclass"
-    vars:
-      org_name: "{{ org.name | lower }}"
-      cloudProvider: "{{ org.cloud_provider | lower }}"
-      sc_name: "{{ org_name }}-{{ cloudProvider }}-storageclass"
-      region: "{{ org.k8s.region | default('eu-west-1') }}"
-      git_dir: "{{ org.gitops.release_dir }}"
-      kubernetes: "{{ org.k8s }}"
-      gitops: "{{ org.gitops }}"
-      charts_dir: "platforms/shared/charts"
-      platform_suffix: "ent"
-    loop: "{{ network['organizations'] }}"
-    loop_control:
-      loop_var: org
+  # # Create Storageclass that will be used for this deployment
+  # - name: Create Storage Class
+  #   include_role:
+  #     name: "{{ playbook_dir }}/../../../platforms/shared/configuration/roles/setup/storageclass"
+  #   vars:
+  #     org_name: "{{ org.name | lower }}"
+  #     cloudProvider: "{{ org.cloud_provider | lower }}"
+  #     sc_name: "{{ org_name }}-{{ cloudProvider }}-storageclass"
+  #     region: "{{ org.k8s.region | default('eu-west-1') }}"
+  #     git_dir: "{{ org.gitops.release_dir }}"
+  #     kubernetes: "{{ org.k8s }}"
+  #     gitops: "{{ org.gitops }}"
+  #     charts_dir: "platforms/shared/charts"
+  #     platform_suffix: "ent"
+  #   loop: "{{ network['organizations'] }}"
+  #   loop_control:
+  #     loop_var: org
 
+  - name: stop 1
+    pause: 
+      minutes: 1
   # ---------------------------------------------------------------------- 
   # Setup CENM services for the network
   - name: "Setup cenm"   
@@ -71,6 +74,9 @@
       loop_var: org
     when: org.type == 'cenm'
 
+  - name: stop 2
+    pause: 
+      minutes: 1
   # ----------------------------------------------------------------------  
   # Wait for cenm services to respond  
   - name: Check that CENM uri are reachable
