@@ -59,7 +59,7 @@
       aws: "{{ item.aws }}"
       organization: "{{ item }}"
     with_items: "{{ network.organizations }}"
-    when: network.env.proxy == 'ambassador' and network['type'] == 'besu'
+    when: network.env.proxy == 'ambassador' and network['type'] == 'corda-enterprise'
   # Installs cert-manager
   - include_role:
       name: setup/certmanager
