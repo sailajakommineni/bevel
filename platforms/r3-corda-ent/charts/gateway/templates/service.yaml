@@ -44,17 +44,17 @@ spec:
 apiVersion: getambassador.io/v3alpha1
 kind: TCPMapping
 metadata:
-  name: {{ .Values.nodeName }}-mapping
+  name: {{ .Values.nodeName }}-tcpmapping
   namespace: {{ .Values.metadata.namespace }}
 spec:
   port: {{ .Values.ambassador.port }}
   service: {{ .Values.nodeName }}.{{ .Values.metadata.namespace }}:{{ .Values.service.port }}
-  tls: {{ .Values.nodeName }}-mapping-tlscontext
+  tls: {{ .Values.nodeName }}-tlscontext
 ---
 apiVersion: getambassador.io/v3alpha1
 kind: TLSContext
 metadata:
-  name: {{ .Values.nodeName }}-mapping-tlscontext
+  name: {{ .Values.nodeName }}-tlscontext
   namespace: {{ .Values.metadata.namespace }}
 spec:
   hosts:
