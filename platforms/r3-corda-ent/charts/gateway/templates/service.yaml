@@ -42,7 +42,7 @@ spec:
       from: SELF
 ---
 apiVersion: getambassador.io/v3alpha1
-kind: Mapping
+kind: TCPMapping
 metadata:
   name: {{ .Values.nodeName }}-mapping
   namespace: {{ .Values.metadata.namespace }}
