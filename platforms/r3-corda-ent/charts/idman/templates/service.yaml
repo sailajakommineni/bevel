@@ -75,8 +75,6 @@ metadata:
   name: {{ .Values.nodeName }}-tlscontext
   namespace: {{ .Values.metadata.namespace }}
 spec:
-  hosts:
-  - {{ .Values.nodeName }}.{{ .Values.ambassador.external_url_suffix }}
   secret: {{ .Values.nodeName }}-ambassador-certs.{{ .Values.metadata.namespace }}
   secret_namespacing: true
   min_tls_version: v1.2
