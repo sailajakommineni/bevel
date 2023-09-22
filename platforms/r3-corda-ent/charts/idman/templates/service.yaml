@@ -43,40 +43,13 @@ spec:
       name: adminlistener
 {{ if $.Values.ambassador }}
 ---
-# apiVersion: getambassador.io/v3alpha1
-# kind: Host
-# metadata:
-#   name: {{ .Values.nodeName }}-host
-#   namespace: {{ .Values.metadata.namespace }}
-# spec:
-#   hostname: {{ .Values.nodeName }}.{{ .Values.ambassador.external_url_suffix }}
-#   acmeProvider:
-#     authority: none
-#   requestPolicy:
-#     insecure:
-#       action: Reject
-  # tlsSecret:
-  #   name: {{ .Values.nodeName }}-ambassador-certs
-  #   namespace: {{ .Values.metadata.namespace }}
----
 apiVersion: getambassador.io/v3alpha1
 kind: Mapping
 metadata:
   name: {{ .Values.nodeName }}-mapping
   namespace: {{ .Values.metadata.namespace }}
 spec:
-  host: {{ .Values.nodeName }}.{{ .Values.ambassador.external_url_suffix }}
+  hostname: {{ .Values.nodeName }}.{{ .Values.ambassador.external_url_suffix }}
   prefix: /
   service: {{ .Values.nodeName }}.{{ .Values.metadata.namespace }}:{{ .Values.service.external.port }}
-#   tls: {{ .Values.nodeName }}-tlscontext
-# ---
-# apiVersion: getambassador.io/v3alpha1
-# kind: TLSContext
-# metadata:
-#   name: {{ .Values.nodeName }}-tlscontext
-#   namespace: {{ .Values.metadata.namespace }}
-# spec:
-#   secret: {{ .Values.nodeName }}-ambassador-certs.{{ .Values.metadata.namespace }}
-#   secret_namespacing: true
-#   min_tls_version: v1.2
 {{- end }}
