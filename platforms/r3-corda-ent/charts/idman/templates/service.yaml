@@ -43,17 +43,18 @@ spec:
       name: adminlistener
 {{ if $.Values.ambassador }}
 ---
-apiVersion: getambassador.io/v3alpha1
-kind: Host
-metadata:
-  name: {{ .Values.nodeName }}-host
-spec:
-  host: {{ .Values.nodeName }}.{{ .Values.ambassador.external_url_suffix }}
-  acmeProvider:
-    authority: none
-  requestPolicy:
-    insecure:
-      action: Reject
+# apiVersion: getambassador.io/v3alpha1
+# kind: Host
+# metadata:
+#   name: {{ .Values.nodeName }}-host
+#   namespace: {{ .Values.metadata.namespace }}
+# spec:
+#   hostname: {{ .Values.nodeName }}.{{ .Values.ambassador.external_url_suffix }}
+#   acmeProvider:
+#     authority: none
+#   requestPolicy:
+#     insecure:
+#       action: Reject
   # tlsSecret:
   #   name: {{ .Values.nodeName }}-ambassador-certs
   #   namespace: {{ .Values.metadata.namespace }}
