@@ -24,6 +24,10 @@
     ssh-keyscan {{ git_host }} >> ~/.ssh/known_hosts
   when: git_protocol == "ssh"
 
+- name: stop 2
+  pause: 
+    minutes: 1
+
 - name: Install flux cli and bootstrap flux v2
   shell: |
     {{ bin_install_dir }}/flux bootstrap git \
