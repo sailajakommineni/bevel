@@ -63,15 +63,15 @@ metadata:
 spec:
   port: {{ .Values.nodeConf.ambassador.p2pPort }}
   service: {{ .Values.nodeName }}.{{ .Values.metadata.namespace }}:{{ .Values.service.p2pPort }}
-  tls: {{ .Values.nodeName }}-context
----
-apiVersion: getambassador.io/v3alpha1
-kind: TLSContext
-metadata:
-  name: {{ .Values.nodeName }}-context
-  namespace: {{ .Values.metadata.namespace }}
-spec:
-  secret: {{ .Values.nodeName }}-ambassador-certs.{{ .Values.metadata.namespace }}
-  secret_namespacing: true
-  min_tls_version: v1.2
+#   tls: {{ .Values.nodeName }}-context
+# ---
+# apiVersion: getambassador.io/v3alpha1
+# kind: TLSContext
+# metadata:
+#   name: {{ .Values.nodeName }}-context
+#   namespace: {{ .Values.metadata.namespace }}
+# spec:
+#   secret: {{ .Values.nodeName }}-ambassador-certs.{{ .Values.metadata.namespace }}
+#   secret_namespacing: true
+#   min_tls_version: v1.2
 {{ end }}
