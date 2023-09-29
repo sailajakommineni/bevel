@@ -53,13 +53,13 @@ k8s:
   #Eg. kubernetes_url: https://10.3.8.5:6443
   kubernetes_url: 
 
-# rbac:
-#   # Specifies whether RBAC resources should be created
-#   create: true
+rbac:
+  # Specifies whether RBAC resources should be created
+  create: true
 
-# serviceAccount:
-#   # Specifies whether a ServiceAccount should be created
-#   create: true
-#   # The name of the ServiceAccount to use.
-#   # If not set and create is true, a name is generated using the fullname template
-#   name: vault-auth
+serviceAccount:
+  # Specifies whether a ServiceAccount should be created
+  create: true
+  # The name of the ServiceAccount to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: vault-auth
