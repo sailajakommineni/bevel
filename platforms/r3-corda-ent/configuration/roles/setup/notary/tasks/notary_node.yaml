@@ -53,6 +53,7 @@
     name: "{{ playbook_dir }}/../../shared/configuration/roles/setup/vault_kubernetes"
   vars:
     component_name: "{{ org.name | lower }}-ent"
+    component_path: "{{ org.name | lower }}/"
     component_auth: "cordaent{{ org.name | lower }}"
     component_type: "{{ org.type | lower }}"
 
