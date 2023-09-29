@@ -26,10 +26,10 @@ spec:
     vault:
       role: vault-role
       address: http://a39f5128b6763403fbe629cbb6978dc2-1224147318.eu-west-1.elb.amazonaws.com:20001
-      authpath: cordaentmanufacturer
+      authpath: cordaentmanufacturerfloat
       policy: vault-crypto-manufacturer-ent-manufacturer-ro
       policydata: "{\n  \"policy\": \"\\npath \\\"secretsv2/data/manufacturer/*\\\" {\n    \\ncapabilities = [\\\"list\\\", \\\"read\\\", \\\"create\\\", \\\"update\\\"]\\n\n  }\"\n}"
-      secret_path: secretsv2
+      secret_path: manufacturer
       imagesecretname: regcred
 
     k8s:
