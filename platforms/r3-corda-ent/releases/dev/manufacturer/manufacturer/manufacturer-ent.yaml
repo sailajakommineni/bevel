@@ -26,18 +26,11 @@ spec:
     vault:
       role: vault-role
       address: http://a39f5128b6763403fbe629cbb6978dc2-1224147318.eu-west-1.elb.amazonaws.com:20001
-      authpath: cordaentfloatmanufacturer
+      authpath: cordaentmanufacturer
       policy: vault-crypto-manufacturer-ent-manufacturer-ro
       policydata: "{\n  \"policy\": \"\\npath \\\"secretsv2/data/manufacturer/*\\\" {\n    \\ncapabilities = [\\\"list\\\", \\\"read\\\", \\\"create\\\", \\\"update\\\"]\\n\n  }\"\n}"
-      secret_path: manufacturer
+      secret_path: secretsv2
       imagesecretname: regcred
 
     k8s:
       kubernetes_url: https://300125A3D09FFA0A178EC3522C96BBB8.gr7.eu-west-1.eks.amazonaws.com
-    
-    rbac:
-      create: False
-
-    serviceAccount:
-      create: False
-      name: vault-auth
