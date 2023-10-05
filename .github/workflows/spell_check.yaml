@@ -1,0 +1,61 @@
+name: Check Spelling
+on:
+  push:
+    branches: ["**"]
+  pull_request_target:
+    branches: ["**"]
+  issue_comment:
+    types: [created,updated] 
+	
+jobs: 
+  spellcheck:
+    name: Check Spelling
+    runs-on: ubuntu-latest	
+    permissions:
+      contents: read
+      pull-requests: read
+      actions: read
+	  
+	steps: 
+	  - name: Checkout code
+	    uses: actions/checkout@v2
+	  
+	  - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+		  distribution: 'adopt'
+          java-version: '8'
+		    
+	  - name: Install LanguageTool
+        run: |
+          wget https://languagetool.org/download/LanguageTool-6.2.zip
+          unzip LanguageTool-6.2.zip
+		  working-directory: ${{ github.workspace }}
+
+    - name: Spell and Grammar Check
+      run: |
+        java -jar LanguageTool-6.2/languagetool-commandline.jar --config languagetool-config.yaml --autoDetect -l en-US -c UTF-8 ./
+      continue-on-error: true
+
+    - name: Comment on PR
+      if: failure()
+      uses: actions/github-script@v4
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const { data } = await github.repos.get({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            pull_number: context.payload.pull_request.number
+          });
+
+          const commentBody = `
+            Spell and grammar check failed on this PR. Please review and make necessary corrections.
+          `;
+
+          await github.issues.createComment({
+            issue_number: context.payload.pull_request.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: commentBody
+          });

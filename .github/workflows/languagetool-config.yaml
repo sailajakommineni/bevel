@@ -1,0 +1,32 @@
+name: LanguageTool Check
+
+on: [pull_request]
+
+jobs:
+  language_tool_check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '8'
+
+      - name: Run LanguageTool with Custom Configuration
+        run: |
+          cat << 'EOF' > languagetool-config.yaml
+          rules:
+            - id: MORFOLOGIK_RULE_EN_US
+              pattern:
+                token: yourword
+              message: Use "correctword" 
+              suggestedReplacements:
+                - correctword
+          EOF
+
+          java -jar LanguageTool-6.2/languagetool-commandline.jar -c languagetool-config.yaml
+        env:
+          LANGUAGETOOL_CONFIG_PATH: languagetool-config.yaml
