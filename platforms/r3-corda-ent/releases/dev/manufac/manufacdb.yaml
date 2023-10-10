@@ -1,0 +1,44 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: manufacdb
+  namespace: manufac-ent
+  annotations:
+    fluxcd.io/automated: "false"
+spec:
+  releaseName: manufacdb
+  interval: 1m
+  chart:
+   spec:
+    chart: platforms/r3-corda-ent/charts/h2
+    sourceRef:
+      kind: GitRepository
+      name: flux-vara
+      namespace: flux-vara
+  values:
+    nodeName: manufac
+    metadata:
+      namespace: manufac-ent
+    replicaCount: 1
+    image:
+      containerName: index.docker.io/hyperledgerlabs/h2:2018
+      imagePullSecret: regcred
+      pullPolicy: IfNotPresent
+    resources:
+      limits: 512Mi
+      requests: 512Mi
+    storage:
+      name: manufac-aws-storageclass
+      memory: 512Mi
+    service:
+      type: NodePort
+      tcp:
+        port: 9101
+        targetPort: 1521
+      web:
+        targetPort: 81
+        port: 8080
+    deployment:
+      annotations: {}
+    pvc:
+      annotations: {}
