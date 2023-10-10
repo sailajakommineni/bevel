@@ -73,15 +73,7 @@ vault:
 orderer:
   #Provide the address for orderer including port
   #Eg. address: orderer-ext.example-com:443
-<<<<<<< HEAD
-<<<<<<< HEAD
-  address:
-=======
   address: ""
->>>>>>> c7f59cea19fb0eca9ab959f79bbb88760d93d928
-=======
-  address: ""
->>>>>>> 97c6f266f29fd8bc605bb4efcf31ea8fa2b76d8b
 
 chaincode:
   #Provide a valid chaincode builder image for Fabric

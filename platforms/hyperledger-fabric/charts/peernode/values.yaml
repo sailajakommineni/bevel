@@ -38,15 +38,7 @@ peer:
   gossippeeraddress: peer1.org1-example-com.svc.cluster.local:7051
   #Provide the url of gossip external endpoint and  port to be mentioned is haproxy https service port
   #Eg. gossipexternalendpoint: peer1-ext.org1-example-com:443
-<<<<<<< HEAD
-<<<<<<< HEAD
-  gossipexternalendpoint:  
-=======
   gossipexternalendpoint: peer1-ext.org1-example-com:443
->>>>>>> c7f59cea19fb0eca9ab959f79bbb88760d93d928
-=======
-  gossipexternalendpoint: peer1-ext.org1-example-com:443
->>>>>>> 97c6f266f29fd8bc605bb4efcf31ea8fa2b76d8b
   #Provide the localmspid for organization
   #Eg. localmspid: Org1MSP
   localmspid: Org1MSP

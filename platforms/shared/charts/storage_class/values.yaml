@@ -17,7 +17,7 @@ cloud_provider: aws
 # This "provisioner" is an optional field.
 # Fill it only if you want to use a specific provisioner of your choice. 
 # Otherwise, leave it empty to use the default provisioner based on the value of "cloud_provider" field.
-provisioner: 
+provisioner: kubernetes.io/aws-ebs
 
 # The parameters that will be passed to the storage provisioner.
 # The `aws` key specifies the parameters that will be passed to the AWS storage provisioner.
@@ -45,14 +45,14 @@ reclaimPolicy: Delete
 # The mode for binding PersistentVolumes that are provisioned by this StorageClass. Supported values are: Immediate or WaitForFirstConsumer.
 # The `Immediate` value specifies that PersistentVolumes that are provisioned by this StorageClass will be bound to Pods immediately.
 # The `WaitForFirstConsumer` value specifies that PersistentVolumes that are provisioned by this StorageClass will not be bound to Pods until a Pod requests a PersistentVolume of that StorageClass.
-volumeBindingMode: Immediate
+volumeBindingMode: WaitForFirstConsumer
 
 # A list of allowed topologies for PersistentVolumes that are provisioned by this StorageClass.
 # The `allowedTopologies` list specifies the zones in which PersistentVolumes that are provisioned by this StorageClass can be created.
 allowedTopologies:
   # A label expression that specifies the allowed zones.
   - matchLabelExpressions:
-      - key: failure-domain.beta.kubernetes.io/zone
+      - key: failure-domain.beta.kubernetes.io/zone    #topology.ebs.csi.aws.com/zone  #failure-domain.beta.kubernetes.io/zone
         values:
           # The allowed zones.
           - "eu-west-1a"

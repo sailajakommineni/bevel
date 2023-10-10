@@ -8,6 +8,7 @@
 # Task to check if Job deployed and completed
 # This task will try for a maximum of 10 times with an interval of
 # 60 seconds between each try
+
 - name: 'Wait for {{ component_type }} {{ component_name }} in {{ namespace }}'
   k8s_info:
     kind: "Job"

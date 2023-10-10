@@ -51,6 +51,9 @@
     loop_control:
       loop_var: org
 
+  # # - name: 1
+  # #   pause: 
+  # #     minutes: 1
   # ---------------------------------------------------------------------- 
   # Setup CENM services for the network
   - name: "Setup cenm"   
@@ -71,6 +74,9 @@
       loop_var: org
     when: org.type == 'cenm'
 
+  # # - name: 2
+  # #   pause: 
+  # #     minutes: 1
   # ----------------------------------------------------------------------  
   # Wait for cenm services to respond  
   - name: Check that CENM uri are reachable
@@ -82,7 +88,10 @@
     loop: "{{ network['network_services'] }}"
     retries: "{{ network.env.retry_count}}"
     delay: 50
- 
+  
+  # - name: 3
+  #   pause: 
+  #     minutes: 1
   # ----------------------------------------------------------------------   
   # Setup Corda Node services for the network
   - name: Setup Corda Node services
@@ -103,6 +112,10 @@
       loop_var: org
     when: org.type == 'node'
 
+  - name: 4
+    pause: 
+      minutes: 1
+
   # Setup Additional Notary services for the network
   - name: Setup Additional Notary services
     include_role:
@@ -121,6 +134,10 @@
     loop_control:
       loop_var: org
     when: org.type == 'notary'
+
+  - name: 5
+    pause: 
+      minutes: 1
 
   vars: #These variables can be overriden from the command line
     privilege_escalate: false           #Default to NOT escalate to root privledges

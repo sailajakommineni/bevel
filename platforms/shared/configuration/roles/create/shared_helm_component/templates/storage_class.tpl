@@ -13,7 +13,7 @@ provisioner: k8s.io/minikube-hostpath
 {% if cloud_provider == "aws" %}
 allowedTopologies:
   - matchLabelExpressions:
-      - key: failure-domain.beta.kubernetes.io/zone
+      - key: topology.ebs.csi.aws.com/zone
         values:
           - "{{ region }}a"
 {% endif %}

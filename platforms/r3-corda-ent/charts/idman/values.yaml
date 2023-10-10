@@ -41,7 +41,11 @@ image:
   # Provide the docker-registry secret created and stored in kubernetes cluster as a secret.
   # Eg. imagePullSecrets: regcred, can add multiple creds
   imagePullSecrets: 
+<<<<<<< HEAD
     - name: ""
+=======
+    - name: "" 
+>>>>>>> 50b6d9525ce36aa62f552600fb2bacfbef1a5bc8
   # Pull policy to be used for the Docker image
   # Eg. pullPolicy: Always
   pullPolicy: IfNotPresent

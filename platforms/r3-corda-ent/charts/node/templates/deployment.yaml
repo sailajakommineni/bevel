@@ -77,27 +77,32 @@ spec:
             # setting up env to get secrets from vault
             echo "Getting secrets from Vault Server"
             KUBE_SA_TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+            echo "KUBE_SA_TOKEN=>$KUBE_SA_TOKEN" # i added
             VAULT_TOKEN=$(curl -sS --request POST ${VAULT_ADDR}/v1/auth/${KUBERNETES_AUTH_PATH}/login -H "Content-Type: application/json" -d '{"role":"'"${VAULT_APP_ROLE}"'","jwt":"'"${KUBE_SA_TOKEN}"'"}' | jq -r 'if .errors then . else .auth.client_token end')
-
+            echo "VAULT_TOKEN=>$VAULT_TOKEN" # i added
             validateVaultResponse 'vault login token' "${VAULT_TOKEN}"
-            echo "logged into vault"
+            echo "logged into vault" 
             COUNTER=1
             while [ "$COUNTER" -lt {{ $.Values.vault.retries }} ]
             do
+                echo "inside do" # i added
                 # get truststore from vault to see if registration is done or not
                 LOOKUP_SECRET_RESPONSE=$(curl -sS --header "X-Vault-Token: ${VAULT_TOKEN}" ${VAULT_ADDR}/v1/${CERTS_SECRET_PREFIX}/certs/truststore | jq -r 'if .errors then . else . end')
                 data_info="$(echo ${LOOKUP_SECRET_RESPONSE} | jq -r '.data["data"]')"
-              
+                echo "data_info=>$data_info"
                 if [ "$data_info" == "null" ]
                 then
                   sleep {{ $.Values.vault.retryInterval }}
+                  echo "inside do if" # i added
                 else
+                  echo "inside do else"  # i added
                   validateVaultResponse "${CERTS_SECRET_PREFIX}/certs/truststore" "${LOOKUP_SECRET_RESPONSE}" "LOOKUPSECRETRESPONSE"
                   break
                 fi
+                echo "COUNTER=>$COUNTER"
                 COUNTER=`expr "$COUNTER" + 1`
             done
-
+            echo "104" # i added
             if [ "$COUNTER" -ge {{ $.Values.vault.retries }} ]
             then
               # printing number of trial done before giving up
