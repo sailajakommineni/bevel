@@ -26,7 +26,7 @@ spec:
     vault:
       role: vault-role
       address: http://a39f5128b6763403fbe629cbb6978dc2-1224147318.eu-west-1.elb.amazonaws.com:20001
-      authpath: cordaentmanufacfloat
+      authpath: cordaentfloatmanufac
       policy: vault-crypto-manufac-ent-manufac-ro
       policydata: "{\n  \"policy\": \"\\npath \\\"secretsv2/data/manufac/*\\\" {\n    \\ncapabilities = [\\\"list\\\", \\\"read\\\", \\\"create\\\", \\\"update\\\"]\\n\n  }\"\n}"
       secret_path: manufac
