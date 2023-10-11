@@ -19,13 +19,8 @@
     git_branch: "{{ item.gitops.branch }}"
     git_path: "{{ item.gitops.release_dir }}"
     git_host: "{{ item.gitops.git_repo.split('/')[0] | lower }}" # extract the hostname from the git_repo
-<<<<<<< HEAD
     # ssh: "{{ item.gitops.ssh | default(false) }}"
     git_protocol: "{{ item.gitops.ssh | default(false) }}"
-=======
-    git_protocol: "{{ item.gitops.ssh | default(false) }}"
-    # git_protocol: "{{ item.gitops.ssh | default(false) }}"
->>>>>>> 50b6d9525ce36aa62f552600fb2bacfbef1a5bc8
     helm_operator_version: "1.2.0"
     aws_authenticator:
       os: "{{ install_os }}"
