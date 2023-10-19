@@ -10,11 +10,3 @@ provisioner: gce.csi.google.com
 {% elif cloud_provider == "minikube" %}
 provisioner: k8s.io/minikube-hostpath
 {% endif %}
-{% if cloud_provider == "aws" %}
-allowedTopologies:
-  - matchLabelExpressions:
-      - key: failure-domain.beta.kubernetes.io/zone
-        values:
-          - "{{ region }}a"
-          - "{{ region }}b"
-{% endif %}

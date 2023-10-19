@@ -15,27 +15,27 @@
 metadata:
   # Provide the namespace for the Corda Enterprise Zone.
   # Eg. namespace: cenm
-  namespace: cenm
+  namespace: 
   # Provide the name of the deployment
   # Eg. nodeName: zone
-  nodeName: zone
+  nodeName: 
   # Provide prefix for deployment
   # Eg. prefix: cenm
-  prefix: cenm
+  prefix: 
 
 # Provide information regarding the Docker images used.
 image:
   # Provide the alpine utils image, which is used for all init-containers of deployments/jobs.
   # NOTE: The alpine image used is the base alpine image with CURL installed.
   # Eg. initContainer: ghcr.io/hyperledger/bevel-alpine:latest
-  initContainer: ghcr.io/hyperledger/bevel-alpine:latest
+  initContainer: 
   # Provide the image for the main Zone container.
   # Eg. zoneContainer: corda/enterprise-zone:1.5.1-zulu-openjdk8u242
-  zoneContainer: corda/enterprise-zone:1.5.1-zulu-openjdk8u242
+  zoneContainer: 
   # Provide the docker-registry secret created and stored in kubernetes cluster as a secret.
   # Eg. imagePullSecrets: regcred, can add multiple creds
-  imagePullSecrets: ""
-    - name: 
+  imagePullSecrets: 
+    - name: ""
   # Pull policy to be used for the Docker image
   # Eg. pullPolicy: Always
   pullPolicy:
@@ -47,7 +47,7 @@ config:
   # Provide volume related specifications
   volume:
     # Eg. baseDir: /opt/cenm
-    baseDir: /opt/cenm
+    baseDir: 
 
   pvc:
     # Volume size for h2/ directory
@@ -96,7 +96,7 @@ config:
 cenmServices:
   # Provide the name of the idman
   # Eg. idmanName: idman
-  idmanName: idman
+  idmanName: 
   # Eg. authName: auth
   authName: auth
   # The port of auth service
@@ -138,22 +138,22 @@ service:
   type:
   # Port of service type
   # Eg. port: 80
-  port: 80
+  port: 
 
 listenerPort:
   # Provide the port where the Zone Service listens for Angel Services to connect.
   # Eg. enm: "25000"
-  enm: "25000"
+  enm: 
   # Provide the port where Angel Services connect to the Zone Service.
   # Eg. admin: "12345"
-  admin: "12345"
+  admin: 
 
 # This section contains the storage information, used for the Persistent Volume Claims (PVC).
 # Provide the name of the storageclass.
 # NOTE: Make sure that the storageclass exist prior to this deployment as
 # this chart doesn't create the storageclass.
 # Eg. storageClass: cenm
-storageClass: cenm
+storageClass: 
 
 #############################################################
 #               HashiCorp Vault Configuration               #
@@ -170,7 +170,7 @@ vault:
   role: vault-role
   # Provide the authpath configured to be used.
   # Eg. authpath: entcordacenm
-  authPath: entcordacenm
+  authPath: 
   # Provide the service account name autheticated to vault.
   # NOTE: Make sure that the service account is already created and autheticated to use the vault.
   # Eg. serviceaccountname: vault-auth
