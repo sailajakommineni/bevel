@@ -1,0 +1,60 @@
+name: Spellcheck Action
+on:
+  push:
+    branches: ["**"]
+  pull_request_target:
+    branches: ["**"]
+
+jobs:
+  Spellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: rojopolis/spellcheck-github-actions@0.34.0
+        name: Spellcheck
+        with:
+          config_path: .github/spellcheck.yaml
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# on:
+
+#   pull_request:
+
+#     types: [opened, reopened,update]
+
+# jobs:
+#   check-spell:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - name: Checkout
+#       uses: actions/checkout@v2
+
+#     - name: Spellcheck
+#       uses: check-spelling/check-spelling@v1
+#       with:
+#         github_token: ${{ secrets.GITHUB_TOKEN }}
+#         languages: en
+#         files: |
+#           README.md
+#           docs/**/*.md
