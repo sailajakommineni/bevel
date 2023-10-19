@@ -1,0 +1,21 @@
+on:
+
+  pull_request:
+
+    types: [opened, reopened,update]
+
+jobs:
+  check-spell:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Spellcheck
+      uses: check-spelling/check-spelling@v1
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        languages: en
+        files: |
+          README.md
+          docs/**/*.md
