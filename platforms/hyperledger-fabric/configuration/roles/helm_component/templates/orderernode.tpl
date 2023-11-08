@@ -15,15 +15,15 @@ spec:
         kind: GitRepository
         name: flux-{{ network.env.type }}
         namespace: flux-{{ network.env.type }}
-      chart: {{ charts_dir }}/orderernode
+      chart: {{ charts_dir }}/fabric-orderernode
   values:
     metadata:
       namespace: {{ namespace }}
       network:
         version: {{ network.version }}
       images:
-        orderer: {{ orderer_image }}
-        alpineutils: {{ alpine_image }}
+        orderer: {{ docker_url }}/{{ orderer_image[network.version] }}
+        alpineutils: {{ docker_url }}/{{ alpine_image }}
 {% if network.env.annotations is defined %}
     annotations:  
       service:

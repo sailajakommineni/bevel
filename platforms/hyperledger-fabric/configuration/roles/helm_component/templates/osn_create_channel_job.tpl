@@ -15,15 +15,15 @@ spec:
         kind: GitRepository
         name: flux-{{ network.env.type }}
         namespace: flux-{{ network.env.type }}
-      chart: {{ charts_dir }}/osn_create_channel   
+      chart: {{ charts_dir }}/fabric-osnadmin-channel-create   
   values:
     metadata:
       namespace: {{ component_ns }}
       network:
         version: {{ network.version }}
       images:
-        fabrictools: {{ fabrictools_image }}
-        alpineutils: {{ alpine_image }}
+        fabrictools: {{ docker_url }}/{{ fabric_tools_image[network.version] }}
+        alpineutils: {{ docker_url }}/{{ alpine_image }}
 
     vault:
       role: vault-role
