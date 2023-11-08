@@ -1,0 +1,82 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: networkmapsai
+  annotations:
+    fluxcd.io/automated: "false"
+  namespace: supplysai-ns
+spec:
+  releaseName: networkmapsai
+  interval: 1m
+  chart:
+    spec:
+      chart: platforms/r3-corda/charts/corda-networkmap-tls
+      sourceRef:
+        kind: GitRepository
+        name: flux-sako
+        namespace: flux-sako
+  values:
+    nodeName: networkmapsai
+    metadata:
+      namespace: supplysai-ns
+    image:
+      authusername: sa
+      containerName: ghcr.io/hyperledger/bevel-networkmap-linuxkit:latest
+      env:
+      - name: NETWORKMAP_PORT
+        value: 8080
+      - name: NETWORKMAP_ROOT_CA_NAME
+        value: CN=Network Map,OU=FRA,O=FRA,L=Berlin,C=DE
+      - name: NETWORKMAP_TLS
+        value: true
+      - name: NETWORKMAP_DB
+        value: /opt/networkmap/db
+      - name: DB_USERNAME
+        value: networkmapsai
+      - name: NETWORKMAP_AUTH_USERNAME
+        value: sa
+      - name: DB_URL
+        value: mongodb-networkmapsai
+      - name: DB_PORT
+        value: 27017
+      - name: DATABASE
+        value: admin
+      - name: NETWORKMAP_CACHE_TIMEOUT
+        value: 60S
+      - name: NETWORKMAP_MONGOD_DATABASE
+        value: networkmap
+      imagePullSecret: regcred
+      tlsCertificate: true
+      initContainerName: ghcr.io/hyperledger/alpine-utils:1.0
+      mountPath:
+          basePath: /opt/networkmap
+    storage:
+      memory: 512Mi
+      mountPath: "/opt/h2-data"
+      name: supplysai-aws-storageclass
+    vault:
+      address: http://vault.internal.dev.aws.blockchaincloudpoc-develop.com:20002
+      role: vault-role
+      authpath: cordanetworkmapsai
+      serviceaccountname: vault-auth
+      secretprefix: networkmapsai
+      certsecretprefix: networkmapsai/data/certs
+      dbcredsecretprefix: networkmapsai/data/credentials/mongodb
+      secretnetworkmappass: networkmapsai/data/credentials/userpassword
+      tlscertsecretprefix: networkmapsai/data/tlscerts
+      dbcertsecretprefix: networkmapsai/data/certs
+    healthcheck:
+      readinesscheckinterval: 10
+      readinessthreshold: 15
+      dburl: mongodb-networkmapsai:27017
+    service:
+      port: 8080
+      targetPort: 8080
+      type: ClusterIP
+      annotations: {}
+    deployment:
+      annotations: {}
+    pvc:
+      annotations: {}
+    ambassador:
+      external_url_suffix: sai29.dev.aws.blockchaincloudpoc-develop.com
