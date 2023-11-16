@@ -3,7 +3,7 @@ name: spell and grammer check
 on:
   pull_request:
     paths:
-      - 'docs/**'          # provide name of the file or folder
+      - '*.md'          # provide name of the file or folder
 
 env:
   SPELL_CHECK_DISABLED: false
@@ -32,7 +32,7 @@ jobs:
       uses: rojopolis/spellcheck-github-actions@0.34.0
       with:
         config_path: .github/.spellcheck.yaml
-        source_files: "docs/**"       # name of the file to check spell 
+        source_files: "*.md"       # name of the file to check spell 
         task_name: Markdown
     # To check the grammatical mistakes of the given files and folders.
     - name: Run grammar check
@@ -40,7 +40,6 @@ jobs:
       run: |
         cat <<EOF | python -
         import language_tool_python
-        import subprocess
 
         # Initialize LanguageTool
         tool = language_tool_python.LanguageTool('en-US')  # You can specify the language you want to check.
@@ -48,10 +47,8 @@ jobs:
         # Specify the directory path
         directory_path = 'docs'
 
-        markdown_files = subprocess.check_output(['find', 'docs', '-name', '*.md']).decode('utf-8').splitlines()
-
         # Read the text from your file
-        for file_path in markdown_files:
+        file_path = '*.md'  # Update the path accordingly
         with open(file_path, 'r', encoding='utf-8') as file:
             text = file.read()
  
@@ -61,7 +58,7 @@ jobs:
         # Print grammar errors with line numbers
         if matches:
             for match in matches:
-                print(f"Grammar error in file {file_path} at line {match.line} - {match.message}")
+                print(f"Grammar error at line {match.offset} - {match.message}")
             # Exit with a non-zero code to indicate failure
             exit(1)
         else:
