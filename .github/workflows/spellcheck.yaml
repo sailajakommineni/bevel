@@ -40,15 +40,18 @@ jobs:
       run: |
         cat <<EOF | python -
         import language_tool_python
- 
+        import subprocess
+
         # Initialize LanguageTool
         tool = language_tool_python.LanguageTool('en-US')  # You can specify the language you want to check.
  
         # Specify the directory path
         directory_path = 'docs'
 
+        markdown_files = subprocess.check_output(['find', 'docs', '-name', '*.md']).decode('utf-8').splitlines()
+
         # Read the text from your file
-        file_path = 'docs/README.md'  # Update the path accordingly
+        for file_path in markdown_files:
         with open(file_path, 'r', encoding='utf-8') as file:
             text = file.read()
  
@@ -58,7 +61,7 @@ jobs:
         # Print grammar errors with line numbers
         if matches:
             for match in matches:
-                print(f"Grammar error at line {match.offset} - {match.message}")
+                print(f"Grammar error in file {file_path} at line {match.line} - {match.message}")
             # Exit with a non-zero code to indicate failure
             exit(1)
         else:
