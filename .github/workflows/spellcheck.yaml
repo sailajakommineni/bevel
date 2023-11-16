@@ -55,4 +55,3 @@ jobs:
             fi
             echo "No grammar errors found in file: $file"
           done
-
