@@ -1,57 +1,65 @@
-name: Spell and Grammar Check
-
+---
+name: spell and grammer check
 on:
   pull_request:
     paths:
-      - "docs"
+      - "README.md"         # provide name of the file or folder
 
 env:
   SPELL_CHECK_DISABLED: false
   GRAMMAR_CHECK_DISABLED: false
 
 jobs:
-  check-spelling:
+  check-spelling-and-grammar:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.8
-      - name: Install dependencies
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    # Install the dependencies for grammer check and spell check.
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip setuptools
+        python -m pip install pyspelling 
+        sudo apt-get install hunspell hunspell-en-us aspell aspell-en
+        pip install pylanguagetool
+      
+    - uses: actions/checkout@v2
+    - name: Spellcheck
+      if: ${{ env.SPELL_CHECK_DISABLED == 'false' }}
+      uses: rojopolis/spellcheck-github-actions@0.34.0
+      with:
+        config_path: .github/.spellcheck.yaml
+        source_files: "README.md"       # name of the file to check spell 
+        task_name: Markdown
+    # To check the grammatical mistakes of the given files and folders.
+    - name: Run grammar check
+      if: ${{ env.GRAMMAR_CHECK_DISABLED == 'false' }}
         run: |
-          python -m pip install --upgrade pip setuptools
-          python -m pip install pyspelling 
-          sudo apt-get install hunspell hunspell-en-us aspell aspell-en
-          pip install pylanguagetool
+        from language_tool_python import LanguageTool
 
-      - uses: actions/checkout@v2
-      - name: Spellcheck
-        if: ${{ env.SPELL_CHECK_DISABLED == 'false' }}
-        uses: rojopolis/spellcheck-github-actions@0.34.0
-        with:
-          config_path: .github/.spellcheck.yaml
-          source_files: "docs"
-          task_name: Markdown
+        # Initialize LanguageTool
+        tool = pylanguagetool.LanguageTool('en-US')  # You can specify the language you want to check.
 
-      - name: Run grammar check
-        if: ${{ env.GRAMMAR_CHECK_DISABLED == 'false' }}
-        run: |
-          files_to_check=$(find docs -type f)
-          api_url="https://languagetool.org/api/v2/check"
-          language="en-US"
+        # Read the text from your file
+        file_path = 'README.md'  # Update the path accordingly
+        with open(file_path, 'r', encoding='utf-8') as file:
+            text = file.read()
 
-          for file in $files_to_check; do
-            text_to_check=$(cat "$file")
-            response=$(curl -s -d "text=$text_to_check" -d "language=$language" "$api_url")
+        # Check for grammar errors
+        matches = tool.check(text)
 
-            if [[ $response == *"matches"* ]]; then
-              matches=$(echo "$response" | jq -r '.matches[] | "Grammar error at line \(.offset + 1) - \(.message)"')
-              if [[ -n $matches ]]; then
-                echo "Grammar errors found in file: $file"
-                echo "$matches"
-                exit 1
-              fi
-            fi
-            echo "No grammar errors found in file: $file"
-          done
+        # Print grammar errors with line numbers
+        if matches:
+            for match in matches:
+                print(f"Grammar error at line {match['offset']} - {match['message']}")
+            # Exit with a non-zero code to indicate failure
+            exit(1)
+        else:
+            # No grammar errors found, print a success message
+            print("No grammar errors found.")
+
+            # Exit with a zero code to indicate success
+            exit(0)
