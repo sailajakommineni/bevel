@@ -3,7 +3,8 @@ name: spell and grammer check
 on:
   pull_request:
     types: [opened, edited, reopened]         
-
+  push
+  
 env:
   SPELL_CHECK_DISABLED: false
   GRAMMAR_CHECK_DISABLED: false
