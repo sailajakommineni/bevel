@@ -24,11 +24,9 @@ jobs:
         python -m pip install --upgrade pip setuptools
         python -m pip install pyspelling 
         sudo apt-get install hunspell hunspell-en-us aspell aspell-en
-        pip install pylanguagetool
-        pip install language_tool_python
         pip install --user --upgrade language_tool_python
       
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v2
     - name: Spellcheck
       if: ${{ env.SPELL_CHECK_DISABLED == 'false' }}
       uses: rojopolis/spellcheck-github-actions@0.34.0
@@ -47,17 +45,17 @@ jobs:
         tool = language_tool_python.LanguageTool('en-US')  # You can specify the language you want to check.
  
         # Read the text from your file
-        files_to_check=$(find docs -type f)   # Update the path accordingly
-        with open(files_to_check, 'r', encoding='utf-8') as file:
-            text_to_check=file.read()
+        file_path = 'docs/**'  # Update the path accordingly
+        with open(file_path, 'r', encoding='utf-8') as file:
+            text = file.read()
  
         # Check for grammar errors
-        matches = tool.check(text_to_check)
+        matches = tool.check(text)
  
         # Print grammar errors with line numbers
         if matches:
             for match in matches:
-                print(f"Grammar error at line {match.offset} - {match.message}")
+                print(f"Grammar error at line {match.fromy}:{match.fromx} - {match.msg}")
             # Exit with a non-zero code to indicate failure
             exit(1)
         else:
