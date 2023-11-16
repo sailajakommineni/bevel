@@ -24,7 +24,8 @@ jobs:
         python -m pip install --upgrade pip setuptools
         python -m pip install pyspelling 
         sudo apt-get install hunspell hunspell-en-us aspell aspell-en
-        pip install pylanguagetool
+        pip install --upgrade language_tool_python
+        pip install grammar-check
       
     - uses: actions/checkout@v2
     - name: Spellcheck
@@ -37,29 +38,6 @@ jobs:
     # To check the grammatical mistakes of the given files and folders.
     - name: Run grammar check
       if: ${{ env.GRAMMAR_CHECK_DISABLED == 'false' }}
-      run: |
-        # Read the text from  all files in the  directory and its subdirectories
-        files_to_check=$(find docs -type f)   
+      run: python grammar_check.py
 
-        # Define the LanguageTool API URL and language (e.g., en-US for English)
-        api_url="https://languagetool.org/api/v2/check"
-        language="en-US"
-
-        for file in $files_to_check; do
-          # Read the content of each file 
-          text_to_check=$(cat "$file")
-           
-          # Send a POST request to the LanguageTool API and store the response in a variable
-          response=$(curl -s -d "text=$text_to_check" -d "language=$language" "$api_url")
-          
-          # Check if the response file exists 
-          if [[ $response == *"matches"* ]]; then
-            matches=$(echo "$response" | jq -r '.matches[] | "Grammar error at line \(.offset + 1) - \(.message)"')
-            if [[ -n $matches ]]; then
-              echo "Grammar errors found in file: $file"
-              echo "$matches"
-              exit 1
-            fi
-          fi
-          echo "No grammar errors found in file: $file"
-        done
+        
