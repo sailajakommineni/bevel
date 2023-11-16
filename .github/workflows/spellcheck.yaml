@@ -37,4 +37,30 @@ jobs:
     # To check the grammatical mistakes of the given files and folders.
     - name: Run grammar check
       if: ${{ env.GRAMMAR_CHECK_DISABLED == 'false' }}
-      run: python .github/grammar_check.py
+      - name: Run grammar check
+      run: |
+        from language_tool_python import LanguageTool
+ 
+        # Initialize LanguageTool
+        tool = pylanguagetool.LanguageTool('en-US')  # You can specify the language you want to check.
+ 
+        # Read the text from your file
+        file_path = 'docs/*.md*'  # Update the path accordingly
+        with open(file_path, 'r', encoding='utf-8') as file:
+            text = file.read()
+ 
+        # Check for grammar errors
+        matches = tool.check(text)
+ 
+        # Print grammar errors with line numbers
+        if matches:
+            for match in matches:
+                print(f"Grammar error at line {match['offset']} - {match['message']}")
+            # Exit with a non-zero code to indicate failure
+            exit(1)
+        else:
+            # No grammar errors found, print a success message
+            print("No grammar errors found.")
+ 
+            # Exit with a zero code to indicate success
+            exit(0)
