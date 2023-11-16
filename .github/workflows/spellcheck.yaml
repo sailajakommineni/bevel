@@ -37,7 +37,6 @@ jobs:
     # To check the grammatical mistakes of the given files and folders.
     - name: Run grammar check
       if: ${{ env.GRAMMAR_CHECK_DISABLED == 'false' }}
-      - name: Run grammar check
       run: |
         from language_tool_python import LanguageTool
  
@@ -45,7 +44,7 @@ jobs:
         tool = pylanguagetool.LanguageTool('en-US')  # You can specify the language you want to check.
  
         # Read the text from your file
-        file_path = 'docs/*.md*'  # Update the path accordingly
+        file_path = '.github/checking.txt'  # Update the path accordingly
         with open(file_path, 'r', encoding='utf-8') as file:
             text = file.read()
  
