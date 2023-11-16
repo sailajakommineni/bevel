@@ -5,7 +5,7 @@ on:
     paths:
       - "docs"         # provide name of the file or folder
 jobs:
-  check-spelling:
+  check-spelling-and-grammar:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
