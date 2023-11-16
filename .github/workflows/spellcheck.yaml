@@ -3,7 +3,7 @@ name: spell and grammer check
 on:
   pull_request:
     paths:
-      - 'docs/checking.txt'          # provide name of the file or folder
+      - 'docs/README.md'          # provide name of the file or folder
 
 env:
   SPELL_CHECK_DISABLED: false
@@ -32,7 +32,7 @@ jobs:
       uses: rojopolis/spellcheck-github-actions@0.34.0
       with:
         config_path: .github/.spellcheck.yaml
-        source_files: "docs/checking.txt"       # name of the file to check spell 
+        source_files: "docs/README.md"       # name of the file to check spell 
         task_name: Markdown
     # To check the grammatical mistakes of the given files and folders.
     - name: Run grammar check
@@ -48,7 +48,7 @@ jobs:
         directory_path = 'docs'
 
         # Read the text from your file
-        file_path = 'docs/checking.txt'  # Update the path accordingly
+        file_path = 'docs/README.md'  # Update the path accordingly
         with open(file_path, 'r', encoding='utf-8') as file:
             text = file.read()
  
