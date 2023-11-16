@@ -24,7 +24,6 @@ jobs:
         python -m pip install --upgrade pip setuptools
         python -m pip install pyspelling 
         sudo apt-get install hunspell hunspell-en-us aspell aspell-en
-        pip install --user --upgrade language_tool_python
         pip install pylanguagetool
       
     - uses: actions/checkout@v2
