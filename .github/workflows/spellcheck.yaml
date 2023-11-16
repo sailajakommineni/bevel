@@ -25,8 +25,9 @@ jobs:
         python -m pip install pyspelling 
         sudo apt-get install hunspell hunspell-en-us aspell aspell-en
         pip install pylanguagetool
+        pip install language-tool-python
       
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@master
     - name: Spellcheck
       if: ${{ env.SPELL_CHECK_DISABLED == 'false' }}
       uses: rojopolis/spellcheck-github-actions@0.34.0
@@ -39,7 +40,7 @@ jobs:
       if: ${{ env.GRAMMAR_CHECK_DISABLED == 'false' }}
       run: |
         cat <<EOF | python -
-        from language_tool_python import LanguageTool
+        import LanguageTool
  
         # Initialize LanguageTool
         tool = pylanguagetool.LanguageTool('en-US')  # You can specify the language you want to check.
