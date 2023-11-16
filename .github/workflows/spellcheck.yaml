@@ -2,8 +2,7 @@
 name: spell and grammer check
 on:
   pull_request:
-    paths:
-      - 'docs'          # provide name of the file or folder
+    types: [opened, edited, reopened]         
 
 env:
   SPELL_CHECK_DISABLED: false
