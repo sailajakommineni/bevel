@@ -30,29 +30,29 @@ jobs:
         task_name: Markdown
     # To check the grammatical mistakes of the given files and folders.
     - name: Run grammar check
-        run: |
-          import pylanguagetool
+      run: |
+        import pylanguagetool
 
-          # Initialize LanguageTool
-          tool = pylanguagetool.LanguageTool('en-US')  # You can specify the language you want to check.
+        # Initialize LanguageTool
+        tool = pylanguagetool.LanguageTool('en-US')  # You can specify the language you want to check.
 
-          # Read the text from your file
-          file_path = 'docs/*.md*'  # Update the path accordingly
-          with open(file_path, 'r', encoding='utf-8') as file:
-              text = file.read()
+        # Read the text from your file
+        file_path = 'docs/*.md*'  # Update the path accordingly
+        with open(file_path, 'r', encoding='utf-8') as file:
+            text = file.read()
 
-          # Check for grammar errors
-          matches = tool.check(text)
+        # Check for grammar errors
+        matches = tool.check(text)
 
-          # Print grammar errors with line numbers
-          if matches:
-              for match in matches:
-                  print(f"Grammar error at line {match['offset']} - {match['message']}")
-              # Exit with a non-zero code to indicate failure
-              exit(1)
-          else:
-              # No grammar errors found, print a success message
-              print("No grammar errors found.")
+        # Print grammar errors with line numbers
+        if matches:
+            for match in matches:
+                print(f"Grammar error at line {match['offset']} - {match['message']}")
+            # Exit with a non-zero code to indicate failure
+            exit(1)
+        else:
+            # No grammar errors found, print a success message
+            print("No grammar errors found.")
 
-              # Exit with a zero code to indicate success
-              exit(0)
+            # Exit with a zero code to indicate success
+            exit(0)
