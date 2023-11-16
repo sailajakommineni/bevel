@@ -3,7 +3,7 @@ name: spell and grammer check
 on:
   pull_request:
     paths:
-      - ".github/checking.txt"          # provide name of the file or folder
+      - "docs"          # provide name of the file or folder
 
 env:
   SPELL_CHECK_DISABLED: false
@@ -32,14 +32,14 @@ jobs:
       uses: rojopolis/spellcheck-github-actions@0.34.0
       with:
         config_path: .github/.spellcheck.yaml
-        source_files: ".github/checking.txt"       # name of the file to check spell 
+        source_files: "docs"       # name of the file to check spell 
         task_name: Markdown
     # To check the grammatical mistakes of the given files and folders.
     - name: Run grammar check
       if: ${{ env.GRAMMAR_CHECK_DISABLED == 'false' }}
       run: |
         # Read the text from  all files in the  directory and its subdirectories
-        files_to_check=$(find .github/checking.txt -type f)   
+        files_to_check=$(find docs -type f)   
 
         # Define the LanguageTool API URL and language (e.g., en-US for English)
         api_url="https://languagetool.org/api/v2/check"
