@@ -58,6 +58,7 @@ jobs:
         # Print grammar errors with line numbers
         if matches:
             for match in matches:
+                line_number = sum(len(line) + 1 for line in lines[:match.offset]) + 1
                 print(f"Grammar error at line {match.offset} - {match.message}")
             # Exit with a non-zero code to indicate failure
             exit(1)
