@@ -38,28 +38,28 @@ jobs:
     - name: Run grammar check
       if: ${{ env.GRAMMAR_CHECK_DISABLED == 'false' }}
       run: |
-        import LanguageTool
+        # Read the text from  all files in the  directory and its subdirectories
+        files_to_check=$(find .github/checking.txt -type f)   
 
-        # Initialize LanguageTool
-        tool = pylanguagetool.LanguageTool('en-US')  # You can specify the language you want to check.
+        # Define the LanguageTool API URL and language (e.g., en-US for English)
+        api_url="https://languagetool.org/api/v2/check"
+        language="en-US"
 
-        # Read the text from your file
-        file_path = '.github/checking.txt '  # Update the path accordingly
-        with open(file_path, 'r', encoding='utf-8') as file:
-            text = file.read()
-
-        # Check for grammar errors
-        matches = tool.check(text)
-
-        # Print grammar errors with line numbers
-        if matches:
-            for match in matches:
-                print(f"Grammar error at line {match['offset']} - {match['message']}")
-            # Exit with a non-zero code to indicate failure
-            exit(1)
-        else:
-            # No grammar errors found, print a success message
-            print("No grammar errors found.")
-
-            # Exit with a zero code to indicate success
-            exit(0)
+        for file in $files_to_check; do
+          # Read the content of each file 
+          text_to_check=$(cat "$file")
+           
+          # Send a POST request to the LanguageTool API and store the response in a variable
+          response=$(curl -s -d "text=$text_to_check" -d "language=$language" "$api_url")
+          
+          # Check if the response file exists 
+          if [[ $response == *"matches"* ]]; then
+            matches=$(echo "$response" | jq -r '.matches[] | "Grammar error at line \(.offset + 1) - \(.message)"')
+            if [[ -n $matches ]]; then
+              echo "Grammar errors found in file: $file"
+              echo "$matches"
+              exit 1
+            fi
+          fi
+          echo "No grammar errors found in file: $file"
+        done
