@@ -41,10 +41,10 @@ jobs:
       if: ${{ env.GRAMMAR_CHECK_DISABLED == 'false' }}
       run: |
         cat <<EOF | python -
-        import LanguageTool
+        import language_tool_python
  
         # Initialize LanguageTool
-        tool = pylanguagetool.LanguageTool('en-US')  # You can specify the language you want to check.
+        tool = language_tool_python.LanguageTool('en-US')  # You can specify the language you want to check.
  
         # Read the text from your file
         file_path = '.github/checking.txt'  # Update the path accordingly
