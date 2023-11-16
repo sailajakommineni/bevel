@@ -38,6 +38,7 @@ jobs:
     - name: Run grammar check
       if: ${{ env.GRAMMAR_CHECK_DISABLED == 'false' }}
       run: |
+        python - <<EOF
         from language_tool_python import LanguageTool
  
         # Initialize LanguageTool
