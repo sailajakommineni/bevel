@@ -38,8 +38,7 @@ jobs:
     - name: Run grammar check
       if: ${{ env.GRAMMAR_CHECK_DISABLED == 'false' }}
       run: |
-
-        from language_tool_python import LanguageTool
+        import LanguageTool
 
         # Initialize LanguageTool
         tool = pylanguagetool.LanguageTool('en-US')  # You can specify the language you want to check.
