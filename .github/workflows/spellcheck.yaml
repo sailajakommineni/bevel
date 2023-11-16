@@ -56,7 +56,7 @@ jobs:
         # Print grammar errors with line numbers
         if matches:
             for match in matches:
-                print(f"Grammar error at line {match['offset']} - {match['message']}")
+                print(f"Grammar error at line {match.fromy}:{match.fromx} - {match.msg}")
             # Exit with a non-zero code to indicate failure
             exit(1)
         else:
@@ -65,3 +65,5 @@ jobs:
  
             # Exit with a zero code to indicate success
             exit(0)
+        EOF
+
