@@ -51,8 +51,6 @@ jobs:
         file_path = '.github/checking.txt'  # Update the path accordingly
         with open(file_path, 'r', encoding='utf-8') as file:
             text = file.read()
-
-        lines = text.split('\n')
  
         # Check for grammar errors
         matches = tool.check(text)
@@ -60,8 +58,7 @@ jobs:
         # Print grammar errors with line numbers
         if matches:
             for match in matches:
-                line_number = sum(len(line) + 1 for line in lines[:match.offset]) + 1
-                print(f"Grammar error at line {line_number} - {match.message}")
+                print(f"Grammar error at line {match.fromy} - {match.message}")
             # Exit with a non-zero code to indicate failure
             exit(1)
         else:
