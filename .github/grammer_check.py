@@ -1,6 +1,6 @@
 from language_tool_python import LanguageTool
 
-def grammar_check(text):
+ def grammar_check(text):
     # Create an instance of the LanguageTool class
     tool = LanguageTool('en-US')
 
