@@ -37,4 +37,4 @@ jobs:
     # To check the grammatical mistakes of the given files and folders.
     - name: Run grammar check
       if: ${{ env.GRAMMAR_CHECK_DISABLED == 'false' }}
-      run: python grammar_check.py
+      run: python .github/grammar_check.py
