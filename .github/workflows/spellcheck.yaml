@@ -3,7 +3,7 @@ name: spell and grammer check
 on:
   pull_request:
     paths:
-      - 'docs/README.md'          # provide name of the file or folder
+      - 'docs'          # provide name of the file or folder
 
 env:
   SPELL_CHECK_DISABLED: false
