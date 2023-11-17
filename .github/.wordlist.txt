@@ -3,7 +3,7 @@ Corda
 Ansible
 DLT
 DevOps
-Hyperledger
+reStructuredText
 Kubernetes
 Github
 TSC
@@ -34,3 +34,10 @@ runtime
 Tessera
 IBFT
 CII
+rst
+toctree
+conf
+py
+md
+pre
+html
