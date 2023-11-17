@@ -3,6 +3,9 @@ name: spell and grammer check
 on:
   pull_request:
     types: [opened, edited, reopened]         
+  push:
+    branches:
+      - 'testing'
 
 env:
   SPELL_CHECK_DISABLED: false
