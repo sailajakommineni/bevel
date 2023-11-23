@@ -43,3 +43,6 @@ pre
 html
 http
 www
+rst
+toctree
+reStructuredText
