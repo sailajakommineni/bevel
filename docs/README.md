@@ -21,7 +21,7 @@ Tools used: [Sphinx] (http://www.sphinx-doc.org/).
 ```
 
 ### Building the docs
-1. Install the latest Sphinx
+1. Install the latest Sphinx.
 ```
 pip install -U Sphinx
 ```
