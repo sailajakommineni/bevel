@@ -25,7 +25,7 @@ Tools used: [Sphinx] (http://www.sphinx-doc.org/).
 ```
 pip install -U Sphinx
 ```
-2. Install the prerequisites.
+2. Install the pre-requisites.
 ```
 pip install -r pip-requirements.txt
 ```
