@@ -35,4 +35,4 @@ make html
 or
 make.bat html
 ```
-4. Access the documents from the **build/html/** folder.
+4. Access the documents from the **build/html** folder.
