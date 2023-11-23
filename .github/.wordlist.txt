@@ -41,3 +41,5 @@ py
 md
 pre
 html
+http
+www
