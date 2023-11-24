@@ -60,7 +60,7 @@ jobs:
                         line_range = f"Lines {match.fromy}-{match.toy}"
                     else:
                         line_range = "Unknown lines"
-                    print(f"Error in {filename} at line {match.from_line}, column {match.from_col}: {match.message}")
+                    print(f"Error in {filename} at {line_range}, column {match.from_col}: {match.message}")
 
         file_path = '.github/checking.txt'
 
