@@ -58,17 +58,13 @@ jobs:
                 for match in matches:
                     print(f"Error in {filename} at line {match.from_line}, column {match.from_col}: {match.message}")
 
-        def check_grammar_in_directory(directory_path):
-            for filename in os.listdir(directory_path):
-                if filename.endswith(".txt"):  # Adjust the file extension as needed
-                    file_path = os.path.join(directory_path, filename)
-                    with open(file_path, 'r', encoding='utf-8') as file:
-                        document = file.read()
-                        errors = identify_grammar_errors(document)
-                        print_errors(errors, filename)
+        file_path = '.github/checking.txt'
 
-        directory_to_check = '.github/checking.txt'
-        check_grammar_in_directory('.github/checking.txt')
+        # Check grammar for the content of the specified file
+        with open(file_path, 'r', encoding='utf-8') as file:
+            document = file.read()
+            errors = identify_grammar_errors(document)
+            print_errors(errors, file_path)
 
         EOF
 
