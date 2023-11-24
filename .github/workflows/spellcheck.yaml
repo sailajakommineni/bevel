@@ -58,7 +58,7 @@ jobs:
             text = file.read()
 
         # Define the pattern to match code blocks
-        code_block_pattern = r'
+        code_block_pattern = r'</code></pre>[\\s\\S]*?<pre  class="9"><code class="9">'
 
         # Find all code blocks in the text
         code_blocks = re.findall(code_block_pattern, text)
