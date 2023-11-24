@@ -29,6 +29,7 @@ jobs:
         python -m pip install pyspelling 
         sudo apt-get install hunspell hunspell-en-us aspell aspell-en
         pip install --user --upgrade language_tool_python
+        python -m pip install language-check
       
     - uses: actions/checkout@v2
     - name: Spellcheck
@@ -42,7 +43,6 @@ jobs:
     - name: Run grammar check
       if: ${{ env.GRAMMAR_CHECK_DISABLED == 'false' }}
       run: |
-        pip install language-check
         language-check --disable "WHITESPACE_RULE,EN_UNPAIRED_BRACKETS,COMMA_PARENTHESIS_WHITESPACE,UPPERCASE_SENTENCE_START" -l en-US .github/checking.txt
         python - <<EOF
         import language_tool_python
