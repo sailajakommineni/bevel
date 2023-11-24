@@ -68,7 +68,7 @@ jobs:
                         print_errors(errors, filename)
 
         directory_to_check = '.github/checking.txt'
-        check_grammar_in_directory(.github/checking.txt)
+        check_grammar_in_directory('.github/checking.txt')
 
         EOF
 
