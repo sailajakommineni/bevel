@@ -75,7 +75,11 @@ jobs:
         # Print grammar errors with line numbers
         if matches:
             for match in matches:
-                print(f"Grammar error at line {match.offset} - {match.message}")
+                adjusted_offset = match.offset
+                for code_block in code_blocks:
+                    if match.offset > code_block.find('<pre  class="9"><code class="9">'):
+                        adjusted_offset -= len(code_block)
+                print(f"Line {adjusted_offset}, column {match.from_column}: {match.message}")
             # Exit with a non-zero code to indicate failure
             exit(1)
 
