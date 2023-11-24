@@ -62,10 +62,11 @@ jobs:
         # Print grammar errors with line numbers
         if matches:
             for match in matches:
-                if hasattr(match, 'line'):
-                    print(f"Grammar error at line {match.line} - {match.message}")
-                else:
-                    print(f"Grammar error - {match.message}")
+                if hasattr(match, 'fromy') and hasattr(match, 'toy'):
+                line_range = f"Lines {match.fromy}-{match.toy}"
+            else:
+                line_range = "Unknown lines"
+            print(f"Grammar error at {line_range} - {match.message}")
             # Exit with a non-zero code to indicate failure
             exit(1)
 
