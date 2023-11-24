@@ -44,6 +44,7 @@ jobs:
       run: |
         python - <<EOF
         import language_tool_python
+        import os 
         
         def identify_grammar_errors(text):
             tool = language_tool_python.LanguageTool('en-US')
@@ -53,9 +54,9 @@ jobs:
         def print_errors(matches, filename):
             if not matches:
                 print(f"No grammar errors found in {filename}.")
-        else:
-            for match in matches:
-                print(f"Error in {filename} at line {match.from_line}, column {match.from_col}: {match.message}")
+            else:
+                for match in matches:
+                    print(f"Error in {filename} at line {match.from_line}, column {match.from_col}: {match.message}")
 
         def check_grammar_in_directory(directory_path):
             for filename in os.listdir(directory_path):
