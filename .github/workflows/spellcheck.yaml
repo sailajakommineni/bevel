@@ -79,7 +79,7 @@ jobs:
                 for code_block in code_blocks:
                     if match.offset > code_block.find('<pre  class="9"><code class="9">'):
                         adjusted_offset -= len(code_block)
-                print(f"Line {adjusted_offset}, position {match.from_pos}: {match.message}")
+                print(f"Line {adjusted_offset}: {match.message}")
             # Exit with a non-zero code to indicate failure
             exit(1)
 
