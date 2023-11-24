@@ -6,7 +6,7 @@ on:
     - "**"
   pull_request:
     paths:
-      - 'docs/README.md'
+      - '.github/checking.txt'
     types: [opened, edited, updated]          
 
 env:
@@ -36,7 +36,7 @@ jobs:
       uses: rojopolis/spellcheck-github-actions@0.34.0
       with:
         config_path: .github/.spellcheck.yaml
-        source_files: "docs/README.md"       # name of the file to check spell 
+        source_files: ".github/checking.txt"       # name of the file to check spell 
         task_name: Markdown
     # To check the grammatical mistakes of the given files and folders.
     - name: Run grammar check
@@ -53,39 +53,19 @@ jobs:
         directory_path = 'docs'
 
         # Read the text from your file
-        file_path = 'docs/README.md'  # Update the path accordingly
+        file_path = '.github/checking.txt'  # Update the path accordingly
         with open(file_path, 'r', encoding='utf-8') as file:
             text = file.read()
 
-        # Define the pattern to match code blocks
-        code_block_pattern = r'</code></pre>[\\s\\S]*?<pre  class="9"><code class="9">'
-
-        # Find all code blocks in the text
-        code_blocks = re.findall(code_block_pattern, text)
-
-        # Remove code blocks from the text
-        text_without_code = re.sub(code_block_pattern, '', text)
-
-        # Check for grammar errors in the remaining text (without code blocks)
-        matches = tool.check(text_without_code)
- 
         # Check for grammar errors
         #matches = tool.check(text)
  
         # Print grammar errors with line numbers
         if matches:
             for match in matches:
-                adjusted_offset = match.offset
-                for code_block in code_blocks:
-                    if match.offset > code_block.find('<pre  class="9"><code class="9">'):
-                        adjusted_offset -= len(code_block)
-                print(f"Line {adjusted_offset}: {match.message}")
+                print(f"Grammar error at line {match.line} - {match.message}")
             # Exit with a non-zero code to indicate failure
             exit(1)
-
-        # Print code blocks to skip them from grammar checking
-        for code_block in code_blocks:
-            print(f"Skipping code block: {code_block}")
 
         else:
             # No grammar errors found, print a success message
