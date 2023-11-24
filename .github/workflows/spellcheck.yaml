@@ -29,7 +29,6 @@ jobs:
         python -m pip install pyspelling 
         sudo apt-get install hunspell hunspell-en-us aspell aspell-en
         pip install --user --upgrade language_tool_python
-        python -m pip install language-check
       
     - uses: actions/checkout@v2
     - name: Spellcheck
