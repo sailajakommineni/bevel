@@ -44,7 +44,6 @@ jobs:
       run: |
         python - <<EOF
         import language_tool_python
-        import re
 
         # Initialize LanguageTool
         tool = language_tool_python.LanguageTool('en-US')  # You can specify the language you want to check.
@@ -58,7 +57,7 @@ jobs:
             text = file.read()
 
         # Check for grammar errors
-        #matches = tool.check(text)
+        matches = tool.check(text)
  
         # Print grammar errors with line numbers
         if matches:
