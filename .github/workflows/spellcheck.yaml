@@ -62,10 +62,14 @@ jobs:
         # Print grammar errors with line numbers
         if matches:
             for match in matches:
-                line_range = match.context[0]['offset']
-                start_line = text.count('\n', 0, int(line_range)) + 1
-                end_line = text.count('\n', int(line_range), int(line_range) + match.context[0]['length']) + 1
-                print(f"Grammar error from line {start_line} to {end_line}: {match.message}")
+                print("Match context:", match.context)
+                if match.context and 'offset' in match.context[0]:
+                    line_range = match.context[0]['offset']
+                    start_line = text.count('\n', 0, int(line_range)) + 1
+                    end_line = text.count('\n', int(line_range), int(line_range) + match.context[0]['length']) + 1  
+                    print(f"Grammar error from line {start_line} to {end_line}: {match.message}")
+                else:
+                    print("Unexpected match context structure:", match.context)
             # # Exit with a non-zero code to indicate failure
             # exit(1)
 
