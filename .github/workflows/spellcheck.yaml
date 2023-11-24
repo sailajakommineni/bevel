@@ -44,79 +44,31 @@ jobs:
       run: |
         python - <<EOF
         import language_tool_python
-        import os 
-        
-        def identify_grammar_errors(text):
-            tool = language_tool_python.LanguageTool('en-US')
-            matches = tool.check(text)
-            return matches
 
-        def print_errors(matches, filename):
-            if not matches:
-                print(f"No grammar errors found in {filename}.")
-            else:
-                for match in matches:
-                    if hasattr(match, 'fromy') and hasattr(match, 'toy'):
-                        line_range = f"Lines {match.fromy}-{match.toy}"
-                    else:
-                        line_range = "Unknown lines"
-                    if hasattr(match, 'fromx') and hasattr(match, 'tox'):
-                        col_range = f"Columns {match.fromx}-{match.tox}"
-                    else:
-                        col_range = "Unknown columns"
-                    print(f"Error in {filename} at {line_range}, column {match.from_col}: {match.message}")
-
-        file_path = '.github/checking.txt'
-
-        # Check grammar for the content of the specified file
-        with open(file_path, 'r', encoding='utf-8') as file:
-            document = file.read()
-            errors = identify_grammar_errors(document)
-            print_errors(errors, file_path)
-
-        EOF
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-        # # Initialize LanguageTool
-        # tool = language_tool_python.LanguageTool('en-US')  # You can specify the language you want to check.
+        # Initialize LanguageTool
+        tool = language_tool_python.LanguageTool('en-US')  # You can specify the language you want to check.
 
         # # Specify the directory path
         # directory_path = 'docs'
 
-        # # Read the text from your file
-        # file_path = '.github/checking.txt'  # Update the path accordingly
-        # with open(file_path, 'r', encoding='utf-8') as file:
-        #     text = file.read()
+        # Read the text from your file
+        file_path = '.github/checking.txt'  # Update the path accordingly
+        with open(file_path, 'r', encoding='utf-8') as file:
+            text = file.read()
 
-        # # Check for grammar errors
-        # matches = tool.check(text)
+        # Check for grammar errors
+        matches = tool.check(text)
  
-        # # Print grammar errors with line numbers
-        # if matches:
-        #     for match in matches:
-        #         if hasattr(match, 'fromy') and hasattr(match, 'toy'):
-        #             line_range = f"Lines {match.fromy}-{match.toy}"
-        #     else:
-        #         line_range = "Unknown lines"
-        #     print(f"Grammar error at {line_range} - {match.message}")
-        #     # Exit with a non-zero code to indicate failure
-        #     exit(1)
+        # Print grammar errors with line numbers
+        if matches:
+            for match in matches:
+                print(f"Grammar error at {line_range} - {match.message}")
+            # Exit with a non-zero code to indicate failure
+            exit(1)
 
-        # else:
-        #     # No grammar errors found, print a success message
-        #     print("No grammar errors found.")
+        else:
+            # No grammar errors found, print a success message
+            print("No grammar errors found.")
  
-        #     exit(0)
-        # EOF
+            exit(0)
+        EOF
