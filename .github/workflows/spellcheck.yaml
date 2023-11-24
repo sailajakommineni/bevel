@@ -44,7 +44,6 @@ jobs:
     - name: Run grammar check
       if: ${{ env.GRAMMAR_CHECK_DISABLED == 'false' }}
       run: |
-        language-check --disable "WHITESPACE_RULE,EN_UNPAIRED_BRACKETS,COMMA_PARENTHESIS_WHITESPACE,UPPERCASE_SENTENCE_START" -l en-US .github/checking.txt
         python - <<EOF
         import language_tool_python
 
