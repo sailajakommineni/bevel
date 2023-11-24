@@ -50,7 +50,7 @@ jobs:
         tool = language_tool_python.LanguageTool('en-US')  # You can specify the language you want to check.
 
         # # Specify the directory path
-        # directory_path = 'docs'
+        # directory_path = 'docs/README.md'
         
         # Iterate through all files in the directory
         for filename in os.listdir(directory_path):
