@@ -40,9 +40,9 @@ jobs:
         task_name: Markdown
     # To check the grammatical mistakes of the given files and folders.
     - name: Run grammar check
-      if: ${{ env.GRAMMAR_CHECK_DISABLED == 'false' }}
+      if: ${{ env.GRAMMAR_CHECK_DISABLED == false }}
       run: |
-        cat <<EOF | python -
+        python - <<EOF
         import language_tool_python
 
         # Initialize LanguageTool
