@@ -49,38 +49,74 @@ jobs:
         # Initialize LanguageTool
         tool = language_tool_python.LanguageTool('en-US')  # You can specify the language you want to check.
 
-        # # Specify the directory path
-        # directory_path = '.github/checking.txt'
-        
-        # Iterate through all files in the directory
-        for filename in os.listdir(directory_path):
-            file_path = os.path.join(directory_path, filename)
-  
-            if os.path.isfile(file_path):
         # Read the text from your file
-        # file_path = '.github/checking.txt'  # Update the path accordingly
-                with open(file_path, 'r', encoding='utf-8') as file:
-                    text = file.read()
+        file_path = '.github/checking.txt'  # Update the path accordingly
+        with open(file_path, 'r', encoding='utf-8') as file:
+            text = file.read()
 
-                # Check for grammar errors
-                matches = tool.check(text)
- 
-                # Print grammar errors with line numbers
-                if matches:
-                    for match in matches:
-                        print(f"File: {filename}")
-                        line_range = match.context[0]['offset']
-                        start_line = text.count('\n', 0, int(line_range)) + 1
-                        end_line = text.count('\n', int(line_range), int(line_range) + match.context[0]['length']) + 1  
-                        print(f"Grammar error from line {start_line} to {end_line}: {match.message}")
-                else:
-                    print(f"No grammar errors found in {filename}")
-        #     # # Exit with a non-zero code to indicate failure
-        #     # exit(1)
-        print(f"No grammar errors found in {filename}")
-        # else:
-        #     # No grammar errors found, print a success message
-        #     print("No grammar errors found.")
- 
-            # exit(0)
+        # Check for grammar errors
+        matches = tool.check(text)
+
+        # Print grammar errors with line numbers
+        if matches:
+            for match in matches:
+            print("Match context:", match.context)  # Add this line for debugging
+            if match.context and 'offset' in match.context[0]:
+                line_range = match.context[0]['offset']
+                start_line = text.count('\n', 0, int(line_range)) + 1
+                end_line = text.count('\n', int(line_range), int(line_range) + match.context[0]['length']) + 1
+                print(f"Grammar error from line {start_line} to {end_line}: {match.message}")
+            else:
+                print("Unexpected match context structure:", match.context)  # Add this line for debugging
+                # Handle the case when the match context doesn't have the expected structure
+        else:
+            # No grammar errors found, print a success message
+            print("No grammar errors found.")
         EOF
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        # # # Specify the directory path
+        # # directory_path = '.github/checking.txt'
+        
+        # # Iterate through all files in the directory
+        # for filename in os.listdir(directory_path):
+        #     file_path = os.path.join(directory_path, filename)
+  
+        #     if os.path.isfile(file_path):
+        # # Read the text from your file
+        # # file_path = '.github/checking.txt'  # Update the path accordingly
+        #         with open(file_path, 'r', encoding='utf-8') as file:
+        #             text = file.read()
+
+        #         # Check for grammar errors
+        #         matches = tool.check(text)
+ 
+        #         # Print grammar errors with line numbers
+        #         if matches:
+        #             for match in matches:
+        #                 print(f"File: {filename}")
+        #                 line_range = match.context[0]['offset']
+        #                 start_line = text.count('\n', 0, int(line_range)) + 1
+        #                 end_line = text.count('\n', int(line_range), int(line_range) + match.context[0]['length']) + 1  
+        #                 print(f"Grammar error from line {start_line} to {end_line}: {match.message}")
+        #         else:
+        #             print(f"No grammar errors found in {filename}")
+        # #     # # Exit with a non-zero code to indicate failure
+        # #     # exit(1)
+        # print(f"No grammar errors found in {filename}")
+        # # else:
+        # #     # No grammar errors found, print a success message
+        # #     print("No grammar errors found.")
+ 
+        #     # exit(0)
+        # EOF
