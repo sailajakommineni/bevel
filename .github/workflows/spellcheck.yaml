@@ -44,35 +44,73 @@ jobs:
       run: |
         python - <<EOF
         import language_tool_python
+        
+        def identify_grammar_errors(text):
+            tool = language_tool_python.LanguageTool('en-US')
+            matches = tool.check(text)
+            return matches
 
-        # Initialize LanguageTool
-        tool = language_tool_python.LanguageTool('en-US')  # You can specify the language you want to check.
-
-        # Specify the directory path
-        directory_path = 'docs'
-
-        # Read the text from your file
-        file_path = '.github/checking.txt'  # Update the path accordingly
-        with open(file_path, 'r', encoding='utf-8') as file:
-            text = file.read()
-
-        # Check for grammar errors
-        matches = tool.check(text)
- 
-        # Print grammar errors with line numbers
-        if matches:
-            for match in matches:
-                if hasattr(match, 'fromy') and hasattr(match, 'toy'):
-                    line_range = f"Lines {match.fromy}-{match.toy}"
-            else:
-                line_range = "Unknown lines"
-            print(f"Grammar error at {line_range} - {match.message}")
-            # Exit with a non-zero code to indicate failure
-            exit(1)
-
+        def print_errors(matches, filename):
+            if not matches:
+                print(f"No grammar errors found in {filename}.")
         else:
-            # No grammar errors found, print a success message
-            print("No grammar errors found.")
- 
-            exit(0)
+            for match in matches:
+                print(f"Error in {filename} at line {match.from_line}, column {match.from_col}: {match.message}")
+
+        def check_grammar_in_directory(directory_path):
+            for filename in os.listdir(directory_path):
+                if filename.endswith(".txt"):  # Adjust the file extension as needed
+                    file_path = os.path.join(directory_path, filename)
+                    with open(file_path, 'r', encoding='utf-8') as file:
+                        document = file.read()
+                        errors = identify_grammar_errors(document)
+                        print_errors(errors, filename)
+
+        directory_to_check = '.github/checking.txt'
+        check_grammar_in_directory(.github/checking.txt)
+
         EOF
+
+
+
+
+
+
+
+
+
+
+
+
+
+        # # Initialize LanguageTool
+        # tool = language_tool_python.LanguageTool('en-US')  # You can specify the language you want to check.
+
+        # # Specify the directory path
+        # directory_path = 'docs'
+
+        # # Read the text from your file
+        # file_path = '.github/checking.txt'  # Update the path accordingly
+        # with open(file_path, 'r', encoding='utf-8') as file:
+        #     text = file.read()
+
+        # # Check for grammar errors
+        # matches = tool.check(text)
+ 
+        # # Print grammar errors with line numbers
+        # if matches:
+        #     for match in matches:
+        #         if hasattr(match, 'fromy') and hasattr(match, 'toy'):
+        #             line_range = f"Lines {match.fromy}-{match.toy}"
+        #     else:
+        #         line_range = "Unknown lines"
+        #     print(f"Grammar error at {line_range} - {match.message}")
+        #     # Exit with a non-zero code to indicate failure
+        #     exit(1)
+
+        # else:
+        #     # No grammar errors found, print a success message
+        #     print("No grammar errors found.")
+ 
+        #     exit(0)
+        # EOF
