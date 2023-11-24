@@ -65,6 +65,7 @@ jobs:
 
         # Remove code blocks from the text
         text_without_code = re.sub(code_block_pattern, '', text)
+        clean_text = re.sub(r'[^\w\s\-\:\.\(\)]', '', text)
 
         # Check for grammar errors in the remaining text (without code blocks)
         matches = tool.check(text_without_code)
