@@ -49,10 +49,10 @@ jobs:
         tool = language_tool_python.LanguageTool('en-US')  # You can specify the language you want to check.
 
         # Manually disable rules
-          tool.disable_rule('WHITESPACE_RULE')
-          tool.disable_rule('EN_UNPAIRED_BRACKETS')
-          tool.disable_rule('COMMA_PARENTHESIS_WHITESPACE')
-          tool.disable_rule('UPPERCASE_SENTENCE_START')
+        tool.disable_rule('WHITESPACE_RULE')
+        tool.disable_rule('EN_UNPAIRED_BRACKETS')
+        tool.disable_rule('COMMA_PARENTHESIS_WHITESPACE')
+        tool.disable_rule('UPPERCASE_SENTENCE_START')
  
         # Specify the directory path
         directory_path = 'docs'
