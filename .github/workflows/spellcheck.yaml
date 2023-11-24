@@ -48,8 +48,8 @@ jobs:
         # Initialize LanguageTool
         tool = language_tool_python.LanguageTool('en-US')  # You can specify the language you want to check.
 
-        # Manually disable rule
-        disabled_rule = [
+        # Manually disable rules
+        disabled_rules = [
             'WHITESPACE_RULE',
             'EN_UNPAIRED_BRACKETS',
             'COMMA_PARENTHESIS_WHITESPACE',
