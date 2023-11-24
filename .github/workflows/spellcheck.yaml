@@ -63,7 +63,7 @@ jobs:
         if matches:
             for match in matches:
                 if hasattr(match, 'fromy') and hasattr(match, 'toy'):
-                line_range = f"Lines {match.fromy}-{match.toy}"
+                    line_range = f"Lines {match.fromy}-{match.toy}"
             else:
                 line_range = "Unknown lines"
             print(f"Grammar error at {line_range} - {match.message}")
