@@ -57,7 +57,7 @@ jobs:
         ]
 
         for rule in disabled_rules:
-            tool.disable_rule(rule)
+            tool._disabled_rules.append(rule)
  
         # Specify the directory path
         directory_path = 'docs'
