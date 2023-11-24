@@ -46,7 +46,7 @@ jobs:
         import language_tool_python
 
         # Initialize LanguageTool
-        tool = language_tool_python.LanguageTool('en-US', config_file='.github/languagetool.cfg'))  # You can specify the language you want to check.
+        tool = language_tool_python.LanguageTool('en-US', config_file='.github/languagetool.cfg')  # You can specify the language you want to check.
  
         # Specify the directory path
         directory_path = 'docs'
