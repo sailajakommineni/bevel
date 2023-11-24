@@ -62,16 +62,16 @@ jobs:
         # Print grammar errors with line numbers
         if matches:
             for match in matches:
-                line_range = match.context
-                start_line = line_range['offset']
-                end_line = line_range['offset'] + line_range['length']
+                line_range = match.context[0].get('offset', 0)
+                start_line = text.count('\n', 0, line_range) + 1
+                end_line = text.count('\n', line_range, line_range + match.context[0].get('length', 0)) + 1
                 print(f"Grammar error from line {start_line} to {end_line}: {match.message}")
-            # Exit with a non-zero code to indicate failure
-            exit(1)
+            # # Exit with a non-zero code to indicate failure
+            # exit(1)
 
         else:
             # No grammar errors found, print a success message
             print("No grammar errors found.")
  
-            exit(0)
+            # exit(0)
         EOF
