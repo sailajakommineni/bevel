@@ -44,21 +44,11 @@ jobs:
       run: |
         python - <<EOF
         import language_tool_python
+        import re
 
         # Initialize LanguageTool
         tool = language_tool_python.LanguageTool('en-US')  # You can specify the language you want to check.
 
-        # Manually disable rules
-        disabled_rules = [
-            'WHITESPACE_RULE',
-            'EN_UNPAIRED_BRACKETS',
-            'COMMA_PARENTHESIS_WHITESPACE',
-            'UPPERCASE_SENTENCE_START',
-        ]
-
-        for rule in disabled_rules:
-            tool._disabled_rules.append(rule)
- 
         # Specify the directory path
         directory_path = 'docs'
 
@@ -66,9 +56,21 @@ jobs:
         file_path = '.github/checking.txt'  # Update the path accordingly
         with open(file_path, 'r', encoding='utf-8') as file:
             text = file.read()
+
+        # Define the pattern to match code blocks
+        code_block_pattern = r'
+
+        # Find all code blocks in the text
+        code_blocks = re.findall(code_block_pattern, text)
+
+        # Remove code blocks from the text
+        text_without_code = re.sub(code_block_pattern, '', text)
+
+        # Check for grammar errors in the remaining text (without code blocks)
+        matches = tool.check(text_without_code)
  
         # Check for grammar errors
-        matches = tool.check(text)
+        #matches = tool.check(text)
  
         # Print grammar errors with line numbers
         if matches:
@@ -76,6 +78,11 @@ jobs:
                 print(f"Grammar error at line {match.offset} - {match.message}")
             # Exit with a non-zero code to indicate failure
             exit(1)
+
+        # Print code blocks to skip them from grammar checking
+        for code_block in code_blocks:
+            print(f"Skipping code block: {code_block}")
+
         else:
             # No grammar errors found, print a success message
             print("No grammar errors found.")
