@@ -62,9 +62,9 @@ jobs:
         # Print grammar errors with line numbers
         if matches:
             for match in matches:
-                line_range = match.locqualityissuetype
-                start_line = line_range[0]
-                end_line = line_range[1]
+                line_range = match.context
+                start_line = line_range['offset']
+                end_line = line_range['offset'] + line_range['length']
                 print(f"Grammar error from line {start_line} to {end_line}: {match.message}")
             # Exit with a non-zero code to indicate failure
             exit(1)
