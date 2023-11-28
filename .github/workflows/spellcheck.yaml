@@ -55,24 +55,60 @@ jobs:
 
         # Check for grammar errors
         matches = tool.check(text)
-
-        # Print grammar errors with line numbers
+        
+        # Print relevant grammar errors with line numbers
+        relevant_errors = []
         if matches:
             for match in matches:
-                line_number = text.count('\n', 0, match.offset) + 1
-                print(f"Grammar error at line {line_number}: {match.message}")
+                excluded_rules = ['COMMA_PARENTHESIS_WHITESPACE', 'UPPERCASE_SENTENCE_START', 'WHITESPACE_RULE', 'EN_UNPAIRED_BRACKETS']
+                if match.ruleId not in excluded_rules:
+                   line_number = text.count('\n', 0, match.offset) + 1
+                   relevant_errors.append((line_number, match.message))
 
-            # Correct the grammar error
-            corrected_text = language_tool_python.correct(text, matches)
-
-            # Write the corrected text back to the file
-            with open(file_path, 'w', encoding='utf-8') as file:
-                file.write(corrected_text)
-
-            print("Grammar errors corrected successfully.")
+            if relevant_errors:
+                for error in relevant_errors:
+                    line_number, message = error
+                    print(f"Grammar error at line {line_number}: {message}")
+            else:
+                print("No relevant grammar errors found.")
         else:
             print("No grammar errors found.")
         EOF
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        # # Print grammar errors with line numbers
+        # if matches:
+        #     for match in matches:
+        #         line_number = text.count('\n', 0, match.offset) + 1
+        #         print(f"Grammar error at line {line_number}: {match.message}")
+
+        #     # Correct the grammar error
+        #     corrected_text = language_tool_python.correct(text, matches)
+
+        #     # Write the corrected text back to the file
+        #     with open(file_path, 'w', encoding='utf-8') as file:
+        #         file.write(corrected_text)
+
+        #     print("Grammar errors corrected successfully.")
+        # else:
+        #     print("No grammar errors found.")
+        # EOF
 
 
 
