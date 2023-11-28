@@ -59,19 +59,54 @@ jobs:
         # Print grammar errors with line numbers
         if matches:
             for match in matches:
-                print("Match context:", match.context)  # Add this line for debugging
-                if match.context and 'offset' in match.context[0]:
-                   line_range = match.context[0]['offset']
-                   start_line = text.count('\n', 0, int(line_range)) + 1
-                   end_line = text.count('\n', int(line_range), int(line_range) + match.context[0]['length']) + 1
-                   print(f"Grammar error from line {start_line} to {end_line}: {match.message}")
-                else:
-                    print("Unexpected match context structure:", match.context)  # Add this line for debugging
-                    # Handle the case when the match context doesn't have the expected structure
+                line_number = text.count('\n', 0, match.offset) + 1
+                print(f"Grammar error at line {line_number}: {match.message}")
+
+                # Correct the grammar error
+                corrected_text = language_tool_python.correct(text, matches)
+
+               # Write the corrected text back to the file
+               with open(file_path, 'w', encoding='utf-8') as file:
+                   file.write(corrected_text)
+
+            print("Grammar errors corrected successfully.")
         else:
-            # No grammar errors found, print a success message
             print("No grammar errors found.")
-        EOF
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        # # Print grammar errors with line numbers
+        # if matches:
+        #     for match in matches:
+        #         print("Match context:", match.context)  # Add this line for debugging
+        #         if match.context and 'offset' in match.context[0]:
+        #            line_range = match.context[0]['offset']
+        #            start_line = text.count('\n', 0, int(line_range)) + 1
+        #            end_line = text.count('\n', int(line_range), int(line_range) + match.context[0]['length']) + 1
+        #            print(f"Grammar error from line {start_line} to {end_line}: {match.message}")
+        #         else:
+        #             print("Unexpected match context structure:", match.context)  # Add this line for debugging
+        #             # Handle the case when the match context doesn't have the expected structure
+        # else:
+        #     # No grammar errors found, print a success message
+        #     print("No grammar errors found.")
+        # EOF
         
         
         
