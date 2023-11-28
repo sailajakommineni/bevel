@@ -46,4 +46,3 @@ www
 rst
 toctree
 reStructuredText
-.rst
