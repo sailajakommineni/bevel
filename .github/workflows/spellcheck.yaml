@@ -53,7 +53,6 @@ jobs:
         with open(file_path, 'r', encoding='utf-8') as file:
             text = file.read()
 
-
         # Check for grammar errors
         matches = tool.check(text)
 
@@ -63,12 +62,12 @@ jobs:
                 line_number = text.count('\n', 0, match.offset) + 1
                 print(f"Grammar error at line {line_number}: {match.message}")
 
-                # Correct the grammar error
-                corrected_text = language_tool_python.correct(text, matches)
+            # Correct the grammar error
+            corrected_text = language_tool_python.correct(text, matches)
 
-               # Write the corrected text back to the file
-               with open(file_path, 'w', encoding='utf-8') as file:
-                   file.write(corrected_text)
+            # Write the corrected text back to the file
+            with open(file_path, 'w', encoding='utf-8') as file:
+                file.write(corrected_text)
 
             print("Grammar errors corrected successfully.")
         else:
