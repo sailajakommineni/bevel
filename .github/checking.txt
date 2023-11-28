@@ -31,9 +31,9 @@ pip install -r pip-requirements.txt
 ```
 3. Build the documents.
 ```
-make html
+make HTML
 or
-make.bat html
+make.bat HTML
 ```
 4. Access the documents from the **build/html** folder.
 
