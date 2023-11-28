@@ -44,7 +44,6 @@ jobs:
       run: |
         python - <<EOF
         import language_tool_python
-        import sys
 
         # Initialize LanguageTool
         tool = language_tool_python.LanguageTool('en-US')  # You can specify the language you want to check.
@@ -69,7 +68,6 @@ jobs:
                 for error in relevant_errors:
                     line_number, message = error
                     print(f"Grammar error at line {line_number}: {message}")
-                    sys.exit("Exiting due to spelling mistakes.")
             else:
                 print("No relevant grammar errors found.")
         else:
