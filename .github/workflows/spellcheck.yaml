@@ -53,6 +53,7 @@ jobs:
         with open(file_path, 'r', encoding='utf-8') as file:
             text = file.read()
 
+
         # Check for grammar errors
         matches = tool.check(text)
 
