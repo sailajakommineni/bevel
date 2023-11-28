@@ -11,6 +11,7 @@ Tools used: [Sphinx] (http://www.sphinx-doc.org/).
 ./
 ├── docs
 │   ├── source
+|   |   |── index
 │   │   ├── conf.py
 │   │   ├── *.md
 │   ├── Makefile
