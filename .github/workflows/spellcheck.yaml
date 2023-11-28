@@ -67,11 +67,11 @@ jobs:
             if relevant_errors:
                 for error in relevant_errors:
                     line_number, message = error
-                    print(f"Grammar error at line {match.offset} - {match.message}")
-            else:
-                print("No relevant grammar errors found.")
+                    print(f"Grammar error at line {line_number}: {message}")
+                exit(1)
         else:
             print("No grammar errors found.")
+            exit(0)
         EOF
 
 
