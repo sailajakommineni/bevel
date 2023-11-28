@@ -72,7 +72,7 @@ jobs:
             print("Grammar errors corrected successfully.")
         else:
             print("No grammar errors found.")
-
+        EOF
 
 
 
