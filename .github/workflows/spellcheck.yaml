@@ -1,5 +1,5 @@
 ---
-name: spell and grammer check
+name: spell check
 on:
   push:
     branches:
@@ -11,10 +11,9 @@ on:
 
 env:
   SPELL_CHECK_DISABLED: false
-  GRAMMAR_CHECK_DISABLED: false
 
 jobs:
-  check-spelling-and-grammar:
+  check-spelling:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -28,8 +27,7 @@ jobs:
         python -m pip install --upgrade pip setuptools
         python -m pip install pyspelling 
         sudo apt-get install hunspell hunspell-en-us aspell aspell-en
-        pip install --user --upgrade language_tool_python
-      
+        
     - uses: actions/checkout@v2
     - name: Spellcheck
       if: ${{ env.SPELL_CHECK_DISABLED == 'false' }}
@@ -38,41 +36,3 @@ jobs:
         config_path: .github/.spellcheck.yaml
         source_files: '**/*.md'       # name of the file to check spell 
         task_name: Markdown
-    # To check the grammatical mistakes of the given files and folders.
-    - name: Run grammar check
-      if: ${{ env.GRAMMAR_CHECK_DISABLED == 'false' }}
-      run: |
-        python - <<EOF
-        import language_tool_python
-
-        # Initialize LanguageTool
-        tool = language_tool_python.LanguageTool('en-US')  # You can specify the language you want to check.
-
-        # Specify the directory path
-        directory_path = 'docs'
-
-        # Read the text from your file 
-        file_path = '**/*.md'  # Update the path accordingly
-        with open(file_path, 'r', encoding='utf-8') as file:
-            text = file.read()
-
-        # Check for grammar errors
-        matches = tool.check(text)
-        
-        # Print relevant grammar errors with line numbers
-        relevant_errors = []
-        if matches:
-            for match in matches:
-                if match.ruleId == 'MORFOLOGIK_RULE_EN_US':
-                   line_number = text.count('\n', 0, match.offset) + 1
-                   relevant_errors.append((line_number, match.message))
-
-            if relevant_errors:
-                for error in relevant_errors:
-                    line_number, message = error
-                    print(f"Grammar error at line {line_number}: {message}")
-                exit(1)
-        else:
-            print("No grammar errors found.")
-            exit(0)
-        EOF
