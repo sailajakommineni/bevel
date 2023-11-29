@@ -6,7 +6,7 @@ on:
     - "**"
   pull_request:
     paths:
-      - 'docs'
+      - 'docs/**/*.md'
     types: [opened, edited, updated]          
 
 env:
@@ -34,5 +34,5 @@ jobs:
       uses: rojopolis/spellcheck-github-actions@0.34.0
       with:
         config_path: .github/.spellcheck.yaml
-        source_files: 'docs/source/compatibilitytable.md'       # name of the file to check spell 
+        source_files: 'docs/source/contributing.md'       # name of the file to check spell 
         task_name: Markdown
