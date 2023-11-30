@@ -98,3 +98,8 @@ HAProxy
 POC
 dev
 url
+cryptographically
+BaaS
+OpenShift
+BYOI
+architected
