@@ -76,3 +76,5 @@ trainings
 HashiCorp
 upto
 HelmRelease 
+hackathon
+Hashicorp

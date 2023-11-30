@@ -104,8 +104,8 @@ It is assumed that newer versions of these tools would be backward compatible, w
 ### Why does the Flux K8s pod get a permission denied for this Hyperledger Bevel GitHub repository?
 This usually means that the private key that you have used in your network.yaml for gitops does not have access to the GitHub repository. The corresponding public key must be added to your GitHub Account (or other git repository that you are using). Details can be found [here](https://github.com/hyperledger/bevel/tree/main/platforms/shared/configuration/).
 
-### Why does the flux-helm-operator keep on reporting "Failed to list *v1beta1.HelmRelease: the server could not find the requested resource (get helm releases.flux.weave.works)"?
-The HelmRelease CustomResourceDefinition (CRD) was missing from the cluster, according to https://github.com/fluxcd/flux, the following command has to be used to deploy it:
+### Why does the flux-helm-operator keep on reporting "Failed to list *v1beta1.Helm Release: the server could not find the requested resource (get helm releases.flux.weave.works)"?
+The Helm Release CustomResourceDefinition (CRD) was missing from the cluster, according to https://github.com/fluxcd/flux, the following command has to be used to deploy it:
 ```
 kubectl apply -f https://raw.githubusercontent.com/fluxcd/flux/helm-0.10.1/deploy-helm/flux-helm-release-crd.yaml
 ```
