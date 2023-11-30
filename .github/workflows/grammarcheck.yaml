@@ -44,7 +44,7 @@ jobs:
         tool = language_tool_python.LanguageTool('en-US')  # You can specify the language you want to check.
 
         # Specify the directory path
-        directory_path = 'docs'
+        directory_path = 'docs/*.md'
 
         # Read the text from your file 
         file_path = 'docs/*.md'  # Update the path accordingly
