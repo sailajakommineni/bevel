@@ -2,7 +2,6 @@
 matrix:
 - name: Markdown
   expect_match: false
-  case_sensitive: false
   apsell:
     mode: en
   dictionary:
