@@ -89,3 +89,12 @@ jq
 openshift
 Homebrew
 validator
+blockchain
+GitOps
+VM
+backend
+DNS
+HAProxy
+POC
+dev
+url
