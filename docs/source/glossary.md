@@ -78,10 +78,10 @@ For more details, refer: [Kubernetes](https://kubernetes.io/)
 A node is a worker machine in Kubernetes, previously known as a minion. A node may be a VM or physical machine, depending on the cluster. Each node contains the services necessary to run pods and is managed by the main components. The services on a node include the container runtime, kubelet and kube-proxy. 
 For more details, refer: [Kubernetes Node](https://kubernetes.io/docs/concepts/architecture/nodes/)
 ### Kubernetes Storage Class
-A StorageClass in Kubernetes provides a way for administrators to describe the “classes” of storage they offer. Different classes might map to quality-of-service levels, or to backup policies, or to arbitrary policies determined by the cluster administrators.
+A storage class in Kubernetes provides a way for administrators to describe the “classes” of storage they offer. Different classes might map to quality-of-service levels, or to backup policies, or to arbitrary policies determined by the cluster administrators.
 For more details, refer: [Storage class](https://kubernetes.io/docs/concepts/storage/storage-classes/)
 ### Kubernetes PersistentVolume (PV)
-A PersistentVolume (PV) is a piece of storage in the cluster that has been provisioned by an administrator or dynamically provisioned using Storage Classes. It is a resource in the cluster just like a node is a cluster resource. PVs are volume plugins like Volumes, but have a lifecycle independent of any individual pod that uses the PV.
+A PersistentVolume (PV) is a piece of storage in the cluster that has been provisioned by an administrator or dynamically provisioned using Storage Classes. It is a resource in the cluster just like a node is a cluster resource. PV's are volume plugins like Volumes, but have a lifecycle independent of any individual pod that uses the PV.
 For more details, refer: [PVC](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
 ### Kubernetes Persistent Volume Claim (PVC)
 A PVC, binds a persistent volume to a pod that requested it. When a pod wants access to a persistent disk, it will request access to the claim which will specify the size , access mode and/or storage classes that it will need from a Persistent Volume.
@@ -154,7 +154,7 @@ For more details, refer: [MSP](https://hyperledger-fabric.readthedocs.io/en/rele
 Orderer peer is considered as the central communication channel for the Hyperledger Fabric network. Orderer peer/node is responsible for consistent Ledger state across the network. Orderer peer creates the block and delivers that to all the peers
 For more details, refer: [Orderer](https://hyperledger-fabric.readthedocs.io/en/release-1.4/orderer/ordering_service.html)
 ### Peer
-Hyperledger Fabric is a permissioned blockchain network that gets set by the organizations that intend to set up a consortium. The organizations that take part in building the Hyperledger Fabric network are called the “members”. Each member organization in the blockchain network is responsible to set up their peers for participating in the network. All of these peers need are configured with appropriate cryptographic materials like Certificate Authority and other information.
+Hyperledger Fabric is a permissioned blockchain network that gets set up by the organizations that intend to set up a consortium. The organizations that take part in building the Hyperledger Fabric network are called the "members." Each member organization in the blockchain network is responsible for setting up their peers to participate in the network. All of these peers need to be configured with appropriate cryptographic materials, like certificates of authority and other information.
 For more details, refer: [Peer](https://hyperledger-fabric.readthedocs.io/en/release-1.4/peers/peers.html)
 ### Zkkafka
 Kafka is primarily a distributed, horizontally-scalable, fault-tolerant, commit log. A commit log is basically a data structure that only appends. No modification or deletion is possible, which leads to no read/write locks, and the worst case complexity O(1). There can be multiple Kafka nodes in the blockchain network, with their corresponding Zookeeper ensemble.
