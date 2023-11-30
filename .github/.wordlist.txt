@@ -72,3 +72,7 @@ CustomResourceDefinition
 fluxcd
 github
 TBD
+trainings
+Hashicorp
+upto
+HelmRelease 

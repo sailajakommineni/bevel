@@ -27,13 +27,13 @@ A **common scenario** that a developer would like to use this repo might be that
 
 Hyperledger Bevel provisions its **unique values** to the developer that s/he now has an opportunity to learn how different sets of cutting-edge technologies leveraged in this repository are combined in use such as reusable architecture patterns, reusable assets including APIs or microservices design. The architecture design in this repository has been fully tested and demonstrated as a high-quality one known for a fact that it has been being improved continuously through the technical experts' rich experiences. The developer could try to use this repository to set up a small-size DLT/Blockchain network to see how it works and gradually pick up new skills across Blockchain, DevOps, etc.
 
-Furthermore, the developer could even show the maturity of skills to contribute back to this project. Contributions can include but not limited to (1) suggest or add new functionalities (2) fix various bugs and (3) organize hackthon or developer events for Hyperledger Bevel in the future.
+Furthermore, the developer could even show the maturity of skills to contribute back to this project. Contributions can include but not limited to (1) suggest or add new functionalities (2) fix various bugs and (3) organize hackathon or developer events for Hyperledger Bevel in the future.
 
 ### What is Hyperledger Bevel and how could it help me?
 In simple words, Hyperledger Bevel works as an accelerator to help organizations set up a production-scale DLT network (currently supports Corda, Fabric, Indy, Besu and Quorum) with a single network.yaml file used for [Fabric](./operations/fabric_networkyaml.md) or [Corda](./operations/corda_networkyaml.md) or [Quorum](./operations/quorum_networkyaml.md) to be configured in this project. It can work in managed Kubernetes Clusters which has been fully tested in AWS Elastic Kubernetes Services (EKS), and should also work in a non-managed Kubernetes Cluster in theory. For detailed information, please see the [Welcome page](index).
 
 ### How do I find more about Hyperledger Bevel?
-Normally, when a user sees information in this section, it means that s/he has already known the existence of Hyperledger Bevel project, at least this readthedocs website. Basically, this website provisions a high-level background information of how to use Hyperledger Bevel GitHub repository. For detailed step-by-step instructions, one should go to Hyperledger Bevel's GitHub repository and find the readme files for a further reading. Upon finishing reading the tutorials in this website, one should be able to analyse whether Hyperledger Bevel would be the right solution in your case and reach a decision to use it or not.
+Normally, when a user sees information in this section, it means that s/he has already known the existence of Hyperledger Bevel project, at least this readthedocs website. Basically, this website provisions a high-level background information of how to use Hyperledger Bevel GitHub repository. For detailed step-by-step instructions, one should go to Hyperledger Bevel's GitHub repository and find the readme files for a further reading. Upon finishing reading the tutorials in this website, one should be able to analyze whether Hyperledger Bevel would be the right solution in your case and reach a decision to use it or not.
 
 ### How much would Hyperledger Bevel cost? How much would it cost to run Hyperledger Bevel on a cloud platform?
 As an open source repository, there will be no cost at all to use Hyperledger Bevel. However, by running Hyperledger Bevel repository on a cloud platform, there might be cost by using a cloud platform and it will depend on which cloud services you are going to use.
@@ -44,11 +44,11 @@ One could raise questions in the Github repository and Hyperledger Bevel maintai
 ### Is there any training provided? If so, what kind of training will be included?
 Unfortunately, there are no existing training for using Hyperledger Bevel yet, because we are not sure about the potential size of the community and what types of training people would look forward to. However, we do aware that trainings could happen, if there would be a large number of same or similar questions or issues raised by new users, and if we would have a large amount of requests like this in the future.  
 
-### Can I add/remove one or more organisations as DLT nodes in a running DLT/Blockchain network by using Hyperledger Bevel?
+### Can I add/remove one or more organizations as DLT nodes in a running DLT/Blockchain network by using Hyperledger Bevel?
 Yes, you can add additional nodes to a running DLT/Blockchain network using Hyperledger Bevel . Unfortunately, Bevel does not support removing nodes in a running DLT/Blockchain network, but this significant feature is in our future roadmap, and we will add this feature in a future release.
 
 ### Does Hyperledger Bevel support multiple versions of Fabric and Corda? What are the minimum versions for Fabric and Corda supported in Hyperledger Bevel?
-Hyperledger Bevel currently only supports version 1.4.8 & 2.2.2 for Fabric and version 4.1 and 4.4 for Corda as minimum versions, and will only support future higher versions for Fabric and Corda. Corda Enterprise 4.7 is available as per latest release. Please check the [latest releases](https://github.com/hyperledger/bevel/releases) for version upgrades and deprecations.
+Hyperledger Bevel currently only supports version 1.4.8 & 2.2.2 for Fabric and version 4.1 and 4.4 for Corda as minimum versions, and will only support future higher versions for Fabric and Corda. Corda Enterprise 4.7 is available as per latest release. Please check the [latest releases](https://github.com/hyperledger/bevel/releases) for version upgrades and deprecation.
 
 ## 2.FAQs for Operators Guide
 
@@ -56,7 +56,7 @@ Hyperledger Bevel currently only supports version 1.4.8 & 2.2.2 for Fabric and v
 To run Hyperledger Bevel repository, you need to have a managed/non-managed Kubernetes clusters ready as well as an unsealed Hashicorp Vault service available. 
 
 ### What would be the recommended/required cloud service?
-We recommand to use Cloud Services such as Aamzon Web Services (AWS), Microsoft Azure, Google Cloud Platform (GCP) and DigitalOcean (DO) as their managed Kubernetes clusters services are being or will be tested for this repository. We have fully tested this repository in AWS, and testing it on Azure, GCP, DO is in our future roadmap.
+We recommend to use Cloud Services such as Amazon Web Services (AWS), Microsoft Azure, Google Cloud Platform (GCP) and DigitalOcean (DO) as their managed Kubernetes clusters services are being or will be tested for this repository. We have fully tested this repository in AWS, and testing it on Azure, GCP, DO is in our future roadmap.
 
 ### Do I have to use AWS? 
 No, AWS is not mandatory, but is recommended because it is the first cloud platform we have tested on. Theoretically, Hyperledger Bevel repository should work in any cloud platforms as long as a Kubernetes Cluster service is provisioned, but there is no 100% guarantee it will work, since there might be unseen/unknown features in these managed Kubernetes clusters environments we are not aware of.
@@ -74,13 +74,13 @@ Hyperledger Bevel repository relies a lot on using [Ansible](./gettingstarted.ht
 The network.yaml file is the main file to be configured to set up a DLT/Blockchain network. [This page](./operationalguide.md) gives the links for a user to pick up knowledge of how to configure this file for Fabric and Corda first (see the two "Configuration file specification" sections for each DLT/Blockchain platform). Having this knowledge will then enable a user to understand how to use this file in the "Setting up DLT network" section.
 
 ### How can I test whether my DLT/Blockchain network are configured and deployed correctly?
-Please see this [page](./operations/setting_dlt.md) for detials.
+Please see this [page](./operations/setting_dlt.md) for details.
 
 ### How/Where can I request for new features, bugs and get feedback?
 One could request a new feature on the Github repository for now. In the future, people might use Jira or Slack to do the same as well.
 
 ### Are CI/CD pipeline tools a mandatory to use Hyperledger Bevel?
-No, CI/CD pipeline tools like Jenkins are not mandatory, but it could help a user automate the set-up or testing of a new DLT/Blockchain network in different environments, once a user has a good understanding of using it. We have the main Jenkinsfile in `automation` folder which can be taken as a template.
+No, CI/CD pipeline tools like Jenkins are not mandatory, but it could help a user automate the set-up or testing of a new DLT/Blockchain network in different environments, once a user has a good understanding of using it. We have the main Jenkins file in `automation` folder which can be taken as a template.
 
 ### Is it required to run Ansible in a particular machine like AWS EC2?
 No, a user should be able to run the Ansible command on any machine as long as Ansible command CLI is installed.
@@ -89,7 +89,7 @@ No, a user should be able to run the Ansible command on any machine as long as A
 Yes, you can find an example ansible_hosts file [here](https://github.com/hyperledger/bevel/tree/main/platforms/shared/inventory/ansible_provisioners). The configuration in this file means that all Ansible commands will be run in the same machine that works as both an Ansible client and server machine.
 
 ### Can I specify the tools versions such as kubectl, helm in this project?
-Yes, you can specify tools versions like kubectl, helm, HashiCorp Vault, AWS-authenticator in the playbook [setup-environment.yaml](https://github.com/hyperledger/bevel/tree/main/platforms/shared/configuration/setup-environment.yaml).
+Yes, you can specify tools versions like kubectl, helm, HashiCorp Vault, AWS-Authenticator in the playbook [setup-environment.yaml](https://github.com/hyperledger/bevel/tree/main/platforms/shared/configuration/setup-environment.yaml).
 
 ### How would system react if we plan to update tools versions (e.g. kubectl, helm)?
 Honestly speaking, we don't know. The latest version Hyperledger Bevel has been tested on specific client versions of these tools, see below:
@@ -104,7 +104,7 @@ It is assumed that newer versions of these tools would be backward compatible, w
 ### Why does the Flux K8s pod get a permission denied for this Hyperledger Bevel GitHub repository?
 This usually means that the private key that you have used in your network.yaml for gitops does not have access to the GitHub repository. The corresponding public key must be added to your GitHub Account (or other git repository that you are using). Details can be found [here](https://github.com/hyperledger/bevel/tree/main/platforms/shared/configuration/).
 
-### Why does the flux-helm-operator keep on reporting "Failed to list *v1beta1.HelmRelease: the server could not find the requested resource (get helmreleases.flux.weave.works)"?
+### Why does the flux-helm-operator keep on reporting "Failed to list *v1beta1.HelmRelease: the server could not find the requested resource (get helm releases.flux.weave.works)"?
 The HelmRelease CustomResourceDefinition (CRD) was missing from the cluster, according to https://github.com/fluxcd/flux, the following command has to be used to deploy it:
 ```
 kubectl apply -f https://raw.githubusercontent.com/fluxcd/flux/helm-0.10.1/deploy-helm/flux-helm-release-crd.yaml
