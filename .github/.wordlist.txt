@@ -108,7 +108,6 @@ scalable
 MSP
 SDK
 MSPs
-kubeconfig
 TLS
 PV
 RPC
@@ -127,7 +126,6 @@ auditable
 config
 IAM
 IOT
-IoT
 kubelet
 PersistentVolume
 lifecycle
@@ -139,7 +137,6 @@ Brandl
 Georg
 LDAP
 Chaincode
-chaincode
 subnet
 Orderer
 permissioned
