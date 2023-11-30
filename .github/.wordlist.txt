@@ -129,7 +129,6 @@ IAM
 IOT
 IoT
 kubelet
-Kubeconfig
 PersistentVolume
 lifecycle
 cryptographic
