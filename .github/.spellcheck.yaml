@@ -22,3 +22,6 @@ matrix:
       - 'code'
       - 'pre'
       - 'blockquote'
+  sources:
+  - '**/*.md'
+  default_encoding: utf-8
