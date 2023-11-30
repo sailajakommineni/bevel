@@ -73,6 +73,6 @@ fluxcd
 github
 TBD
 trainings
-Hashicorp
+HashiCorp
 upto
 HelmRelease 
