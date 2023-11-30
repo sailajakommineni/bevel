@@ -120,3 +120,5 @@ DIDs
 NYM
 rpc
 MTA
+memcached
+auditable
