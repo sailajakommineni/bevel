@@ -178,7 +178,7 @@ For more details, refer: [CorDapp](https://docs.corda.net/cordapp-overview.html)
 A Corda node is a JVM run-time environment with a unique identity on the network that hosts Corda services and CorDapps.For more details, refer [Corda Node](https://docs.corda.net/key-concepts-node.html).
 
 ### Corda Web Server
-A simple web server is provided that embeds the Jetty servlet container. The Corda web server is not meant to be used for real, production-quality web apps. Instead it shows one example way of using Corda RPC in web apps to provide a REST API on top of the Corda native RPC mechanism.
+A simple web server is provided that embeds the Jetty servlet container. The Corda web server is not meant to be used for real, production-quality web apps. Instead, it shows one example of using Corda RPC in web apps to provide a REST API on top of the Corda native RPC mechanism.
 ### Doorman
 The Doorman CA is a Certificate Authority R3 Corda. It is used for day-to-day key signing to reduce the risk of the root network CA's private key being compromised. This is equivalent to an intermediate certificate in the web PKI. For more details, refer [Doorman](https://docs.corda.net/releases/M16-RC04/permissioning.html).
 ### NetworkMap
