@@ -79,3 +79,13 @@ HelmRelease
 hackathon
 Hashicorp
 Authenticator
+JSON
+ajv
+cli
+npm
+NPM
+MacOS
+jq
+openshift
+Homebrew
+validator
