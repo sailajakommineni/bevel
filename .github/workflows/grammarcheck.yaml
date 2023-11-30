@@ -12,7 +12,7 @@ on:
     - "**"
   pull_request:
     paths:
-      - 'docs/*.md'
+      - 'docs'
     types: [opened, edited, updated]          
 
 env:
@@ -44,10 +44,10 @@ jobs:
         tool = language_tool_python.LanguageTool('en-US')  # You can specify the language you want to check.
 
         # Specify the directory path
-        directory_path = 'docs/*.md'
+        directory_path = 'docs'
 
         # Read the text from your file 
-        file_path = 'docs/*.md'  # Update the path accordingly
+        file_path = 'docs/README.md'  # Update the path accordingly
         with open(file_path, 'r', encoding='utf-8') as file:
             text = file.read()
 
