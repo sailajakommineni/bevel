@@ -28,7 +28,7 @@ jobs:
         python -m pip install pyspelling 
         sudo apt-get install hunspell hunspell-en-us aspell aspell-en
         
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@master
     - name: Spellcheck
       if: ${{ env.SPELL_CHECK_DISABLED == 'false' }}
       uses: rojopolis/spellcheck-github-actions@0.34.0
