@@ -2,6 +2,7 @@
 matrix:
 - name: Markdown
   expect_match: false
+  case_sensitive: false
   apsell:
     mode: en
   dictionary:
@@ -13,7 +14,6 @@ matrix:
   - pyspelling.filters.markdown:
       markdown_extensions:
       - markdown.extensions.extra:
-      - case_sensitive: false
   - pyspelling.filters.html:
       comments: false
       attributes:
