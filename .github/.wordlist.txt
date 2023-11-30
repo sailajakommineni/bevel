@@ -165,3 +165,7 @@ pluggable
 Hostnames
 crypto
 parallelization
+kube
+PV's
+CorDapp
+CA’s
