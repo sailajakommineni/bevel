@@ -6,7 +6,7 @@ on:
       grammar_check_disabled:
         description: 'Disable grammar check'
         default: 'false'
-        required: false
+        required: true
   push:
     branches:
     - "**"
