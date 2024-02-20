@@ -157,34 +157,34 @@ network:
           metrics:
             enabled: true      # Set this to true to enable Prometheus monitoring for this node, or false to disable it.
             port: 9545         # Specify the port that Prometheus will use to collect metrics for this node. 
-        - validator:
-          name: validator3
-          bootnode: false          # true if the validator node is used also a bootnode for the network
-          p2p:
-            port: 30303
-            ambassador: 15014       #Port exposed on ambassador service (use one port per org if using single cluster)
-          rpc:
-            port: 8545
-            ambassador: 80       # Will only support port 80
-          ws:
-            port: 8546
-          metrics:
-            enabled: false      # Set this to true to enable Prometheus monitoring for this node, or false to disable it.
-            port: 9545          # Specify the port that Prometheus will use to collect metrics for this node. 
-        - validator:
-          name: validator4
-          bootnode: false          # true if the validator node is used also a bootnode for the network
-          p2p:
-            port: 30303
-            ambassador: 15016       #Port exposed on ambassador service (use one port per org if using single cluster)
-          rpc:
-            port: 8545
-            ambassador: 80       # Will only support port 80
-          ws:
-            port: 8546
-          metrics:
-            enabled: false      # Set this to true to enable Prometheus monitoring for this node, or false to disable it.
-            port: 9545          # Specify the port that Prometheus will use to collect metrics for this node. 
+        # - validator:
+        #   name: validator3
+        #   bootnode: false          # true if the validator node is used also a bootnode for the network
+        #   p2p:
+        #     port: 30303
+        #     ambassador: 15014       #Port exposed on ambassador service (use one port per org if using single cluster)
+        #   rpc:
+        #     port: 8545
+        #     ambassador: 80       # Will only support port 80
+        #   ws:
+        #     port: 8546
+        #   metrics:
+        #     enabled: false      # Set this to true to enable Prometheus monitoring for this node, or false to disable it.
+        #     port: 9545          # Specify the port that Prometheus will use to collect metrics for this node. 
+        # - validator:
+        #   name: validator4
+        #   bootnode: false          # true if the validator node is used also a bootnode for the network
+        #   p2p:
+        #     port: 30303
+        #     ambassador: 15016       #Port exposed on ambassador service (use one port per org if using single cluster)
+        #   rpc:
+        #     port: 8545
+        #     ambassador: 80       # Will only support port 80
+        #   ws:
+        #     port: 8546
+        #   metrics:
+        #     enabled: false      # Set this to true to enable Prometheus monitoring for this node, or false to disable it.
+        #     port: 9545          # Specify the port that Prometheus will use to collect metrics for this node. 
 
     - organization:
       name: carrier

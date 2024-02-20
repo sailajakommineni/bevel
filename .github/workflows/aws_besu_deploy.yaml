@@ -26,10 +26,20 @@ name: Deploy BESU to an EKS Cluster
 on:
   # Manually trigger the workflow through the GitHub Actions UI
   workflow_dispatch:
+    inputs:
+      action:
+        description: 'Choose action: Deploy or Reset'
+        required: false
+        default: 'deploy'
+        type: choice
+        options:
+          - 'deploy'
+          - 'reset'
     paths-ignore:
       - 'docs/**'
       - '**/charts/**'
       - '**/releases/**'
+
 
 # Jobs to be executed
 jobs:
@@ -69,7 +79,15 @@ jobs:
           aws-access-key-id: "${{ env.AWS_ACCESS_KEY_ID }}"
           aws-secret-access-key: "${{ env.AWS_SECRET_ACCESS_KEY }}"
           aws-region: "${{ env.AWS_REGION }}"
-      
+
+      #  name: Reset corda network
+      #   run: |
+      #     if [ "${{ github.event.inputs.action }}" == "reset" ]; then
+      #       reset=true
+      #     else
+      #       reset=false
+      #     fi-
+
       # Set up BEVEL's BESU network configuration file
       - name: BEVEL's BESU Network Configuration file Setup
         run: |
@@ -112,10 +130,11 @@ jobs:
           for placeholder in "${!placeholders[@]}"; do
             sed -i "s#${placeholder}#${placeholders[$placeholder]}#g" "$NETWORK_CONF_FILE"
           done
-
+      
       # Deploy BEVEL's BESU Platform
       - name: Deploy BEVEL's BESU Platform
         run: |
+    
           # Setup Kubernetes configuration
           mkdir -p /home/runner/.kube/build_config
           echo "${{ env.KUBECONFIG }}" | base64 --decode > /home/runner/.kube/build_config/kubeconfig
@@ -133,8 +152,15 @@ jobs:
           pip install ansible jmespath jinja2-time
           ansible-galaxy collection install -r platforms/shared/configuration/requirements.yaml
           
+          # Set reset variable 
+          if [ "${{ github.event.inputs.action }}" == "reset" ]; then
+            reset=true
+          else
+            reset=false
+          fi
+         
           # Deploy the BEVEL's BESU DLT platform
           ansible-playbook platforms/shared/configuration/site.yaml \
             -i platforms/shared/inventory/ansible_provisioners \
             -e @build/network-besu.yaml \
-            -e 'ansible_python_interpreter=/usr/bin/python3'
+            -e 'ansible_python_interpreter=/usr/bin/python3' -e "reset=$reset"
